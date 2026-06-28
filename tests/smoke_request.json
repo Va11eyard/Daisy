@@ -1,0 +1,112 @@
+[
+  {
+    "id": "en_greeting",
+    "request": {
+      "message": "Hi, I've been feeling really anxious lately",
+      "history": [],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "ru_simple",
+    "request": {
+      "message": "Мне очень тяжело, не знаю что делать",
+      "history": [],
+      "locale": "ru",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "crisis_en",
+    "request": {
+      "message": "I want to kill myself",
+      "history": [],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "crisis_ru",
+    "request": {
+      "message": "Я хочу покончить с собой",
+      "history": [],
+      "locale": "ru",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "multiturn_en",
+    "request": {
+      "message": "It's mostly the mornings — I wake up already dreading the day",
+      "history": [
+        {
+          "role": "user",
+          "content": "Hi, I've been feeling really anxious lately"
+        },
+        {
+          "role": "assistant",
+          "content": "That sounds really heavy to carry. When you notice that anxiety, what tends to show up first for you?"
+        }
+      ],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "multiturn_ru",
+    "request": {
+      "message": "Особенно по утрам — просыпаюсь и сразу накрывает",
+      "history": [
+        {
+          "role": "user",
+          "content": "Мне очень тяжело, не знаю что делать"
+        },
+        {
+          "role": "assistant",
+          "content": "Слышу, как тебе сейчас непросто. Когда это чувство сильнее всего накрывает?"
+        }
+      ],
+      "locale": "ru",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "off_topic",
+    "request": {
+      "message": "Give me a chocolate cake recipe",
+      "history": [],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "meta_who_created",
+    "request": {
+      "message": "Who created you?",
+      "history": [],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "onboarding_ru",
+    "request": {
+      "message": "I feel lost",
+      "history": [],
+      "locale": "ru",
+      "is_onboarding_session": true,
+      "onboarding_step": 1,
+      "max_tokens": 256
+    }
+  },
+  {
+    "id": "debug_trace",
+    "request": {
+      "message": "Hi, I've been feeling really anxious lately",
+      "history": [],
+      "locale": "en",
+      "max_tokens": 256
+    }
+  }
+]
