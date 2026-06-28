@@ -171,6 +171,42 @@ def test_format_rag_block_renders_retrieved_context():
     assert "Reflect what you heard" in block
 
 
+def test_rag_tokenize_unicode_and_cyrillic():
+    import rag
+
+    assert rag._tokenize("Hello, WORLD!") == ["hello", "world"]
+    assert rag._tokenize("Тревога и сон") == ["тревога", "и", "сон"]
+    assert rag._tokenize("") == []
+
+
+def test_rag_config_helpers_defaults_and_overrides(monkeypatch):
+    import rag
+
+    monkeypatch.delenv("DAISY_RRF_K", raising=False)
+    monkeypatch.delenv("DAISY_BOOKS_WEIGHT", raising=False)
+    monkeypatch.delenv("DAISY_BM25", raising=False)
+    assert rag._rrf_k() == 60
+    assert rag._books_weight() == 1.0
+    assert rag.bm25_enabled() is True
+    monkeypatch.setenv("DAISY_RRF_K", "30")
+    monkeypatch.setenv("DAISY_BOOKS_WEIGHT", "0.5")
+    monkeypatch.setenv("DAISY_BM25", "false")
+    assert rag._rrf_k() == 30
+    assert rag._books_weight() == 0.5
+    assert rag.bm25_enabled() is False
+    # Bad values fall back to defaults.
+    monkeypatch.setenv("DAISY_RRF_K", "notint")
+    monkeypatch.setenv("DAISY_BOOKS_WEIGHT", "notfloat")
+    assert rag._rrf_k() == 60
+    assert rag._books_weight() == 1.0
+
+
+def test_rag_retrieve_empty_query_returns_list():
+    import rag
+
+    assert rag.retrieve("", reply_lang="en", phase="intake") == []
+
+
 # ---- Layer 4: confidence gate ----
 
 def test_mean_logprob_filters_non_finite():

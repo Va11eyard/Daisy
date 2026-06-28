@@ -32,6 +32,10 @@ environment_variables:
   DAISY_RAG: "true"
   DAISY_RAG_TOP_K: "3"
   DAISY_RAG_MIN_SCORE: "0.30"
+  # Hybrid RAG: BM25 sparse retrieval fused with dense FAISS via Reciprocal Rank Fusion.
+  DAISY_BM25: "true"
+  DAISY_RRF_K: "60"
+  DAISY_BOOKS_WEIGHT: "1.0"
   DAISY_CONFIDENCE_GATE: "true"
   DAISY_CONFIDENCE_THRESHOLD: "-2.5"
   # Multilingual embedder for RAG retrieval (RU/EN strong; KK falls back to ru/en grounding).

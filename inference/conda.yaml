@@ -23,3 +23,6 @@ dependencies:
     # RAG (Layer 2): embeddings + vector search over the dialog corpus
     - sentence-transformers>=3.0.0
     - faiss-cpu>=1.8.0
+    # Hybrid RAG: BM25 sparse retrieval + per-chunk language detection for books
+    - rank-bm25>=0.2.2
+    - langdetect>=1.0.9
