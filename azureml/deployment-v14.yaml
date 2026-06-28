@@ -35,7 +35,9 @@ environment_variables:
   # Hybrid RAG: BM25 sparse retrieval fused with dense FAISS via Reciprocal Rank Fusion.
   DAISY_BM25: "true"
   DAISY_RRF_K: "60"
-  DAISY_BOOKS_WEIGHT: "1.0"
+  # Dialog contributes two RRF streams (dense + BM25); books contribute one. Weight
+  # books above 1.0 so therapeutic terminology surfaces rather than getting outvoted.
+  DAISY_BOOKS_WEIGHT: "1.5"
   DAISY_CONFIDENCE_GATE: "true"
   DAISY_CONFIDENCE_THRESHOLD: "-2.5"
   # Multilingual embedder for RAG retrieval (RU/EN strong; KK falls back to ru/en grounding).
