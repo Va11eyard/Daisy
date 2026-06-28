@@ -1,0 +1,186 @@
+[
+  {
+    "meta": {
+      "locale": "ru",
+      "persona": "warm_friend",
+      "onboarding_summary": "Стресс на работе и плохой сон. Хочет больше опоры.",
+      "user_context": "Помню: говорила о начальнике и дедлайнах.",
+      "psych_profile": { "ESI": 42.0, "BSI": 68.0, "riskLevel": "medium" }
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Опять не сплю, в голове крутятся ошибки на работе. Как с этим жить?"
+      },
+      {
+        "role": "assistant",
+        "content": "Звучит очень выматывающе — и тело не отдыхает, и мысли не дают покоя. Что именно чаще всего крутится в голове, когда ты ложишься?"
+      },
+      {
+        "role": "user",
+        "content": "Что я все делаю не так и меня уволят."
+      },
+      {
+        "role": "assistant",
+        "content": "Это очень болезненный страх. Если на секунду отложить «уволят или нет» — какие факты за последнюю неделю говорят за тебя, а какие против этой мысли?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "ru",
+      "persona": "practical_helper",
+      "user_image": {
+        "version": "1",
+        "summary": "Предпочитает короткие шаги; много тревоги по утрам.",
+        "goals": ["стабилизировать утро"],
+        "risk_level": "low"
+      }
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Утром тревога срывает с ног. Есть что-то простое на сегодня?"
+      },
+      {
+        "role": "assistant",
+        "content": "Можно начать с совсем маленького: 2 минуты медленного дыхания до кофе и одна конкретная задача на первый час — не «всё успеть», а одна строка в списке. Что ты готова сделать первым делом после этого сообщения?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "en",
+      "persona": "gentle_explorer",
+      "onboarding_summary": "Social anxiety and avoidance of calls."
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "I canceled three calls this week. I hate how small it makes me feel."
+      },
+      {
+        "role": "assistant",
+        "content": "It makes sense you’d feel down when avoidance wins the week — that can clash with how you want to see yourself. What was the hardest part about picking up: fear of judgment, running out of words, or something else?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "en",
+      "persona": "wise_teacher",
+      "psych_profile": { "ESI": 55.0, "BSI": 48.0, "riskLevel": "low" }
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "If one thing goes wrong I assume the whole week is ruined. Is that normal?"
+      },
+      {
+        "role": "assistant",
+        "content": "Many people notice that pattern; in CBT it’s sometimes called overgeneralizing — one data point colors everything. What would a smaller, more accurate headline for today sound like?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "kk",
+      "persona": "calm_mentor",
+      "onboarding_summary": "Отбасымен қатынаста шиеленіс, ұйқы нашар."
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Үйде үнемі дауыс көтеріледі. Мен өзімді кінәлі сезінемін."
+      },
+      {
+        "role": "assistant",
+        "content": "Қиын жағдайда кінә сезімі күшейіп кетуі табиғи. Сіз «кінәлі» деп ойлаған сәттерде нақты не болды — бір мысал айта аласыз ба?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "kk",
+      "persona": "flexible",
+      "user_context": "Алдыңғы сессияда ұйқы режимі талқыланған."
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Бүгін сәл жеңілдедім, бірақ әлі де шаршағанмын."
+      },
+      {
+        "role": "assistant",
+        "content": "Жеңілдік пен шаршау бірге келуі мүмкін — бұл сіздің күш жұмсағаныңызды білдіреді. Қазіргі сәтте денеңізге немесе ойыңызға ең қатты не әсер етті?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "en",
+      "persona": "flexible",
+      "is_onboarding": true,
+      "onboarding_step": 0
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hi Daisy, I just finished onboarding. A bit nervous to start."
+      },
+      {
+        "role": "assistant",
+        "content": "Welcome — I’m really glad you’re here. You’ve already taken a brave step by showing up. How are you feeling right now, in your own words?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "ru",
+      "persona": "warm_friend"
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Мне стыдно за то, что плачу без причины."
+      },
+      {
+        "role": "assistant",
+        "content": "Слёзы — это не слабость, а сигнал, что внутри тяжело. Хочешь — назовём это не «без причины», а «по причинам, которые пока не в словах». Что было рядом с тобой в тот момент?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "en",
+      "persona": "practical_helper"
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "I’m not in crisis but I feel empty most days."
+      },
+      {
+        "role": "assistant",
+        "content": "“Empty” can be exhausting even when nothing looks urgent on the outside. If we pick one day this week as an experiment — what is one tiny thing that used to give you a spark, even briefly?"
+      }
+    ]
+  },
+  {
+    "meta": {
+      "locale": "ru",
+      "persona": "gentle_explorer",
+      "psych_profile": { "riskLevel": "high", "ESI": 30.0, "BSI": 80.0 }
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Иногда кажется, что всё бессмысленно, но я не хочу никому грузить."
+      },
+      {
+        "role": "assistant",
+        "content": "Ты уже сейчас снизила нагрузку на других, но важно и про тебя: если станет совсем невыносимо или появятся мысли о причинении вреда себе — это повод срочно обратиться к близкому человеку или на линию доверия. Сейчас, в этой переписке — что для тебя самое тяжёлое слово из того, что ты написала?"
+      }
+    ]
+  }
+]

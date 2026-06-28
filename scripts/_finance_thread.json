@@ -1,0 +1,82 @@
+[
+  {
+    "turn": "мне тревожно сегодня",
+    "response": "Чему бы вы хотели поговорить о своей нынешней волнённости?",
+    "debug": {
+      "has_onboarding": false,
+      "has_memory": false,
+      "has_persona": false,
+      "user_gender": null,
+      "prompt_tokens": 744,
+      "router_plan": null,
+      "router_enabled": false,
+      "coordinator_backend": "off",
+      "has_user_image": false,
+      "daisy_state": "intake",
+      "intent_lang": "ru",
+      "reply_lang": "ru",
+      "translation_path": "direct",
+      "inference_build": "2026-04-pre-june-restore"
+    }
+  },
+  {
+    "turn": "мне нужно разобраться почему",
+    "response": "Какие мысли или чувства приходят к вам когда你们在中国使用中文交流. 请问您想探讨些什么关于这种焦虑的原因?",
+    "debug": {
+      "has_onboarding": false,
+      "has_memory": false,
+      "has_persona": false,
+      "user_gender": null,
+      "prompt_tokens": 783,
+      "router_plan": null,
+      "router_enabled": false,
+      "coordinator_backend": "off",
+      "has_user_image": false,
+      "daisy_state": "intake",
+      "intent_lang": "ru",
+      "reply_lang": "ru",
+      "translation_path": "direct",
+      "inference_build": "2026-04-pre-june-restore"
+    }
+  },
+  {
+    "turn": "я боюсь что останусь без денег…",
+    "response": "Почему вас беспокоит вопрос с деньгами?",
+    "debug": {
+      "has_onboarding": false,
+      "has_memory": false,
+      "has_persona": false,
+      "user_gender": null,
+      "prompt_tokens": 833,
+      "router_plan": null,
+      "router_enabled": false,
+      "coordinator_backend": "off",
+      "has_user_image": false,
+      "daisy_state": "intake",
+      "intent_lang": "ru",
+      "reply_lang": "ru",
+      "translation_path": "direct",
+      "inference_build": "2026-04-pre-june-restore"
+    }
+  },
+  {
+    "turn": "с финансов",
+    "response": "Расскажите больше о том, как ваши финансовые дела влияют на ваше состояние сейчас.",
+    "debug": {
+      "has_onboarding": false,
+      "has_memory": false,
+      "has_persona": false,
+      "user_gender": null,
+      "prompt_tokens": 859,
+      "router_plan": null,
+      "router_enabled": false,
+      "coordinator_backend": "off",
+      "has_user_image": false,
+      "daisy_state": "intake",
+      "intent_lang": "ru",
+      "reply_lang": "ru",
+      "translation_path": "direct",
+      "inference_build": "2026-04-pre-june-restore"
+    }
+  }
+]

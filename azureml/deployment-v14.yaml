@@ -1,0 +1,52 @@
+# Managed online deployment — Daisy rebuild on Qwen3-8B (4-bit on T4 16GB).
+# Endpoint/workspace confirmed live: daisy-therapy / workspace "Daisy" / RG Daisy_group / westus2.
+# Create: az ml online-deployment create --file azureml/deployment-v14.yaml -g Daisy_group -w Daisy
+# Update:  az ml online-deployment update  --file azureml/deployment-v14.yaml -g Daisy_group -w Daisy
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: gpu-deployment-finetuned
+endpoint_name: daisy-therapy
+# Point at the registered base/LoRA artifact once Phi/Qwen3 training (phase 2) is registered.
+# Until then the endpoint loads BASE_MODEL from Hugging Face directly.
+model: azureml:daisy-finetuned-lora:11
+code_configuration:
+  code: ../inference
+  scoring_script: score.py
+environment:
+  conda_file: ../inference/conda.yaml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04
+environment_variables:
+  # Base model rebuilt onto Qwen3-8B (Apache-2.0, commercial-safe, strong RU/EN, usable KK).
+  # Latency fallback: Qwen/Qwen3-4B-Instruct. Kazakh-max (non-commercial): inceptionai/Llama-3.1-Sherkala-8B-Chat.
+  BASE_MODEL: "Qwen/Qwen3-8B"
+  MODEL_DISPLAY_NAME: "daisy-model"
+  INFERENCE_BUILD: "2026-06-phi-rebuild"
+  # VRAM: none=fp16 | 4bit | 8bit (bitsandbytes). 4bit recommended on T4 16GB for 8B + headroom.
+  INFERENCE_QUANTIZATION: "4bit"
+  DEFER_MEMORY_UPDATE: "true"
+  # Multilingual generation direct (no EN round-trip) for RU/KK.
+  DAISY_DIRECT_MULTILINGUAL: "true"
+  USE_AZURE_TRANSLATOR: "false"
+  USE_OPENAI_TRANSLATION: "true"
+  USE_AZURE_OPENAI: "true"
+  # 5-layer anti-hallucination pipeline knobs.
+  DAISY_RAG: "true"
+  DAISY_RAG_TOP_K: "3"
+  DAISY_RAG_MIN_SCORE: "0.30"
+  DAISY_CONFIDENCE_GATE: "true"
+  DAISY_CONFIDENCE_THRESHOLD: "-2.5"
+  # Multilingual embedder for RAG retrieval (RU/EN strong; KK falls back to ru/en grounding).
+  DAISY_EMBED_MODEL: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+# Set HF_TOKEN (and optional translator / Azure OpenAI keys) in the deployment — do not commit secrets.
+instance_type: Standard_NC4as_T4_v3
+instance_count: 1
+request_settings:
+  request_timeout_ms: 180000
+  max_concurrent_requests_per_instance: 1
+liveness_probe:
+  initial_delay: 600
+  period: 60
+  timeout: 30
+readiness_probe:
+  initial_delay: 600
+  period: 60
+  timeout: 30

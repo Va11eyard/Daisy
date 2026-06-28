@@ -1,0 +1,23 @@
+# Azure ML Command job (v2).
+# Recommended: generate data/train.jsonl + data/val.jsonl (see docs/DATASET.md), then either:
+#   python scripts/submit_training_job.py  (copies data/*.jsonl into training/ automatically)
+# or copy train.jsonl / val.jsonl into ../training/ manually before az ml job create.
+# Submit:  az ml job create -f azureml/command_job.yaml --resource-group <rg> --workspace-name <ws>
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+code: ../training
+command: python train.py
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04
+  conda_file: conda.yaml
+compute: azureml:gpu-cluster
+experiment_name: daisy-finetuning
+display_name: daisy-lora-training
+description: LoRA fine-tune Daisy (PEFT + 8-bit). Set HF_TOKEN in workspace secrets or job env.
+environment_variables:
+  BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
+  # true = LoRA (default, fits T4). false = full weight fine-tune (needs large GPU; see README)
+  USE_LORA: "true"
+  TRAIN_FILE: "train.jsonl"
+  VAL_FILE: "val.jsonl"
+  OUTPUT_DIR: "./outputs/daisy-lora"

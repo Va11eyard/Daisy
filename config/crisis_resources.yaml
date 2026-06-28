@@ -1,0 +1,20 @@
+# Hotlines for crisis responses (language/region keys)
+en:
+  hotlines:
+    - name: "988 Suicide & Crisis Lifeline"
+      contact: "988"
+      description: "US — call or text 988"
+      name_ru: "988 Suicide & Crisis Lifeline"
+      description_ru: "США — звонок или SMS 988"
+ru:
+  hotlines:
+    - name: "Телефон доверия"
+      contact: "8-800-2000-122"
+      description: "Бесплатно по России"
+kz:
+  hotlines:
+    - name: "Құтқару қызметі"
+      contact: "150"
+      description_kk: "Қазақстан — төтенше жағдай"
+      name_kk: "Құтқару қызметі"
+      name_ru: "Служба спасения"

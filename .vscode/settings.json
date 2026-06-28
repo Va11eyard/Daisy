@@ -1,0 +1,10 @@
+{
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/inference",
+    "${workspaceFolder}/scripts"
+  ],
+  "basedpyright.analysis.extraPaths": [
+    "${workspaceFolder}/inference",
+    "${workspaceFolder}/scripts"
+  ]
+}

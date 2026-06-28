@@ -1,0 +1,34 @@
+{
+  "evaluated_at": "2026-06-24T15:05:00Z",
+  "base_model_swap_required": false,
+  "reason": "Dataset shape gate passed (0.60 reflect+Q). v13 registered and deployed. Base swap deferred per docs/BASE_MODEL_GATE.md.",
+  "training_job": "keen_celery_g5pdmg2lch",
+  "model_version": 13,
+  "inference_build": "2026-06-book-sse-v9",
+  "dataset_gate": {
+    "reflect_plus_question_shape_rate": 0.6002,
+    "book_dump_row_fraction": 0.0,
+    "target_max": 0.70,
+    "pass": true
+  },
+  "latency_gate": {
+    "status": "deployed",
+    "config": {
+      "DAISY_MAX_REGENS": "2",
+      "DAISY_MAX_VOICE_REGENS": "1",
+      "DAISY_MAX_BRIEF_REGENS": "1",
+      "DAISY_RUBRIC_JUDGE": "false",
+      "DAISY_DEFAULT_MAX_TOKENS": "200"
+    },
+    "note": "Run scripts/latency_probe.py after endpoint warm-up (~10 min)"
+  },
+  "quality_gate": {
+    "status": "deployed",
+    "note": "Run scripts/verify_deploy.py; v12 interim was superseded by v13 prod"
+  },
+  "candidates_if_gates_fail": [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "meta-llama/Llama-3.1-8B-Instruct",
+    "mistralai/Mistral-7B-Instruct-v0.3"
+  ]
+}

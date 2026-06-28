@@ -1,0 +1,18 @@
+[
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I've been anxious about work and sleep badly. Can you help me unpack this?"
+      },
+      {
+        "role": "assistant",
+        "content": "It makes sense you'd feel on edge when work weighs heavily and sleep suffers. What tends to run through your mind when you try to rest?"
+      },
+      {
+        "role": "user",
+        "content": "I keep replaying mistakes and feel I'll disappoint everyone."
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+[tool.pyright]
+include = ["inference", "training", "scripts", "tests"]
+extraPaths = ["inference", "scripts"]
+pythonVersion = "3.11"
+
+[tool.basedpyright]
+include = ["inference", "training", "scripts", "tests"]
+extraPaths = ["inference", "scripts"]
+pythonVersion = "3.11"

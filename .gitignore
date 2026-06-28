@@ -1,0 +1,38 @@
+# Data & checkpoints
+*.jsonl
+!**/sample_data/*.jsonl
+data/*
+!data/raw/
+!data/raw/**
+!data/README.md
+!data/train.jsonl
+!data/val.jsonl
+# Regenerate: python scripts/md_to_dialogues.py → prepare_dataset.py
+data/raw/md_dialogues.json
+data/raw/md_distilled.jsonl
+checkpoints/
+outputs/
+job_outputs/
+mlruns/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+
+# Azure / IDE — never commit deployment dumps (contain live secrets)
+azureml/.merged-deploy.yaml
+deploy-show.json
+deploy-show*.json
+scripts/_probe_turn.json
+.azure/
+.idea/
+*.egg-info/
+dist/
+build/
+
+artifacts/
+node_modules/

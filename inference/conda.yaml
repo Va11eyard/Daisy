@@ -1,0 +1,25 @@
+name: daisy-inference
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    # Required by Azure ML managed online endpoints (gunicorn loads score.py)
+    - azureml-inference-server-http>=1.0.0
+    # Match base image CUDA 11.8 (same as training/conda.yaml) — avoid cu12 wheel on T4
+    - --extra-index-url https://download.pytorch.org/whl/cu118
+    - torch==2.6.0+cu118
+    # transformers>=4.51.3 is required for Qwen3 (and Llama-3.1 Sherkala) chat templates
+    - transformers==4.51.3
+    - accelerate==1.6.0
+    - peft==0.15.2
+    - bitsandbytes==0.45.5
+    - openai==1.76.0
+    - requests==2.32.3
+    - pyyaml>=6.0
+    - pydantic>=2.0,<3
+    # RAG (Layer 2): embeddings + vector search over the dialog corpus
+    - sentence-transformers>=3.0.0
+    - faiss-cpu>=1.8.0

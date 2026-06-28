@@ -1,0 +1,9 @@
+.env
+.env.*
+*.pem
+*.key
+secrets/
+deploy-show.json
+deploy-show*.json
+azureml/.merged-deploy.yaml
+scripts/_probe_turn.json

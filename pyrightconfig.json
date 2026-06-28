@@ -1,0 +1,14 @@
+{
+  "include": ["inference", "training", "scripts", "tests"],
+  "extraPaths": ["inference", "scripts"],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonVersion": "3.11",
+      "extraPaths": ["inference", "scripts"]
+    }
+  ]
+}

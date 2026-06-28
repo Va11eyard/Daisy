@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunks": [
+    {
+      "id": "cbt_intake_01",
+      "modality": "cbt",
+      "state": "intake",
+      "locale": "en",
+      "text": "In early sessions, use reflective listening: mirror the client's words briefly, then ask one open question about what feels most pressing. Avoid reassurance clichés before understanding the specific concern."
+    },
+    {
+      "id": "cbt_disclosure_01",
+      "modality": "cbt",
+      "state": "disclosure",
+      "locale": "en",
+      "text": "During emotional disclosure, stay with meaning and loss before offering reframes. Ask what changed, what is missed, or what feels stuck. Do not pivot to body-focused questions unless the client mentioned physical sensations."
+    },
+    {
+      "id": "cbt_action_01",
+      "modality": "cbt",
+      "state": "action_planning",
+      "locale": "en",
+      "text": "Behavioral activation works best with one or two small steps tied to the client's context. End with a choice question about feasibility, not a generic wellness list."
+    },
+    {
+      "id": "cbt_intake_ru_01",
+      "modality": "cbt",
+      "state": "intake",
+      "locale": "ru",
+      "text": "На этапе знакомства отрази услышанное в 1–2 предложениях и задай один открытый вопрос о том, что сейчас беспокоит сильнее всего. Не начинай с «мне жаль слышать» или «я понимаю, что это сложно»."
+    },
+    {
+      "id": "cbt_disclosure_ru_01",
+      "modality": "cbt",
+      "state": "disclosure",
+      "locale": "ru",
+      "text": "При раскрытии переживаний оставайся в теме смысла и потери. Спроси, что изменилось или что больше всего цепляет. Не предлагай общие фразы поддержки вместо конкретного отражения."
+    },
+    {
+      "id": "dbt_distress_01",
+      "modality": "dbt",
+      "state": "disclosure",
+      "locale": "en",
+      "text": "When distress is high, validate the function of the emotion without endorsing harmful behavior. Name what the feeling might be protecting before suggesting any skill."
+    },
+    {
+      "id": "act_values_01",
+      "modality": "act",
+      "state": "action_planning",
+      "locale": "en",
+      "text": "Link next steps to values the client already named. One tiny committed action beats a long self-improvement list."
+    },
+    {
+      "id": "grief_01",
+      "modality": "grief",
+      "state": "disclosure",
+      "locale": "ru",
+      "text": "При горе и утрате называй потерю прямо, без обесценивания и без «серебряных подкладок». Спроси, какая часть утраты сейчас самая острая."
+    }
+  ],
+  "vectors": []
+}

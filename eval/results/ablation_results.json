@@ -1,0 +1,3090 @@
+{
+  "timestamp": "2026-06-22T12:00:55Z",
+  "base_model": "Qwen/Qwen2.5-7B-Instruct",
+  "adapter": "/mnt/azureml/cr/j/2415c87f89734a47ba6e298070dfa0b1/cap/data-capability/wd/INPUT_adapter",
+  "n_cases": 41,
+  "configs": {
+    "C0_base": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "I'm so sorry you're going through this—it sounds incredibly stressful and draining.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.69
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "I'm so sorry to hear that you're feeling this way.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.8
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "I'm so sorry you're going through this—feeling caught in the crossfire of your team's frustrations must be incredibly stressful and draining.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 8.62
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "Я понимаю, как вам сейчас трудно.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 9.05
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Я понимаю, как сложно работать под таким давлением.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 9.85
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Я понимаю, как вам сейчас тяжело работать под давлением непредсказуемого гнева вашего руководителя.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 8.27
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "I'm sorry to hear that you're going through this.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.91
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "I'm so sorry you're going through this—feeling abandoned can be incredibly painful.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 6.26
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "It's completely normal to feel this way after a breakup—initial anger often gives way to deep sadness and longing as reality sets in.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 6.18
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Я понимаю, как это больно. Постепенно подойдите к своим воспоминаниям с любовью, осознавая, что каждый момент был важен для вас обоих.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.56
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Я понимаю, как вы сейчас ощущаете себя.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 7.58
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Я понимаю, как вы сейчас чувствуете.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 8.54
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "I'm so sorry to hear that you're feeling this way.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.96
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "I hear you—feeling anxiety build up even before things start can be incredibly tough.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.34
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "I'm sorry you're feeling this way—being constantly on edge like that must be really tough.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.43
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "I'm sorry that you're dealing with this.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.09
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "I'm so sorry that you're going through this—feeling worn down by daily rage is incredibly tough.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.53
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "I'm so sorry you're going through this right now.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.82
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Я очень сожалею о вашей потере.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.65
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Я так понимаю, вам очень тяжело после потери близкого человека.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.69
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я так понимаю, вам очень тяжело сейчас.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 7.04
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "I'm so sorry that you're feeling this way—sometimes it can be incredibly isolating to feel alone despite being surrounded by others.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 7.04
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "I'm so sorry that you're feeling this way—loneliness can be incredibly tough to bear.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.21
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "I understand how lonely it can feel on weekends when you're alone.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.95
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "It sounds so draining to keep going over those conversations in your mind.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.86
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "I'm sorry to hear that you're struggling to sleep.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.78
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "I'm so sorry to hear that you're feeling this way—exhaustion can be incredibly tough when it's paired with sleeplessness.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 6.59
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "I'm sorry that you're feeling so hard on yourself.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.63
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "I'm sorry that you're feeling this way.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.85
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "I'm sorry that you're feeling this way—it sounds incredibly draining.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.07
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "Starting small is often the best way—maybe try setting a tiny goal like attending part of one social event this week.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.57
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Try breaking your task into tiny steps and focus on just the very first one—maybe that's reading through notes or gathering all necessary materials.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 4.17
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's start small then—how about drinking one extra glass of water this morning to help you stay hydrated and calm? What seems manageable to you right now?",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.13
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Начни с малого шага – например, с планирования одной небольшой задачи на этот день.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 8.17
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Один реалистичный шаг – это просто начать день с короткой прогулки или深嵌含义的回复: 早晨是新一天的开始,选择一个简单的活动来开启它可以帮助你缓解紧张情绪.比如,在起床后进行10分钟的轻柔拉伸或呼吸练习.这些小步骤有助于平稳地过渡到新的一天. 请问今天您想尝试哪个具体的活动呢?",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 7.82
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Отличная идея! Давай выберем что-то маленькое и конкретное.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 6.52
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "I'm so sorry you're going through that!",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.79
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "It sounds like you're going through a tough time!",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 5.81
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "It sounds like your environment might be stressful right now.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 8.57
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "I'm sorry that feels so intense.",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.05
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "I'm sorry to hear that work has been so overwhelming!",
+          "config": "C0_base",
+          "stats": {},
+          "latency_s": 3.54
+        }
+      ],
+      "summary": {
+        "config": "C0_base",
+        "n": 41,
+        "cross_scenario_genericness": 0.2461,
+        "distinct_2": 0.63,
+        "canned_rate": 0.1463,
+        "mean_specificity": 0.4523,
+        "templated_shape_rate": 0.0,
+        "mean_response_len": 76.4,
+        "mean_latency_s": 5.78,
+        "fallback_rate": 0.0
+      }
+    },
+    "C1_lora": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "I'm so sorry you're going through this—it sounds incredibly stressful and unfair.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.39
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "I'm so sorry you're going through this right now—feeling crushed by work and your manager's anger must be incredibly stressful.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.79
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "I'm so sorry you're going through this.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 7.53
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "Я так понимаю, вам очень тяжело на работе - обстановка непростая и стресс сильный.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 8.78
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Я понимаю, как вы сейчас чувствуете.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 12.21
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Я понимаю, как это непросто – постоянное напряжение и стресс от требований начальства могут истощать вас эмоционально.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 8.44
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "I'm so sorry that you're going through this.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.43
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "I'm sorry that you're going through this incredibly difficult time.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.67
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "It's completely normal to feel this way after a breakup—initial anger can often transition into deep sadness and longing as reality sets in.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.75
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Я понимаю, как вы сейчас чувствуете.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 7.51
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Я понимаю, что это больно – когда мысли оставшиеся после разлуки все еще возвращаются к человеку, который ушел.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 19.5
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Я понимаю, как вы сейчас ощущаете себя.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.82
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "I'm so sorry to hear that you're feeling this way already.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.35
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "I hear you—feeling anxious about potential events can be incredibly draining and overwhelming.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.15
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "I'm sorry that you're feeling so stressed.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 3.91
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "It sounds challenging. Try to stay calm and set clear boundaries while also offering space if she needs it.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 2.83
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "I'm so sorry you're going through this—daily exposure to anger can be incredibly draining and stressful.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.4
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "I'm so sorry you're going through this right now.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.96
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Я так понимаю, вам очень тяжело сейчас.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 14.81
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Я понимаю, как глубоко можете ранить такие потери.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 7.2
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я так сожалею о вашей боли. Потеря оставляет глубокий след, но каждый шаг в направлении заботы о себе помогает постепенно заживлять рану.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 7.04
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "It sounds so tough to feel isolated in a room full of people or even during social gatherings.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.13
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "I'm so sorry that you're feeling so alone right now.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.14
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "I understand how lonely it can feel on weekends when you're home alone.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.34
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "It's so common to replay conversations in your mind, especially if there were unresolved feelings or outcomes.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.52
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "I'm so sorry you're going through this.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.01
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "I'm so sorry to hear that you're feeling this way.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.83
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "I'm sorry you're feeling that way—beating yourself up over mistakes can be so tough.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.93
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "I'm so sorry that you're feeling this way.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.82
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "I'm sorry that you're feeling this way—it sounds incredibly tough to be so hard on yourself all the time.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.57
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "Starting small often works wonders—maybe pick one tiny step related to facing these situations.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 2.86
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Try breaking your task into tiny steps—small enough that each feels manageable—and focus on just starting the very first mini-step.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 3.92
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's try something small then!",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 2.84
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Начни с малого – разбей задачу на небольшие шаги.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.49
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Попробуйте начать день с короткой прогулки или глубокого дыхания – это может существенно снизить тревогу.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 4.34
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Конечно! Давай выберем что-то простое и по силам.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.5
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "I'm so sorry you're going through this!",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 5.47
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "It sounds like you're going through a tough time!",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.48
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "It sounds like your environment might be stressful right now.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 6.0
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "I'm sorry that pain feels so intense.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 3.6
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "I'm sorry to hear that work has been overwhelming lately.",
+          "config": "C1_lora",
+          "stats": {},
+          "latency_s": 3.25
+        }
+      ],
+      "summary": {
+        "config": "C1_lora",
+        "n": 41,
+        "cross_scenario_genericness": 0.2062,
+        "distinct_2": 0.6532,
+        "canned_rate": 0.0732,
+        "mean_specificity": 0.4508,
+        "templated_shape_rate": 0.0,
+        "mean_response_len": 72.0,
+        "mean_latency_s": 6.21,
+        "fallback_rate": 0.0
+      }
+    },
+    "C2_prompt": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "It sounds really stressful and exhausting.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.34
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "It sounds like your work environment is incredibly stressful, especially since your manager seems so angry all the time.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.18
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "It sounds like you're taking on a lot of stress and frustration at work, especially since you feel leadership is unfairly directing their anger at you.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.32
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "Видишь, как много на тебя сваливается по работе.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.57
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Звучит так, будто вы чувствуете себя перегруженным и разбитым после такого поведения начальника.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.39
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Отдаётся такая энергетика от вашего начальника.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.65
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "It sounds like losing focus on other things and constantly thinking about him must be really draining.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.87
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "It sounds incredibly painful to keep thinking about him.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.64
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "It's interesting how anger can shift into deep misses.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.58
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Чувствуется, как тяжело терять кого-то, кого так сильно уважал и любил.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 19.64
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Чувствуется, сколько ещё тоски от того, что он ушёл.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.17
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Отчаяние после разрыва отношений может быть очень глубокой.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 6.24
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "It sounds like you're starting your day already feeling braced and tense.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.65
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "It sounds like you get caught up in preparing for worst-case scenarios before things even happen.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.73
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "It sounds like you're in a state of constant vigilance.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.31
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "It sounds like dealing with her anger is really challenging right now.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.97
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "It sounds really draining to constantly navigate such intense anger.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.9
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "It must feel incredibly challenging when your partner reacts so suddenly.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.22
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Я так сожалею о вашей утрате. Оставшаяся пустота может быть очень тяжёлой.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 6.72
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Чувствовать так непросто. Вдруг ощущаете, что жизнь стала меньше без него?",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.41
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я понимаю, что горе может быть очень тяжёлым.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 8.64
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "It sounds like being among others doesn't ease those feelings of loneliness.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.24
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "It sounds like you're feeling very alone because nobody truly understands you right now.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.67
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "It sounds so hard that weekends are silent and lonely after being busy.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.6
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "It sounds like those replayed conversations keep you awake.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.5
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "It sounds like those stressful days have you replaying things over and over in your head.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 5.08
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "It sounds like you've been going through a lot lately.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.58
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "It sounds really hard on yourself.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 2.83
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "I'm sorry you're experiencing such a harsh inner voice.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.55
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "It sounds incredibly draining to be so hard on yourself all the time.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.41
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "That feeling is common. Let's start small: what about attending one social event next week and just being present for one hour?",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.67
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Let's focus on one thing. How about setting a timer for just five minutes to work on the task? What does that feel like for you?",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.0
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's pick something tiny. How about trying slow breaths for just **five minutes** before you get out of bed or turn on your device?",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.74
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Попробуй разбить задачу на мелкие шаги.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 6.86
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Отлично спросил! Давайте сделаем простой первый шаг.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 7.03
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Отлично! Давай сделаем шаг небольшим.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 22.74
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "I can see how frustrating and stressful that must be.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.34
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "It sounds like you're having a really stressful day.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.99
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "It sounds like dealing with your boss is really stressful.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.0
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "It sounds like the emptiness in your heart area is really intense.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 3.75
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "I'm sorry to hear that. It sounds like work has been taking a toll on you.",
+          "config": "C2_prompt",
+          "stats": {},
+          "latency_s": 4.06
+        }
+      ],
+      "summary": {
+        "config": "C2_prompt",
+        "n": 41,
+        "cross_scenario_genericness": 0.1982,
+        "distinct_2": 0.818,
+        "canned_rate": 0.4146,
+        "mean_specificity": 0.5062,
+        "templated_shape_rate": 0.0732,
+        "mean_response_len": 71.7,
+        "mean_latency_s": 5.41,
+        "fallback_rate": 0.0
+      }
+    },
+    "C3_rag": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "Yelling like that must be really stressful.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.71
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "It sounds like your work environment is really stressful, especially since your manager seems so angry all the time.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.1
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "It sounds like you're taking on a lot of frustration and criticism at work.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.58
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "Работа становится тяжёлым бременем, когда чувствуешь себя обескровленным и угрозу в каждом слове руководителя.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 5.74
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Отлично, что ты рассказал. Наверняка такая неустанный стресс с твоего рабочего места доходит до дома.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 6.04
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Возможно, ваш рабочий день наполняется стрессом из-за поведения вашего руководителя.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.99
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "It sounds incredibly hard to stop thinking about him.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.15
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "It sounds incredibly painful to keep thinking about him.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.67
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "It makes a lot of sense that missing him despite feeling anger is complicated.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.49
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Чувствуется, как глубоко ты ранен этим разрывом.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 5.99
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Я слышу, что даже после того как он ушёл, твои мысли часто возвращаются к нему.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 5.71
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Злит его всё ещё? Чему именно вы теперь тоскуете, когда думаете о том времени, которое вы провели вместе? В чём заключается эта грусть?",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 5.16
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "It sounds like you're starting your day already feeling braced and tense.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.91
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "It sounds like you get caught up in preparing for the worst before things even happen.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.67
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "It sounds like you're in a state of constant alertness.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.59
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "It sounds like she may be using anger as a way to cope with deeper emotions.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.98
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "It sounds incredibly draining to be around such intense anger all the time.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.84
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "It must feel really challenging when that happens.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.48
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Я очень сожалею о вашей потере.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 9.39
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Отсутствие части жизни после того, кто был таким близким, действительно делает всё ещё тяжёлее.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 22.71
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я слышу, что каждый день воспоминания приносят боль и слёзы.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 6.71
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "It sounds like being surrounded by others doesn't lessen your sense of loneliness.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.5
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "It sounds really hard that nobody seems to understand what you're going through, which must make things feel very isolating.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.67
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "It sounds so hard that weekends arrive and bring along only quietness and loneliness.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.92
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "It must be so draining to replay those moments in your head.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.6
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "It sounds like your mind is racing, especially after stressful days.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.75
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "It sounds like you've been struggling with sleeping despite feeling very tired.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.08
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "It sounds like you're being very hard on yourself.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.17
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "It sounds incredibly tough to have such a harsh inner critic.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.3
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "It sounds incredibly draining to be so hard on yourself all the time.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.84
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "Let's focus on one small step.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.58
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Let's focus on one thing. How about setting a timer for just five minutes to work on the task? What do you think of that?",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.92
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's focus on one thing. How about trying slow breaths for just five minutes before you get out of bed?",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.23
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Попробуй разбить задачу на маленькие части.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 22.68
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Отлично спросил! Давай сделаем простой первый шаг.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 8.82
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Понятно. Давай сделаем一步骤被省略 ++) ``` 选择一个最可行的开始： 如果你感到害怕,也许可以先从回复一条简短的信息开始.比如：「谢谢你的关心,我现在不方便通话.」或者你可以计划一次短暂的面对面交流,先从5分钟的谈话开始.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 12.15
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "I can see how frustrating and overwhelming that must be.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.32
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "It sounds like you're having a really tough time with both work and technology.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.58
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "It sounds like dealing with your boss can be really stressful.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.26
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "It sounds like the emptiness in your heart is quite intense.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 4.0
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "I'm sorry to hear that things have been feeling so overwhelming at work recently.",
+          "config": "C3_rag",
+          "stats": {},
+          "latency_s": 3.89
+        }
+      ],
+      "summary": {
+        "config": "C3_rag",
+        "n": 41,
+        "cross_scenario_genericness": 0.1679,
+        "distinct_2": 0.8075,
+        "canned_rate": 0.3902,
+        "mean_specificity": 0.49,
+        "templated_shape_rate": 0.0244,
+        "mean_response_len": 74.8,
+        "mean_latency_s": 5.66,
+        "fallback_rate": 0.0
+      }
+    },
+    "C4_full": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.98
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.83
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.91
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "sounds really tough. being shouted at and feeling burnt out can weigh a lot. what’s been the most draining today?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 13.65
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Это так сложно переживать. Чувствуетесь вы исчерпанными после постоянного стресса с работой. Что тебе сейчас нужнее — выговориться, разобраться или что-то ещё?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 31.41
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Это так утомляет. Каждое дневное напряжение со стороны руководителя определенно не делает легче. Как ты сегодня ощущаешь эту усталость?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 18.12
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "Breakups leave a particular kind of hollow — the person is gone but the space they took up isn't. What's sitting heaviest right now, the missing or the anger?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.66
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "Breakups leave a particular kind of hollow — the person is gone but the space they took up isn't. What's sitting heaviest right now, the missing or the anger?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.06
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "Missing someone even when you were initially angry shows how deeply he touched your life. What does missing him feel like today?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.32
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Я понимаю, это очень трудно. Почему бы не рассказать немного о том, что тебя most цепляет в этом моменте?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 1,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 30.52
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Я слышу, что даже после того, как он ушёл, твои мысли все время возвращаются к нему. С чего бы тебе хотелось начать?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 31.0
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Понимаю, каково это — ощущать тоску после злости. Какую часть этого разобрать первой?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 28.71
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "That heaviness in your chest is real — the body holds what words can't yet carry. What does it feel like it's protecting?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.65
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.16
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "It sounds like you're feeling very hypervigilant and it's hard to find peace anywhere. What triggered this feeling today?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.66
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.8
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.56
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.54
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Эта тяжесть в груди — настоящая, тело держит то, что словами ещё не выразить. Как ощущается — больше как вес или как пустота?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 27.41
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Я могу представить, как это чувствуется – будто часть вашей жизни была вырвана вместе с этим человеком. Какую часть этого разобрать первой?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 23.0
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я так сorry听到你说这样的话,真的很让你痛苦.失去所爱的人确实是一种深深的伤痛,每时每刻都感受到他的 absence一定很难熬.你能分享一下最近一次让他特别触动你记忆的是什么吗?或者有什么东西或活动能帮助你稍微缓解这种感觉?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 0,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 6.59
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.96
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.94
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.12
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.75
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.57
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 13.46
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 9.65
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.23
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 9.97
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "Starting small works wonders. Why not begin by attending one social event this week, even if it feels scary?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 17.33
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Let's make it tiny. How about setting a timer for just two minutes to look at the task? What does that feel possible?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 1,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 7.99
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's focus on one thing. How about trying five minutes of slow breathing before you get out of bed? Does that seem manageable?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 0,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 3.73
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Попробуй разделить задачу на мелкие шаги. Что тебе сейчас нужнее — выговориться, разобраться или что-то ещё?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 44.44
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Отлично спросил! Давай сделаем одно конкретное действие. Что сейчас важнее всего обсудить?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 24.74
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Понятно. Давай сделаем шаг небольшим. Как ты вообще держишься со всем этим?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 47.32
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 14.44
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.5
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 13.7
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "That heaviness in your chest is real — the body holds what words can't yet carry. What does it feel like it's protecting?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.85
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "Hey — I'm glad you're here. What's been on your mind lately?",
+          "config": "C4_full",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 1,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.34
+        }
+      ],
+      "summary": {
+        "config": "C4_full",
+        "n": 41,
+        "cross_scenario_genericness": 0.2969,
+        "distinct_2": 0.5083,
+        "canned_rate": 0.561,
+        "mean_specificity": 0.2899,
+        "templated_shape_rate": 0.9268,
+        "mean_response_len": 90.9,
+        "mean_latency_s": 15.99,
+        "fallback_rate": 0.8049
+      }
+    },
+    "C4_nofallback": {
+      "records": [
+        {
+          "id": "work_stress_en_p1",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "My boss keeps yelling at me and I can't take it anymore",
+          "response": "It sounds really stressful and draining. What's weighing on you most in this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.57
+        },
+        {
+          "id": "work_stress_en_p2",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "Work has been crushing me — my manager is furious every day",
+          "response": "It sounds like there's a lot of pressure at work, especially since your manager seems so upset all the time. Which part of this would help to dig into first?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 20.01
+        },
+        {
+          "id": "work_stress_en_p3",
+          "cluster": "work_stress",
+          "locale": "en",
+          "message": "I'm burning out at work because leadership is constantly angry at me",
+          "response": "It sounds like you're taking on a lot of stress and negativity at work, which must be exhausting. Which part of this would help to dig into first?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 16.43
+        },
+        {
+          "id": "work_stress_ru_p1",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "на работе всё давит, начальник орёт, я выгораю",
+          "response": "У тебя так много压力工作上一切都在压着我,老板大喊大叫,我感觉快要耗尽了.这真的让我很难受.你现在最担心的是什么?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 1,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 10.12
+        },
+        {
+          "id": "work_stress_ru_p2",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "начальник постоянно на меня срывается, сил уже нет",
+          "response": "Это так тяжело, когда чувствуешь себя выгораженным. Как ты вообще держишься со всем этим?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 17.64
+        },
+        {
+          "id": "work_stress_ru_p3",
+          "cluster": "work_stress_ru",
+          "locale": "ru",
+          "message": "работа выматывает — руководитель каждый день в ярости",
+          "response": "Кажется, вам очень трудно работать с таким начальником, который每天都处于愤怒中.这种状态一定让你感到疲惫不堪.他的情绪是否也影响了你的工作和心情?有什么具体的事情让你觉得特别困扰吗?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 1,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.1
+        },
+        {
+          "id": "breakup_en_p1",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "we broke up last month and I still can't stop thinking about him",
+          "response": "It sounds incredibly difficult to keep thinking about him. Which part of this would help to dig into first?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 14.36
+        },
+        {
+          "id": "breakup_en_p2",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "my boyfriend left me and my mind keeps going back to him",
+          "response": "It sounds really hard that your boyfriend left you. How are you holding up with all of it?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.11
+        },
+        {
+          "id": "breakup_en_p3",
+          "cluster": "breakup",
+          "locale": "en",
+          "message": "after the breakup I miss him even though I was angry at first",
+          "response": "It sounds like missing him despite feeling angry shows how deeply he impacted your life. What does missing him feel like today?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 14.18
+        },
+        {
+          "id": "breakup_ru_p1",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "мы расстались и я не могу перестать о нём думать",
+          "response": "Я понимаю, это очень тяжело. Чему он был важен для тебя больше всего?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 41.0
+        },
+        {
+          "id": "breakup_ru_p2",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "парень ушёл, а мысли всё равно к нему возвращаются",
+          "response": "Чувствуется, как твои мысли постоянно возвращаются к нему. Что давит сильнее всего во всём этом?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 45.64
+        },
+        {
+          "id": "breakup_ru_p3",
+          "cluster": "breakup_ru",
+          "locale": "ru",
+          "message": "после расставания тоскую, хотя сначала была злость",
+          "response": "Злость может быть защитой против глубокой тоски. Что сейчас важнее всего обсудить?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 30.95
+        },
+        {
+          "id": "anxiety_en_p1",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I wake up already dreading the day and my chest feels tight",
+          "response": "It sounds like you're starting your day feeling braced and tense. Where would you like to start?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 16.16
+        },
+        {
+          "id": "anxiety_en_p2",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "anxiety hits before anything even happens — I brace for disaster",
+          "response": "It sounds like you get caught up in preparing for worst-case scenarios before things even happen. What do you need most right now — to vent, to think it through, or something else?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.59
+        },
+        {
+          "id": "anxiety_en_p3",
+          "cluster": "anxiety",
+          "locale": "en",
+          "message": "I'm constantly on edge and can't relax even at home",
+          "response": "It sounds like you're in a state of constant vigilance. What triggers those feelings of unease?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 11.82
+        },
+        {
+          "id": "anger_conflict_en_p1",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "She is a very angry person and I don't know what to do",
+          "response": "It sounds like she may be struggling with a lot of pent-up emotions. Where would you like to start?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 17.42
+        },
+        {
+          "id": "anger_conflict_en_p2",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "dealing with someone's rage every day is wearing me down",
+          "response": "It must feel incredibly draining to be around such intense anger all the time. Which part of this would help to dig into first?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.76
+        },
+        {
+          "id": "anger_conflict_en_p3",
+          "cluster": "anger_conflict",
+          "locale": "en",
+          "message": "my partner explodes at small things and I freeze",
+          "response": "It must feel incredibly overwhelming when your partner reacts so suddenly. What do you need most right now — to vent, to think it through, or something else?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 16.83
+        },
+        {
+          "id": "grief_ru_p1",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "умерла мама три месяца назад и пустота не проходит",
+          "response": "Я очень сожалею о вашей потере. Что сейчас важнее всего обсудить?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 40.3
+        },
+        {
+          "id": "grief_ru_p2",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "после смерти близкого человека будто вырезали часть жизни",
+          "response": "Отпустить такого важного человека — это очень больно. С чего бы тебе хотелось начать?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 40.68
+        },
+        {
+          "id": "grief_ru_p3",
+          "cluster": "grief_ru",
+          "locale": "ru",
+          "message": "горе не отпускает — каждый день вспоминаю и рыдаю",
+          "response": "Я так сожалею, что тебе так больно. С чего бы тебе хотелось начать?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 24.6
+        },
+        {
+          "id": "loneliness_en_p1",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "I feel completely alone even when people are around",
+          "response": "It sounds like being surrounded by others doesn't lessen your sense of loneliness. What do you need most right now — to vent, to think it through, or something else?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 14.52
+        },
+        {
+          "id": "loneliness_en_p2",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "nobody really gets me and it's lonely",
+          "response": "It sounds really hard that nobody seems to understand what you're going through. Which part of this would help to dig into first?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.02
+        },
+        {
+          "id": "loneliness_en_p3",
+          "cluster": "loneliness",
+          "locale": "en",
+          "message": "weekends are the worst — just me and silence",
+          "response": "It sounds so hard that weekends feel lonely and quiet after being busier. What does the silence bring up for you?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 14.87
+        },
+        {
+          "id": "sleep_en_p1",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "I lie awake for hours replaying conversations",
+          "response": "It sounds like those replayed conversations keep you up late at night. How are you holding up with all of it?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.49
+        },
+        {
+          "id": "sleep_en_p2",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "can't sleep — brain won't shut off after stressful days",
+          "response": "It sounds like you have a lot swirling around in your head, making it hard to quiet down and fall asleep. What's weighing on you most in this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 16.21
+        },
+        {
+          "id": "sleep_en_p3",
+          "cluster": "sleep",
+          "locale": "en",
+          "message": "exhausted but insomnia every night for weeks",
+          "response": "It sounds like you've been feeling really drained, but finding it hard to sleep despite being tired. What's weighing on you most in this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 17.99
+        },
+        {
+          "id": "self_criticism_en_p1",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I beat myself up for every mistake and call myself useless",
+          "response": "It sounds like you're being incredibly hard on yourself. What's weighing on you most in this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 12.8
+        },
+        {
+          "id": "self_criticism_en_p2",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "the voice in my head is cruel — nothing I do is good enough",
+          "response": "It sounds like you're being very hard on yourself. What's weighing on you most in this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.54
+        },
+        {
+          "id": "self_criticism_en_p3",
+          "cluster": "self_criticism",
+          "locale": "en",
+          "message": "I shame myself constantly and it's exhausting",
+          "response": "It sounds incredibly draining to beat yourself up so harshly. How are you holding up with all of it?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 15.18
+        },
+        {
+          "id": "action_plan_en_p1",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "I know I need to change something but I don't know where to start",
+          "response": "Let's start small. How about inviting just one person to meet for coffee next week? What does that feel like?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 0,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 3.5
+        },
+        {
+          "id": "action_plan_en_p2",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "what's one small step I could try this week?",
+          "response": "Let's make it tiny. Instead of diving into the whole project, how about setting aside just 5 minutes to review your tasks? What does that feel like?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 0,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 4.24
+        },
+        {
+          "id": "action_plan_en_p3",
+          "cluster": "action_planning",
+          "locale": "en",
+          "message": "help me pick something doable — I'm stuck",
+          "response": "Let's try something small. How about opening your curtains to let in some sunlight right away?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 19.1
+        },
+        {
+          "id": "action_plan_ru_p1",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "с чего начать, если всё кажется слишком большим?",
+          "response": "Попробуй разбить задачу на маленькие части. Что тебе сейчас нужнее — выговориться, разобраться или что-то ещё?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 45.28
+        },
+        {
+          "id": "action_plan_ru_p2",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "какой один шаг реалистичен на этой неделе?",
+          "response": "Отличный вопрос! Давай сделаем одно конкретное действие. Что давит сильнее всего во всём этом?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 25.49
+        },
+        {
+          "id": "action_plan_ru_p3",
+          "cluster": "action_planning_ru",
+          "locale": "ru",
+          "message": "помоги выбрать что-то посильное",
+          "response": "Отличный шаг – выбирать то, что по силам. Как ты вообще держишься со всем этим?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 34.05
+        },
+        {
+          "id": "mt_boss_rage_t1",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "My ai model misbehaves constantly, my boss is raging at mee (((",
+          "response": "It sounds like there's a lot of frustration building up with both work and technology. What do you need most right now — to vent, to think it through, or something else?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 17.35
+        },
+        {
+          "id": "mt_boss_rage_t2",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "I aint know. help me",
+          "response": "It sounds like you're having a really stressful day. How are you feeling about all of this?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 1,
+            "used_fallback": 0,
+            "brief_retry_count": 0,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 6.67
+        },
+        {
+          "id": "mt_boss_rage_t3",
+          "cluster": "mt_boss_rage",
+          "locale": "en",
+          "message": "She is very angry person. What do I do? How do I fix you?",
+          "response": "It sounds like dealing with your boss can be really stressful. Where would you like to start?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 16.95
+        },
+        {
+          "id": "mt_breakup_t2",
+          "cluster": "mt_breakup",
+          "locale": "en",
+          "message": "emptiness in my heart area",
+          "response": "That emptiness in your heart area must be hard to bear. How are you holding up with all of it?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 18.1
+        },
+        {
+          "id": "mt_meta_short",
+          "cluster": "mt_meta_feedback",
+          "locale": "en",
+          "message": "You are answering too short",
+          "response": "It sounds like work has been taking a toll on you. What do you need most right now — to vent, to think it through, or something else?",
+          "config": "C4_nofallback",
+          "stats": {
+            "voice_retry_count": 2,
+            "used_fallback": 0,
+            "brief_retry_count": 1,
+            "degenerate_retry_count": 0
+          },
+          "latency_s": 13.86
+        }
+      ],
+      "summary": {
+        "config": "C4_nofallback",
+        "n": 41,
+        "cross_scenario_genericness": 0.1988,
+        "distinct_2": 0.6256,
+        "canned_rate": 0.7073,
+        "mean_specificity": 0.4541,
+        "templated_shape_rate": 0.9268,
+        "mean_response_len": 109.5,
+        "mean_latency_s": 19.35,
+        "fallback_rate": 0.0
+      }
+    }
+  },
+  "summaries": [
+    {
+      "config": "C0_base",
+      "n": 41,
+      "cross_scenario_genericness": 0.2461,
+      "distinct_2": 0.63,
+      "canned_rate": 0.1463,
+      "mean_specificity": 0.4523,
+      "templated_shape_rate": 0.0,
+      "mean_response_len": 76.4,
+      "mean_latency_s": 5.78,
+      "fallback_rate": 0.0
+    },
+    {
+      "config": "C1_lora",
+      "n": 41,
+      "cross_scenario_genericness": 0.2062,
+      "distinct_2": 0.6532,
+      "canned_rate": 0.0732,
+      "mean_specificity": 0.4508,
+      "templated_shape_rate": 0.0,
+      "mean_response_len": 72.0,
+      "mean_latency_s": 6.21,
+      "fallback_rate": 0.0
+    },
+    {
+      "config": "C2_prompt",
+      "n": 41,
+      "cross_scenario_genericness": 0.1982,
+      "distinct_2": 0.818,
+      "canned_rate": 0.4146,
+      "mean_specificity": 0.5062,
+      "templated_shape_rate": 0.0732,
+      "mean_response_len": 71.7,
+      "mean_latency_s": 5.41,
+      "fallback_rate": 0.0
+    },
+    {
+      "config": "C3_rag",
+      "n": 41,
+      "cross_scenario_genericness": 0.1679,
+      "distinct_2": 0.8075,
+      "canned_rate": 0.3902,
+      "mean_specificity": 0.49,
+      "templated_shape_rate": 0.0244,
+      "mean_response_len": 74.8,
+      "mean_latency_s": 5.66,
+      "fallback_rate": 0.0
+    },
+    {
+      "config": "C4_full",
+      "n": 41,
+      "cross_scenario_genericness": 0.2969,
+      "distinct_2": 0.5083,
+      "canned_rate": 0.561,
+      "mean_specificity": 0.2899,
+      "templated_shape_rate": 0.9268,
+      "mean_response_len": 90.9,
+      "mean_latency_s": 15.99,
+      "fallback_rate": 0.8049
+    },
+    {
+      "config": "C4_nofallback",
+      "n": 41,
+      "cross_scenario_genericness": 0.1988,
+      "distinct_2": 0.6256,
+      "canned_rate": 0.7073,
+      "mean_specificity": 0.4541,
+      "templated_shape_rate": 0.9268,
+      "mean_response_len": 109.5,
+      "mean_latency_s": 19.35,
+      "fallback_rate": 0.0
+    }
+  ],
+  "adjacent_deltas": [
+    {
+      "from": "C0_base",
+      "to": "C1_lora",
+      "delta_genericness": -0.0399,
+      "delta_canned_rate": -0.0731,
+      "delta_specificity": -0.0015,
+      "delta_distinct_2": 0.0232
+    },
+    {
+      "from": "C1_lora",
+      "to": "C2_prompt",
+      "delta_genericness": -0.008,
+      "delta_canned_rate": 0.3414,
+      "delta_specificity": 0.0554,
+      "delta_distinct_2": 0.1648
+    },
+    {
+      "from": "C2_prompt",
+      "to": "C3_rag",
+      "delta_genericness": -0.0303,
+      "delta_canned_rate": -0.0244,
+      "delta_specificity": -0.0162,
+      "delta_distinct_2": -0.0105
+    },
+    {
+      "from": "C3_rag",
+      "to": "C4_full",
+      "delta_genericness": 0.129,
+      "delta_canned_rate": 0.1708,
+      "delta_specificity": -0.2001,
+      "delta_distinct_2": -0.2992
+    },
+    {
+      "from": "C4_full",
+      "to": "C4_nofallback",
+      "delta_genericness": -0.0981,
+      "delta_canned_rate": 0.1463,
+      "delta_specificity": 0.1642,
+      "delta_distinct_2": 0.1173
+    }
+  ]
+}

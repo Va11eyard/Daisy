@@ -1,0 +1,5 @@
+# Optional: convert books under data/ to Markdown (scripts/books_to_markdown.py)
+pypdf>=4.0.0
+striprtf>=0.0.26
+python-docx>=1.1.0
+chardet>=5.0.0

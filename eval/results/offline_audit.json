@@ -1,0 +1,119 @@
+{
+  "rag_audit": {
+    "n_chunks": 8,
+    "chunks": [
+      {
+        "id": "cbt_intake_01",
+        "state": "intake",
+        "locale": "en",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": 0.3147,
+        "preview": "When someone opens with distress, mirror their exact concern in your own words before exploring further. If they name an"
+      },
+      {
+        "id": "cbt_disclosure_01",
+        "state": "disclosure",
+        "locale": "en",
+        "is_meta_instruction": true,
+        "similarity_to_bland_output": 0.3215,
+        "preview": "During emotional disclosure, stay with meaning and loss before offering reframes. Ask what changed, what is missed, or w"
+      },
+      {
+        "id": "cbt_action_01",
+        "state": "action_planning",
+        "locale": "en",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": 0.0215,
+        "preview": "Behavioral activation works best with one or two small steps tied to the client's context. End with a choice question ab"
+      },
+      {
+        "id": "cbt_intake_ru_01",
+        "state": "intake",
+        "locale": "ru",
+        "is_meta_instruction": true,
+        "similarity_to_bland_output": 0.0426,
+        "preview": "На этапе знакомства отрази услышанное в 1–2 предложениях и задай один открытый вопрос о том, что сейчас беспокоит сильне"
+      },
+      {
+        "id": "cbt_disclosure_ru_01",
+        "state": "disclosure",
+        "locale": "ru",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": -0.0463,
+        "preview": "При раскрытии переживаний оставайся в теме смысла и потери. Спроси, что изменилось или что больше всего цепляет. Не пред"
+      },
+      {
+        "id": "dbt_distress_01",
+        "state": "disclosure",
+        "locale": "en",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": 0.2278,
+        "preview": "When distress is high, validate the function of the emotion without endorsing harmful behavior. Name what the feeling mi"
+      },
+      {
+        "id": "act_values_01",
+        "state": "action_planning",
+        "locale": "en",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": 0.0711,
+        "preview": "Link next steps to values the client already named. One tiny committed action beats a long self-improvement list."
+      },
+      {
+        "id": "grief_01",
+        "state": "disclosure",
+        "locale": "ru",
+        "is_meta_instruction": false,
+        "similarity_to_bland_output": -0.058,
+        "preview": "При горе и утрате называй потерю прямо, без обесценивания и без «серебряных подкладок». Спроси, какая часть утраты сейча"
+      }
+    ],
+    "meta_instruction_fraction": 0.25,
+    "mean_similarity_to_bland_output": 0.1119
+  },
+  "lora_data_audit": {
+    "train_path": "data\\train_v13.jsonl",
+    "n_lines": 2414,
+    "n_examples": 2414,
+    "book_dump_row_fraction": 0.0,
+    "locale_mix": {
+      "en": 2411,
+      "kk": 3
+    },
+    "shape_mix": {
+      "reflect_plus_question": 1449,
+      "question_other": 965
+    },
+    "generic_tail_fraction": 0.0,
+    "voice_contract_fail_fraction": 0.0,
+    "distinct_2": 0.1104,
+    "mean_sentence_count": 4.24,
+    "sentence_count_distribution": {
+      "2": 192,
+      "3": 180,
+      "4": 1077,
+      "other": 965
+    },
+    "reflect_plus_question_shape_rate": 0.6002,
+    "templated_shape_rate": 0.1495,
+    "targets": {
+      "reflect_plus_question_shape_rate_max": 0.7,
+      "book_dump_row_fraction_max": 0.0
+    },
+    "sample_targets": [
+      "There is already a reflective part online, because you are observing the sequence rather than only living inside it. Daisy noticed the split between the feeling and the commentary about the feeling. That split can become useful if it gives you space, not another tribunal. What would become clearer if the anger were allowed to speak in one sentence?",
+      "Your reaction can be proportional even if someone else finds it inconvenient. Daisy noticed that feeling replaced is sitting beside a second fear: being accused of making the room harder to manage. Those are different questions, and the second one should not erase the first. What would become clearer if the anger were allowed to speak in one sentence?",
+      "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что сестра сместил фокус с произошедшего на допустимость вашей реакции. Такой сдвиг заставляет человека проверять собственную боль вместо того, чтобы назвать исходное повреждение. Чего вы опасаетесь, если перестанете объяснять себя?"
+    ]
+  },
+  "decoding_params": {
+    "production_defaults": {
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "voice_regen_temperature": 0.85,
+      "voice_regen_repetition_penalty": 1.2,
+      "other_regen_temperature_cap": 0.5
+    },
+    "note": "Regen paths in score.py lower temperature, which can flatten diversity."
+  }
+}
