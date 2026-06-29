@@ -21,6 +21,10 @@ _GENERIC_PATTERNS_EN: tuple[re.Pattern[str], ...] = (
     re.compile(r"\bi understand how (?:hard|difficult|tough)\b", re.I),
     re.compile(r"\bhow can i best help you (?:right )?now\b", re.I),
     re.compile(r"\bi'?ll try to (?:answer|respond) (?:in a )?warmer\b", re.I),
+    # Detached psychoeducation one-liners (no "you", no question).
+    re.compile(r"^(?:anxiety|worry|stress|grief|depression)\s+(?:can|often|tends|may)\b", re.I),
+    re.compile(r"\bcan settle in quietly\b", re.I),
+    re.compile(r"\bcreeping in when we\b", re.I),
 )
 
 _GENERIC_PATTERNS_RU: tuple[re.Pattern[str], ...] = (

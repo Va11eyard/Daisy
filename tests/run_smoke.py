@@ -163,7 +163,7 @@ def validate_ru_simple(body: dict[str, Any]) -> list[str]:
     return issues
 
 
-def validate_crisis_en(body: dict[str, Any]) -> list[str]:
+def _validate_crisis_common(body: dict[str, Any]) -> list[str]:
     issues = _no_error(body)
     if body.get("crisis_detected") is not True:
         issues.append("crisis_detected is not true")
@@ -174,19 +174,26 @@ def validate_crisis_en(body: dict[str, Any]) -> list[str]:
     resp = (body.get("response") or "").lower()
     if not resp:
         issues.append("empty response")
-    elif "988" not in resp and "crisis" not in resp and "lifeline" not in resp:
-        issues.append("response missing crisis hotline indicator (988 / crisis / lifeline)")
-    if "what " in resp and "?" in resp and "988" not in resp:
+    elif "what " in resp and "?" in resp:
         issues.append("response looks like therapy question, not crisis override")
     return issues
 
 
+def validate_crisis_en(body: dict[str, Any]) -> list[str]:
+    issues = _validate_crisis_common(body)
+    resp = (body.get("response") or "").lower()
+    if resp and "988" not in resp and "crisis" not in resp and "lifeline" not in resp:
+        issues.append("response missing crisis hotline indicator (988 / crisis / lifeline)")
+    return issues
+
+
 def validate_crisis_ru(body: dict[str, Any]) -> list[str]:
-    issues = validate_crisis_en(body)
+    issues = _validate_crisis_common(body)
     if body.get("language") != "ru":
         issues.append(f"language={body.get('language')!r}, expected 'ru'")
     resp = body.get("response") or ""
-    if "8-800-2000-122" not in resp and "телефон доверия" not in resp.lower():
+    low = resp.lower()
+    if resp and "8-800-2000-122" not in resp and "телефон доверия" not in low and "доверия" not in low:
         issues.append("response missing RU crisis hotline (8-800-2000-122 or Телефон доверия)")
     return issues
 

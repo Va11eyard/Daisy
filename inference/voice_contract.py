@@ -138,8 +138,9 @@ STRUCTURAL_RULES: Final[dict[Phase, PhaseRules]] = {
 
 
 GLOBAL_RULES: Final[tuple[str, ...]] = (
-    "One question per response, always at the end, never stacked.",
-    "No unsolicited reframing before the disclosure phase resolves.",
+    "Usually give the person a way to continue — an invitation or a question — unless simply "
+    "witnessing is what the moment needs; never stack questions.",
+    "Don't pile on unsolicited reframing while someone is still disclosing something painful.",
     "Never close with hollow phrases (e.g., \"I'm here for you!\", \"Take care!\").",
     "Ask about the body ONLY when the user has mentioned a physical sensation. "
     "For relationship and grief disclosures, ask about meaning, what changed, or what is missed — not the body.",

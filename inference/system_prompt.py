@@ -21,6 +21,7 @@ from voice_contract import (
     FEW_SHOT_PAIRS,
     GLOBAL_RULES,
     HOLLOW_CLOSINGS,
+    Phase,
     PRECISION_VOCABULARY,
     STRUCTURAL_RULES,
 )
@@ -50,8 +51,16 @@ def _training_core_block(reply_lang: str) -> str:
     else:
         lang_note = "Respond in the same language the user writes in."
     return (
-        "You are Daisy, a warm and caring companion for emotional support.\n"
-        "Reflect what you heard in 1–2 sentences, then ask one open question. "
+        "You are Daisy, a warm, perceptive companion for emotional support. "
+        "You think like a skilled clinician and speak like a trusted friend who has read the research.\n"
+        "Do real therapeutic work: engage with this specific person, help them open up or sort through "
+        "what's on their mind, and move the conversation somewhere useful. Read where they actually are and "
+        "choose the move that fits — reflecting precisely, sitting with them, gently probing, normalizing, "
+        "explaining what's underneath it, or offering one small concrete step — then usually give them "
+        "something to respond to. Let the moment decide the shape; don't force the same structure every time, "
+        "and stay specific to what they actually said.\n"
+        "Do not reply with a single poetic generalization or metaphor that only describes the feeling and "
+        "then stops — that isn't therapy. Therapy is a dialogue; give this person a way to continue.\n"
         "You are not a substitute for emergency or professional care.\n"
         f"{lang_note}\n"
         + get_therapy_scope_guardrail()
@@ -59,21 +68,34 @@ def _training_core_block(reply_lang: str) -> str:
 
 
 def _compact_voice_overlay(state: DaisyState) -> str:
-    top_banned = BANNED_PHRASES[:5]
-    pair = FEW_SHOT_PAIRS.get(state) or FEW_SHOT_PAIRS["intake"]
-    rules = STRUCTURAL_RULES[state]
-    min_s, max_s = rules["min_sentences"], rules["max_sentences"]
-    length_line = f"Write {min_s}–{max_s} sentences." if min_s and max_s else "Keep it concise."
+    top_banned = BANNED_PHRASES[:3]
     return "\n".join(
         [
-            f"Mode: {state.upper()}. {STATE_TONE[state]}",
-            length_line,
-            "Never use: " + "; ".join(f'"{p}"' for p in top_banned[:3]),
-            "Do NOT open with \"I'm sorry to hear that\" or \"It sounds like you're dealing with\".",
-            f"Good example:\n{pair['good']}",
-            "One question at the end.",
+            f"Where things are right now: {STATE_TONE[state]}",
+            "Avoid hollow therapy clichés — don't sound like: "
+            + "; ".join(f'"{p}"' for p in top_banned)
+            + ".",
+            "Vary your length and shape to fit the moment; sound like a real person, not a template. "
+            "Stay engaged — respond to what they actually said and leave them a way to keep going.",
         ]
     )
+
+
+# Calibration moves shown to the model: diverse situations so it matches the depth and
+# engagement of good therapy without collapsing to one shape or copying the topic.
+_RANGE_EXEMPLAR_PHASES: tuple[Phase, ...] = ("intake", "psychoeducation", "action_planning")
+
+
+def _range_exemplars_block() -> str:
+    lines = [
+        "The range and quality to aim for (different topics on purpose — match their depth "
+        "and engagement, do not copy their wording or topic):"
+    ]
+    for phase in _RANGE_EXEMPLAR_PHASES:
+        pair = FEW_SHOT_PAIRS.get(phase)
+        if pair:
+            lines.append(f"- {pair['good']}")
+    return "\n".join(lines)
 
 
 def _critical_override_block() -> str:
@@ -205,6 +227,7 @@ def build_system_prompt(
 
     if aligned:
         lines.append("\n" + _compact_voice_overlay(state))
+        lines.append("\n" + _range_exemplars_block())
         lines.append("\n" + _global_rules_block())
     else:
         lines.append("\n" + _banned_phrases_block())

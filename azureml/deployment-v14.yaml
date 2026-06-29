@@ -3,11 +3,10 @@
 # Create: az ml online-deployment create --file azureml/deployment-v14.yaml -g Daisy_group -w Daisy
 # Update:  az ml online-deployment update  --file azureml/deployment-v14.yaml -g Daisy_group -w Daisy
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: gpu-deployment-finetuned
+name: gpu-deployment-v14
 endpoint_name: daisy-therapy
-# Point at the registered base/LoRA artifact once Phi/Qwen3 training (phase 2) is registered.
-# Until then the endpoint loads BASE_MODEL from Hugging Face directly.
-model: azureml:daisy-finetuned-lora:11
+# No registered LoRA artifact — Qwen3-8B loads from Hugging Face (BASE_MODEL env).
+# daisy-finetuned-lora:11 is Qwen2.5-7B and must not be mounted on Qwen3-8B.
 code_configuration:
   code: ../inference
   scoring_script: score.py
@@ -39,7 +38,8 @@ environment_variables:
   # books above 1.0 so therapeutic terminology surfaces rather than getting outvoted.
   DAISY_BOOKS_WEIGHT: "1.5"
   DAISY_CONFIDENCE_GATE: "true"
-  DAISY_CONFIDENCE_THRESHOLD: "-2.5"
+  # 4-bit NF4 logprobs run lower than fp16; -2.5 caused near-100% fallback on Qwen3-8B.
+  DAISY_CONFIDENCE_THRESHOLD: "-4.5"
   # Multilingual embedder for RAG retrieval (RU/EN strong; KK falls back to ru/en grounding).
   DAISY_EMBED_MODEL: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 # Set HF_TOKEN (and optional translator / Azure OpenAI keys) in the deployment — do not commit secrets.

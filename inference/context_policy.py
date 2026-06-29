@@ -52,11 +52,19 @@ def fit_messages_to_token_budget(
 
     while len(out) > 2:
         try:
-            prompt = tokenizer.apply_chat_template(
-                out,
-                tokenize=False,
-                add_generation_prompt=True,
-            )
+            try:
+                prompt = tokenizer.apply_chat_template(
+                    out,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    enable_thinking=False,
+                )
+            except TypeError:
+                prompt = tokenizer.apply_chat_template(
+                    out,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                )
         except Exception as e:
             logger.warning("context_policy apply_chat_template failed: %s", e)
             break

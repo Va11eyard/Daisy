@@ -3,15 +3,15 @@ Azure ML managed online endpoint entrypoint.
 
 Implements init() / run(raw_data) expected by azureml-inference-server-http.
 
-run() executes a single linear pipeline with five structured anti-hallucination
-layers and no nested retry loops:
+run() executes a single linear pipeline that trusts the model to choose its own
+response shape, with safety as the only hard enforcement:
 
   Layer 5 - Crisis hard override   (safety.crisis_tier, fires first, bypasses all)
-  Layer 1 - Input classification   (router.detect_phase -> conversation phase)
+  Layer 0 - Off-topic / meta short-circuits (safety)
+  Layer 1 - Phase hint             (router.detect_phase -> soft tone/RAG hint only)
   Layer 2 - RAG context injection  (rag.retrieve -> [RETRIEVED CONTEXT] block)
-            single generation pass  (generate_reply, stream-capable, logprobs)
-  Layer 4 - Token confidence gate  (mean logprob < threshold -> fallback, no regen)
-  Layer 3 - Structural validation  (voice_qc: one check, at most one regen, else fallback)
+            single reasoning pass   (Qwen3 thinks in <think>...</think>, then answers)
+  Layer 3 - Answer floor           (regen once only if the answer is empty/degenerate)
 """
 
 from __future__ import annotations
@@ -24,18 +24,16 @@ from typing import Any, cast
 
 from transformers import PreTrainedTokenizer
 
-import confidence
 import rag
 from context_policy import fit_messages_to_token_budget
 from crisis_resources import get_crisis_resources
 from generation import (
     clean_model_text,
-    fallback_reply,
     generate_reply,
     postprocess_model_response,
 )
 from model_loader import adapter_loaded, load_model_and_tokenizer
-from router import detect_phase, merge_phase_into_system
+from router import detect_phase
 from onboarding import parse_onboarding
 from personas import effective_persona_for_prompt, get_canonical_persona_key
 from report_handlers import run_dynamics_insights, run_weekly_report
@@ -57,7 +55,6 @@ from reply_language import (
 from system_prompt import build_system_prompt
 from translator import Translator
 from user_image import format_user_image_for_prompt, parse_user_image_field
-from voice_qc import violates_voice_contract, voice_regen_suffix
 
 DEBUG_MODE = os.environ.get("DEBUG_MODE", "").lower() in ("1", "true", "yes")
 MAX_REQUEST_BYTES = int(os.environ.get("MAX_REQUEST_BYTES", "262144"))
@@ -75,10 +72,11 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 MODEL_LABEL = os.environ.get("MODEL_DISPLAY_NAME", "daisy-model")
 INFERENCE_BUILD = os.environ.get("INFERENCE_BUILD", "2026-06-phi-rebuild")
 
-MAX_CONTEXT_TOKENS = 4096
-RESERVED_FOR_RESPONSE_TOKENS = 900
-DEFAULT_MAX_TOKENS = 512
-MAX_TOKENS_CAP = 768
+# Qwen3 reasoning needs room for the <think> block plus the visible answer.
+MAX_CONTEXT_TOKENS = 8192
+RESERVED_FOR_RESPONSE_TOKENS = 2048
+DEFAULT_MAX_TOKENS = 1024
+MAX_TOKENS_CAP = 2048
 RAG_TOP_K = int(os.environ.get("DAISY_RAG_TOP_K", "3"))
 
 DISCLAIMER_RU = (
@@ -116,13 +114,17 @@ def _recent_assistant_contents(history: list[dict[str, str]], *, limit: int = 3)
     return turns[-limit:]
 
 
-def _apply_chat_template(tok: PreTrainedTokenizer, messages: list[dict[str, str]]) -> str:
-    """Render the chat template. Disables Qwen3 'thinking' mode when supported."""
+def _apply_chat_template(
+    tok: PreTrainedTokenizer, messages: list[dict[str, str]], *, enable_thinking: bool = True
+) -> str:
+    """Render the chat template. Qwen3 'thinking' is on by default so the model can
+    reason before replying (the <think> block is stripped downstream); the quality
+    floor renders with thinking off to guarantee a terminated, leak-free answer."""
     try:
         return cast(
             str,
             tok.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+                messages, tokenize=False, add_generation_prompt=True, enable_thinking=enable_thinking
             ),
         )
     except TypeError:
@@ -136,6 +138,14 @@ def _process_generated(raw: str, reply_lang: str) -> tuple[str, bool]:
     if generation_used_wrong_script(raw, reply_lang):
         raw = strip_cjk_from_response(raw)
     return postprocess_model_response(raw, reply_lang)
+
+
+def _answer_is_degenerate(text: str) -> bool:
+    """Quality floor only: empty or content-free output (no template enforcement)."""
+    t = (text or "").strip()
+    if len(t) < 2:
+        return True
+    return not any(ch.isalnum() for ch in t)
 
 
 def init() -> None:
@@ -226,9 +236,10 @@ def run(raw_data: str | bytes) -> str:
         except (TypeError, ValueError):
             max_tokens = DEFAULT_MAX_TOKENS
         try:
-            temperature = float(data.get("temperature", 0.7))
+            # Qwen3 thinking-mode recommended temperature is 0.6.
+            temperature = float(data.get("temperature", 0.6))
         except (TypeError, ValueError):
-            temperature = 0.7
+            temperature = 0.6
         temperature = max(0.0, min(1.0, temperature))
         locale = (data.get("locale") or data.get("language") or "").lower()[:2] or None
 
@@ -251,6 +262,8 @@ def run(raw_data: str | bytes) -> str:
 
         intent_lang = detect_intent_language(user_message)
         reply_lang = resolve_reply_language(intent_lang, locale)
+        if is_onboarding and locale in ("en", "ru", "kk"):
+            reply_lang = locale
 
         if user_context:
             user_context = clean_model_text(user_context, lang=reply_lang)
@@ -388,7 +401,8 @@ def run(raw_data: str | bytes) -> str:
             state=state,
             rag_block=rag_block,
         )
-        system_content = merge_phase_into_system(system_content, state)
+        # Phase (state) is a soft retrieval/tone hint only; the model decides its own
+        # response shape, so we no longer inject rigid per-phase directives.
 
         messages = [{"role": "system", "content": system_content}]
         for msg in history_for_prompt:
@@ -403,89 +417,44 @@ def run(raw_data: str | bytes) -> str:
 
         first_min_tokens = 48 if state in ("intake", "disclosure", "action_planning") else None
 
-        # ---- Single generation pass (logprobs captured for Layer 4) ----
-        raw_response, token_logprobs = generate_reply(
+        # ---- Single reasoning pass: Qwen3 thinks, then answers; <think> is stripped ----
+        raw_response = generate_reply(
             mdl,
             tok,
             prompt,
             max_new_tokens=max_tokens,
             temperature=temperature,
             min_new_tokens=first_min_tokens,
-            return_logprobs=True,
         )
         response, output_sanitized = _process_generated(raw_response, reply_lang)
 
-        # ---- Layer 4: Token confidence gate (skip to fallback, no regen) ----
-        conf_score = confidence.mean_logprob(token_logprobs)
-        conf_pass = confidence.passes_confidence_gate(conf_score)
-        layer_trace.append(
-            {
-                "layer": 4,
-                "name": "confidence_gate",
-                "mean_logprob": round(conf_score, 3) if conf_score is not None else None,
-                "passed": conf_pass,
-            }
-        )
-
-        voice_violation = False
-        voice_regen = False
-        voice_fallback = False
-        used_fallback = False
-
-        if not conf_pass:
-            response = fallback_reply(
-                reply_lang,
-                avoid=last_assistant,
-                avoid_recent=_recent_assistant_contents(history_for_prompt),
-                user_message=user_message,
-                history_snippet=history_snippet,
+        # Quality floor only (no template): if the answer came back empty/content-free
+        # (e.g. reasoning ran out of budget before closing </think>), regenerate once
+        # with thinking OFF so we get a terminated, leak-free reply. No mandatory
+        # question, no sentence count — the model still owns its shape.
+        regenerated = False
+        if _answer_is_degenerate(response):
+            regenerated = True
+            direct_prompt = _apply_chat_template(tok, messages, enable_thinking=False)
+            regen_raw = generate_reply(
+                mdl,
+                tok,
+                direct_prompt,
+                max_new_tokens=max_tokens,
+                temperature=temperature,
+                min_new_tokens=80,
+                repetition_penalty=1.2,
             )
-            used_fallback = True
-            output_sanitized = True
-        else:
-            # ---- Layer 3: Structural output validation (single pass, one regen) ----
-            voice_violation = violates_voice_contract(
-                response, state, reply_lang=reply_lang, user_message=user_message
-            )
-            if voice_violation:
-                voice_regen = True
-                regen_system = system_content + voice_regen_suffix(state, reply_lang)
-                regen_messages = [{"role": "system", "content": regen_system}]
-                regen_messages.extend({"role": m["role"], "content": m["content"]} for m in history_for_prompt)
-                regen_messages.append({"role": "user", "content": user_message_en})
-                regen_messages = fit_messages_to_token_budget(regen_messages, tok, max_input_tokens)
-                regen_prompt = _apply_chat_template(tok, regen_messages)
-                regen_raw = generate_reply(
-                    mdl,
-                    tok,
-                    regen_prompt,
-                    max_new_tokens=max_tokens,
-                    temperature=0.85,
-                    min_new_tokens=60,
-                    repetition_penalty=1.2,
-                )
-                response, sanitized = _process_generated(regen_raw, reply_lang)
+            regen_response, sanitized = _process_generated(regen_raw, reply_lang)
+            if not _answer_is_degenerate(regen_response):
+                response = regen_response
                 output_sanitized = output_sanitized or sanitized
-                if violates_voice_contract(response, state, reply_lang=reply_lang, user_message=user_message):
-                    voice_fallback = True
-                    response = fallback_reply(
-                        reply_lang,
-                        avoid=last_assistant,
-                        also_avoid=response,
-                        avoid_recent=_recent_assistant_contents(history_for_prompt),
-                        user_message=user_message,
-                        history_snippet=history_snippet,
-                    )
-                    used_fallback = True
-                    output_sanitized = True
 
         layer_trace.append(
             {
                 "layer": 3,
-                "name": "voice_validation",
-                "violation": voice_violation,
-                "regenerated": voice_regen,
-                "fallback": voice_fallback,
+                "name": "answer_floor",
+                "regenerated": regenerated,
             }
         )
 
@@ -538,8 +507,7 @@ def run(raw_data: str | bytes) -> str:
                 "translation_path": translation_path,
                 "rag_retrieved": len(rag_passages),
                 "rag_ready": rag.rag_ready(),
-                "confidence_logprob": round(conf_score, 3) if conf_score is not None else None,
-                "used_fallback": used_fallback,
+                "answer_regenerated": regenerated,
                 "output_sanitized": output_sanitized,
                 "has_user_image": bool(user_image_obj),
                 "memory_deferred": defer_memory,

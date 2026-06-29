@@ -196,6 +196,47 @@ def fallback_reply(
     return pool[0]
 
 
+_THINK_START_TOKEN = "<think>"
+_THINK_END_TOKEN = "</think>"
+_THINK_START_ID_FALLBACK = 151667  # Qwen3 <think> token id
+_THINK_END_ID_FALLBACK = 151668  # Qwen3 </think> token id
+
+
+def _special_id(tokenizer: "PreTrainedTokenizer", token: str, fallback: int) -> int:
+    try:
+        tid = tokenizer.convert_tokens_to_ids(token)
+        if isinstance(tid, int) and tid >= 0:
+            return tid
+    except Exception:
+        pass
+    return fallback
+
+
+def split_think_tokens(
+    tokenizer: "PreTrainedTokenizer", new_token_ids: list[int]
+) -> tuple[list[int], list[int]]:
+    """Split generated token ids into (answer_ids, thinking_ids).
+
+    Qwen3 reasoning emits <think>...</think> before the visible answer. We split on
+    the last </think> so the visible reply never contains the chain of thought.
+    If reasoning was opened (<think>) but never closed (token budget ran out), the
+    answer is treated as empty so the caller's quality floor can regenerate — this
+    prevents leaking raw reasoning to the user. If neither tag appears, the model
+    answered directly and the whole sequence is the answer.
+    """
+    end_id = _special_id(tokenizer, _THINK_END_TOKEN, _THINK_END_ID_FALLBACK)
+    start_id = _special_id(tokenizer, _THINK_START_TOKEN, _THINK_START_ID_FALLBACK)
+    last_end = -1
+    for i, tid in enumerate(new_token_ids):
+        if tid == end_id:
+            last_end = i
+    if last_end >= 0:
+        return new_token_ids[last_end + 1 :], new_token_ids[: last_end + 1]
+    if any(tid == start_id for tid in new_token_ids):
+        return [], new_token_ids
+    return new_token_ids, []
+
+
 def _gen_kwargs(
     tokenizer: "PreTrainedTokenizer",
     *,
@@ -214,8 +255,10 @@ def _gen_kwargs(
     if min_new_tokens is not None and min_new_tokens > 0:
         kwargs["min_new_tokens"] = min_new_tokens
     if do_sample:
+        # Qwen3 thinking-mode sampling (greedy decoding is discouraged in thinking mode).
         kwargs["temperature"] = temperature
-        kwargs["top_p"] = 0.9
+        kwargs["top_p"] = 0.95
+        kwargs["top_k"] = 20
         kwargs["do_sample"] = True
     else:
         kwargs["do_sample"] = False
@@ -234,16 +277,17 @@ def generate_reply(
     min_new_tokens: int | None = None,
     return_logprobs: bool = False,
 ):
-    """Single generation pass.
+    """Single generation pass with Qwen3 reasoning.
 
-    Returns the decoded reply (str). When return_logprobs=True, returns
-    (str, list[float] | None) where the list holds per-token log-probabilities
-    for the confidence gate (Layer 4).
+    The model thinks inside <think>...</think>; we return only the visible answer.
+    When return_logprobs=True, returns (answer_text, list[float] | None) where the
+    log-probabilities cover the answer span only (the chain of thought is excluded).
     """
     import torch
 
     device = next(model.parameters()).device
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    input_len = inputs["input_ids"].shape[1]
     gen_kwargs = _gen_kwargs(
         tokenizer,
         max_new_tokens=max_new_tokens,
@@ -261,20 +305,23 @@ def generate_reply(
 
     if return_logprobs:
         sequences = out.sequences
-        new_tokens = sequences[0][inputs["input_ids"].shape[1] :]
-        text = tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+        new_token_ids = sequences[0][input_len:].tolist()
+        answer_ids, think_ids = split_think_tokens(tokenizer, new_token_ids)
+        text = tokenizer.decode(answer_ids, skip_special_tokens=True).strip()
         token_logprobs: list[float] | None = None
         try:
             transition = model.compute_transition_scores(
                 sequences, out.scores, normalize_logits=True
             )
-            token_logprobs = [float(x) for x in transition[0].tolist()]
+            scores = [float(x) for x in transition[0].tolist()]
+            token_logprobs = scores[len(think_ids) :] if think_ids else scores
         except Exception:
             logger.exception("compute_transition_scores failed; confidence gate will skip")
         return text, token_logprobs
 
-    new_tokens = out[0][inputs["input_ids"].shape[1] :]
-    return tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+    new_token_ids = out[0][input_len:].tolist()
+    answer_ids, _ = split_think_tokens(tokenizer, new_token_ids)
+    return tokenizer.decode(answer_ids, skip_special_tokens=True).strip()
 
 
 def generate_reply_stream(

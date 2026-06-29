@@ -316,7 +316,11 @@ def _minimal_system_prompt_kwargs() -> dict:
 def test_system_prompt_intake_basic(monkeypatch):
     monkeypatch.setenv("DAISY_PROMPT_MODE", "aligned")
     out = build_system_prompt(state="intake", **_minimal_system_prompt_kwargs())
-    assert "CURRENT INTERACTION MODE: INTAKE" in out or "Mode: INTAKE" in out
+    # Stance-based aligned prompt: engagement-centered, no rigid mode/length mold.
+    assert "They are just opening up" in out
+    assert "Do real therapeutic work" in out
+    assert "The range and quality to aim for" in out
+    assert "Mode: INTAKE" not in out
     assert "REGISTER REFERENCE:" not in out
 
 

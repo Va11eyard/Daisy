@@ -27,6 +27,9 @@ def main() -> int:
     if not az:
         print("Azure CLI (az) not found in PATH.", file=sys.stderr)
         return 1
+    with patch_path.open(encoding="utf-8") as f:
+        patch = yaml.safe_load(f)
+    deploy_name = patch.get("name") or "gpu-deployment-finetuned"
     r = subprocess.run(
         [
             az,
@@ -34,9 +37,9 @@ def main() -> int:
             "online-deployment",
             "show",
             "--name",
-            "gpu-deployment-finetuned",
+            deploy_name,
             "--endpoint-name",
-            "daisy-therapy",
+            patch.get("endpoint_name") or "daisy-therapy",
             "-g",
             "Daisy_group",
             "-w",
@@ -52,8 +55,6 @@ def main() -> int:
     )
     azure = json.loads(r.stdout)
     env_azure = azure.get("environment_variables") or {}
-    with patch_path.open(encoding="utf-8") as f:
-        patch = yaml.safe_load(f)
     env_patch = patch.get("environment_variables") or {}
     merged_env = {**env_azure, **env_patch}
     patch["environment_variables"] = merged_env

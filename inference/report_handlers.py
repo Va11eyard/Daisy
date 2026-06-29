@@ -14,6 +14,21 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
+def _apply_chat_template_no_think(
+    tokenizer: "PreTrainedTokenizer", messages: list[dict[str, str]]
+) -> str:
+    """Render the chat template with Qwen3 thinking OFF so structured JSON output
+    is not preceded by a <think> block."""
+    try:
+        return tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+        )
+    except TypeError:
+        return tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+
+
 def run_dynamics_insights(
     model: Any,
     tokenizer: "PreTrainedTokenizer",
@@ -53,7 +68,7 @@ def run_dynamics_insights(
     )
     user = f"PERIOD: {period_days} days\nCHECK-INS:\n{history_text}"
     messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    prompt = _apply_chat_template_no_think(tokenizer, messages)
     raw = generate_reply(model, tokenizer, prompt, max_new_tokens=400, temperature=0.5)
     parsed = extract_json_object(raw)
     if parsed:
@@ -115,7 +130,7 @@ def run_weekly_report(
         f"PERIOD: last {period_days} days\nPROFILE: {prof}\nCHECK-INS:\n{history_text}\nTOPICS: {topics_str}"
     )
     messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    prompt = _apply_chat_template_no_think(tokenizer, messages)
     raw = generate_reply(model, tokenizer, prompt, max_new_tokens=500, temperature=0.5)
     parsed = extract_json_object(raw)
     if parsed:

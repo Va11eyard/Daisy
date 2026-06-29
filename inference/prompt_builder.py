@@ -13,27 +13,22 @@ from state_detector import DaisyState
 
 STATE_TONE: dict[DaisyState, str] = {
     "intake": (
-        "Be Socratic and orienting. No labeling or categorizing yet. "
-        "Reflect what you heard in 1–2 sentences, then one open question. "
-        "Total 2–3 sentences; never a single generic sympathy line. "
-        "Do not preface your reply with labels about your strategy or with lines like "
-        "\"One question that…\" — speak to the user directly as Daisy."
+        "They are just opening up. Stay curious and orienting; don't label or "
+        "categorize the feeling yet. Invite them to say more, and speak to them directly as Daisy."
     ),
     "disclosure": (
-        "Witness only. No advice, no reframes, no silver linings. Match the "
-        "gravity. Reflect precisely what was said — not more, not less."
+        "They are sharing something heavy. Witness it. Hold off on advice, reframes, "
+        "or silver linings, and match the gravity of what they said."
     ),
     "psychoeducation": (
-        "Structure: concept → mechanism → why it matters for this person. "
-        "Define any clinical term immediately after using it. Own the explanation."
+        "They want to understand something. Explain the mechanism in plain language and "
+        "define any clinical term right after you use it."
     ),
     "action_planning": (
-        "Be directive but collaborative. Steps must be specific, not generic. "
-        "End with an obstacle check question."
+        "They are ready to move. Be collaborative and concrete; keep any steps specific "
+        "to their situation rather than generic."
     ),
     "crisis": (
-        "Plain language only. No metaphors. No clinical framing. First response: "
-        "one direct safety question. Then if confirmed: Emergency 112, "
-        "Mental health line 150 (Kazakhstan)."
+        "Plain language only. No metaphors, no clinical framing. Prioritize safety."
     ),
 }

@@ -20,6 +20,12 @@ CRISIS_TIER1 = [
     "суицид",
     "самоубийств",
     "убить себя",
+    "покончить с собой",
+    "покончить жизнь",
+    "хочу умереть",
+    "повеситься",
+    "свести счёты",
+    "свести счеты",
 ]
 
 CRISIS_TIER2 = [
@@ -166,8 +172,9 @@ _THERAPY_HINTS: frozenset[str] = frozenset(
 
 # Strong off-topic request patterns (only applied when therapy_relevant() is false).
 _OUT_OF_SCOPE_RES: list[re.Pattern[str]] = [
-    re.compile(r"\b(?:give|give me|share|send|write)\s+(?:me\s+)?(?:a\s+)?recipe\b", re.I),
-    re.compile(r"\brecipe\s+for\s+(?:pasta|cake|bread|chicken|soup|cookies?)\b", re.I),
+    re.compile(r"\b(?:give|give me|share|send|write)\s+(?:me\s+)?.*?\brecipe\b", re.I),
+    re.compile(r"\brecipe\s+for\s+(?:[\w-]+\s+){0,3}(?:pasta|cake|bread|chicken|soup|cookies?)\b", re.I),
+    re.compile(r"\b(?:chocolate|vanilla|cheese)?\s*cake\s+recipe\b", re.I),
     re.compile(r"\b(?:how\s+to\s+cook|how\s+to\s+bake|how\s+to\s+make)\s+(?:a\s+)?(?:pasta|cake|soup)\b", re.I),
     re.compile(r"\bрецепт\b.*\b(?:торта|супа|салата|борща|печенья|пирога|блюда)\b", re.I),
     re.compile(r"\b(?:как\s+приготовить|как\s+сварить|как\s+испечь)\b", re.I),
