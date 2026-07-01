@@ -1,8 +1,8 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# Test deploy: daisy-finetuned-lora:8 + LoRA-simple inference (no QC regen when adapter loaded).
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: gpu-deployment-finetuned
 endpoint_name: daisy-therapy
-model: azureml:daisy-finetuned-lora:11
+model: azureml:daisy-finetuned-lora:8
 code_configuration:
   code: ../inference
   scoring_script: score.py
@@ -23,7 +23,7 @@ environment_variables:
   DAISY_DIRECT_MULTILINGUAL: "true"
   USE_TEMPLATE_FALLBACK: "false"
   DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+  INFERENCE_BUILD: "2026-06-lora-v8-simple"
   DAISY_RAG: "false"
   DAISY_BM25: "false"
 instance_type: Standard_NC4as_T4_v3

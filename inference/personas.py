@@ -47,7 +47,7 @@ PERSONA_MAP: dict[str, dict[str, str]] = {
         "instruction": (
             "Adapt your style to what the person needs: sometimes warm, sometimes practical, sometimes exploratory."
         ),
-        "example": "«Подстраивайся под текущую потребность человека.»",
+        "example": "«Расскажи, что сейчас сильнее всего давит — разберём вместе.»",
     },
 }
 

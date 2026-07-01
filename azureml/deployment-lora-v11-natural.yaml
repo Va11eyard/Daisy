@@ -1,4 +1,4 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# v11 LoRA + train-matched prompt, single-pass natural voice (no QC regen).
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: gpu-deployment-finetuned
 endpoint_name: daisy-therapy
@@ -22,10 +22,15 @@ environment_variables:
   USE_AZURE_OPENAI: "true"
   DAISY_DIRECT_MULTILINGUAL: "true"
   USE_TEMPLATE_FALLBACK: "false"
+  DAISY_INFERENCE_MODE: "simple"
   DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+  INFERENCE_BUILD: "2026-06-lora-v11-natural"
   DAISY_RAG: "false"
   DAISY_BM25: "false"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_DEFAULT_MAX_TOKENS: "384"
+  DAISY_THERAPY_MIN_NEW: "80"
+  DAISY_LORA_DEFAULT_TEMP: "0.75"
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1
 request_settings:

@@ -1,8 +1,7 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# A/B arm B: Qwen3-8B base + simple inference (minimal prompt, no LoRA/RAG/QC).
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: gpu-deployment-finetuned
+name: gpu-deployment-v14
 endpoint_name: daisy-therapy
-model: azureml:daisy-finetuned-lora:11
 code_configuration:
   code: ../inference
   scoring_script: score.py
@@ -10,22 +9,20 @@ environment:
   conda_file: ../inference/conda.yaml
   image: mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04
 environment_variables:
-  BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
+  BASE_MODEL: "Qwen/Qwen3-8B"
   MODEL_DISPLAY_NAME: "daisy-model"
+  INFERENCE_BUILD: "2026-06-qwen3-simple"
   INFERENCE_QUANTIZATION: "4bit"
-  ENABLE_ROUTER_PASS: "false"
   DEFER_MEMORY_UPDATE: "true"
-  CJK_MAX_RETRIES: "1"
-  COORDINATOR_BACKEND: "internal"
+  DAISY_DIRECT_MULTILINGUAL: "true"
   USE_AZURE_TRANSLATOR: "false"
   USE_OPENAI_TRANSLATION: "true"
   USE_AZURE_OPENAI: "true"
-  DAISY_DIRECT_MULTILINGUAL: "true"
-  USE_TEMPLATE_FALLBACK: "false"
-  DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+  DAISY_INFERENCE_MODE: "simple"
   DAISY_RAG: "false"
   DAISY_BM25: "false"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_DEFAULT_MAX_TOKENS: "384"
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1
 request_settings:

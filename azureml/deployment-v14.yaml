@@ -18,7 +18,7 @@ environment_variables:
   # Latency fallback: Qwen/Qwen3-4B-Instruct. Kazakh-max (non-commercial): inceptionai/Llama-3.1-Sherkala-8B-Chat.
   BASE_MODEL: "Qwen/Qwen3-8B"
   MODEL_DISPLAY_NAME: "daisy-model"
-  INFERENCE_BUILD: "2026-06-phi-rebuild"
+  INFERENCE_BUILD: "2026-06-hollow-qc-gate-v11"
   # VRAM: none=fp16 | 4bit | 8bit (bitsandbytes). 4bit recommended on T4 16GB for 8B + headroom.
   INFERENCE_QUANTIZATION: "4bit"
   DEFER_MEMORY_UPDATE: "true"

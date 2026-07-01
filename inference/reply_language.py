@@ -21,6 +21,13 @@ _CJK_RE = re.compile(
 
 _CYRILLIC_WORD_RE = re.compile(r"[\u0400-\u04ff]+")
 
+# Polish diacritics — common leak when model drifts off Russian.
+_POLISH_DIACRITICS = re.compile(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]")
+# Three or more consecutive ASCII words — English run inside a Cyrillic reply.
+_ASCII_WORD_RUN = re.compile(r"\b(?:[a-zA-Z]{2,}\s+){2,}[a-zA-Z]{2,}\b")
+
+LATIN_LEAK_RATIO = 0.12
+
 CYRILLIC_FLOOR_CHARS = 15
 CYRILLIC_FLOOR_WORDS = 2
 
@@ -118,9 +125,19 @@ def language_lock_line(reply_lang: str, *, force_english: bool) -> str:
 
 
 def language_retry_suffix(reply_lang: str) -> str:
+    if reply_lang == "ru":
+        return (
+            "\n\nКРИТИЧНО — предыдущий черновик содержал английские или латинские слова. "
+            "Ответь снова только на русском. Никаких английских фраз."
+        )
+    if reply_lang == "kk":
+        return (
+            "\n\nМАҢЫЗДЫ — алдыңғы нұсқа ағылшын немесе латын әріптерін қамтыды. "
+            "Қайта тек қазақша жауап бер."
+        )
     name = _LANG_NAMES.get(reply_lang, "English")
     return (
-        f"CRITICAL — your previous draft used the wrong script. "
+        f"\n\nCRITICAL — your previous draft used the wrong script. "
         f"Reply again in {name} only. Use zero Chinese characters."
     )
 
@@ -141,6 +158,28 @@ def generation_used_wrong_script(text: str, reply_lang: str) -> bool:
     if len(cjk_chars) >= 6:
         return True
     return len(cjk_chars) / letters >= 0.06
+
+
+def generation_has_script_leak(text: str, reply_lang: str) -> bool:
+    """True when model output uses the wrong script for the target reply language."""
+    if generation_used_wrong_script(text, reply_lang):
+        return True
+    if reply_lang not in ("ru", "kk"):
+        return False
+    stripped = text.strip()
+    if not stripped:
+        return False
+    if _POLISH_DIACRITICS.search(stripped):
+        return True
+    if _ASCII_WORD_RUN.search(stripped):
+        return True
+    latin, cyr, _ = _count_script_chars(stripped)
+    total = latin + cyr
+    if total == 0:
+        return False
+    if latin / total > LATIN_LEAK_RATIO:
+        return True
+    return False
 
 
 def strip_cjk_from_response(text: str) -> str:

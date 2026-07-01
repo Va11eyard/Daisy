@@ -62,12 +62,16 @@ class FewShotPair(TypedDict):
 
 
 FEW_SHOT_PAIRS: Final[dict[Phase, FewShotPair]] = {
+    # Used by training/dataset scripts only. Runtime must not inject these into live prompts
+    # (see system_prompt._few_shot_block and voice_qc.voice_regen_suffix).
     "intake": {
-        "bad": "I'm sorry to hear that. That must be really tough.",
+        "bad": (
+            "I hear you! Stress feels like a constant pull, doesn't it?"
+        ),
         "good": (
-            "Breaking up can leave everything feeling raw and unsteady, even when you "
-            "expected it. I don't want to rush you past that. "
-            "What part of this is hitting you hardest right now?"
+            "Work stress can pile up in ways that feel personal even when the cause is structural. "
+            "Sometimes naming one concrete pressure helps more than the word stress itself. "
+            "What's been weighing on you most this week?"
         ),
     },
     "disclosure": {
@@ -138,8 +142,9 @@ STRUCTURAL_RULES: Final[dict[Phase, PhaseRules]] = {
 
 
 GLOBAL_RULES: Final[tuple[str, ...]] = (
-    "Usually give the person a way to continue — an invitation or a question — unless simply "
-    "witnessing is what the moment needs; never stack questions.",
+    "Never end a therapy turn without one open question about the user's experience.",
+    "A response that only restates or validates what they said, then stops, is a failure.",
+    "Structure ordinary turns as: brief reflection → one specific observation or gentle reframe → ONE open question (3–5 sentences total).",
     "Don't pile on unsolicited reframing while someone is still disclosing something painful.",
     "Never close with hollow phrases (e.g., \"I'm here for you!\", \"Take care!\").",
     "Ask about the body ONLY when the user has mentioned a physical sensation. "

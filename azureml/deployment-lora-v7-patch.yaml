@@ -1,41 +1,63 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# v7 LoRA + aligned prompt + role-break regen (no hard fallback gate).
+
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+
 name: gpu-deployment-finetuned
+
 endpoint_name: daisy-therapy
-model: azureml:daisy-finetuned-lora:11
+
+model: azureml:daisy-finetuned-lora:7
+
 code_configuration:
+
   code: ../inference
+
   scoring_script: score.py
+
 environment:
+
   conda_file: ../inference/conda.yaml
+
   image: mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04
+
 environment_variables:
+
   BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
+
   MODEL_DISPLAY_NAME: "daisy-model"
+
   INFERENCE_QUANTIZATION: "4bit"
+
   ENABLE_ROUTER_PASS: "false"
+
   DEFER_MEMORY_UPDATE: "true"
+
   CJK_MAX_RETRIES: "1"
+
   COORDINATOR_BACKEND: "internal"
+
   USE_AZURE_TRANSLATOR: "false"
+
   USE_OPENAI_TRANSLATION: "true"
+
   USE_AZURE_OPENAI: "true"
+
   DAISY_DIRECT_MULTILINGUAL: "true"
+
   USE_TEMPLATE_FALLBACK: "false"
-  DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+
+  DAISY_PROMPT_MODE: "aligned"
+
+  INFERENCE_BUILD: "2026-06-lora-v7-aligned3"
+
   DAISY_RAG: "false"
+
   DAISY_BM25: "false"
-instance_type: Standard_NC4as_T4_v3
-instance_count: 1
-request_settings:
-  request_timeout_ms: 180000
-  max_concurrent_requests_per_instance: 1
-liveness_probe:
-  initial_delay: 600
-  period: 60
-  timeout: 30
-readiness_probe:
-  initial_delay: 600
-  period: 60
-  timeout: 30
+
+  DAISY_DEFAULT_MAX_TOKENS: "384"
+
+  DAISY_MAX_TOKENS_CAP: "768"
+
+  DAISY_LORA_THERAPY_MIN_NEW: "56"
+
+  DAISY_GEN_MIN_MAX_NEW_TOKENS: "32"

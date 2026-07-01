@@ -1,8 +1,11 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# daisy-lora-v12-hollow-fix retrain (registered as model version 14; job
+# olive_street_kw9r698kf7), evaluated with the same tuned inference config that
+# fixed the v11 corruption issue (tight token budget, stop_strings, lower temp).
+# A/B against gpu-deployment-finetuned (v11, natural3 build).
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: gpu-deployment-finetuned
+name: gpu-deployment-v12-hollowfix
 endpoint_name: daisy-therapy
-model: azureml:daisy-finetuned-lora:11
+model: azureml:daisy-finetuned-lora:14
 code_configuration:
   code: ../inference
   scoring_script: score.py
@@ -22,10 +25,16 @@ environment_variables:
   USE_AZURE_OPENAI: "true"
   DAISY_DIRECT_MULTILINGUAL: "true"
   USE_TEMPLATE_FALLBACK: "false"
+  DAISY_INFERENCE_MODE: "simple"
   DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+  INFERENCE_BUILD: "2026-07-lora-v12-hollowfix"
   DAISY_RAG: "false"
   DAISY_BM25: "false"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_DEFAULT_MAX_TOKENS: "90"
+  DAISY_THERAPY_MIN_NEW: "48"
+  DAISY_LORA_DEFAULT_TEMP: "0.55"
+  DAISY_AGGRESSIVE_TRIM: "false"
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1
 request_settings:

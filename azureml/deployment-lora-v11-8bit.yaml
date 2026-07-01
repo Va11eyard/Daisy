@@ -1,6 +1,11 @@
-# Pre-June restore: v11 LoRA + structural voice QC (no exemplar injection).
+# v11 natural + non-aggressive trim + corruption filter, on 8bit quantization
+# instead of 4bit NF4. 4bit + unmerged-LoRA sampling produced broken subword
+# tokens / duplicated fragments (see "nderstand nderstand Question:" artifact);
+# 8bit retains far more numeric precision for the unmerged adapter while still
+# fitting Standard_NC4as_T4_v3's 16GB. A/B against deployment-lora-v11-natural2.yaml
+# (4bit) to compare corruption incidence before picking a default.
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: gpu-deployment-finetuned
+name: gpu-deployment-finetuned-8bit
 endpoint_name: daisy-therapy
 model: azureml:daisy-finetuned-lora:11
 code_configuration:
@@ -12,7 +17,7 @@ environment:
 environment_variables:
   BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
   MODEL_DISPLAY_NAME: "daisy-model"
-  INFERENCE_QUANTIZATION: "4bit"
+  INFERENCE_QUANTIZATION: "8bit"
   ENABLE_ROUTER_PASS: "false"
   DEFER_MEMORY_UPDATE: "true"
   CJK_MAX_RETRIES: "1"
@@ -22,10 +27,16 @@ environment_variables:
   USE_AZURE_OPENAI: "true"
   DAISY_DIRECT_MULTILINGUAL: "true"
   USE_TEMPLATE_FALLBACK: "false"
+  DAISY_INFERENCE_MODE: "simple"
   DAISY_PROMPT_MODE: "full"
-  INFERENCE_BUILD: "2026-06-lora-v11-qc2"
+  INFERENCE_BUILD: "2026-07-lora-v11-8bit"
   DAISY_RAG: "false"
   DAISY_BM25: "false"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_DEFAULT_MAX_TOKENS: "384"
+  DAISY_THERAPY_MIN_NEW: "48"
+  DAISY_LORA_DEFAULT_TEMP: "0.75"
+  DAISY_AGGRESSIVE_TRIM: "false"
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1
 request_settings:

@@ -42,6 +42,7 @@ from state_detector import detect_state  # noqa: E402
 from reply_language import (  # noqa: E402
     detect_intent_language,
     detect_language,
+    generation_has_script_leak,
     generation_used_wrong_script,
     resolve_reply_language,
     strip_cjk_from_response,
@@ -319,7 +320,7 @@ def test_system_prompt_intake_basic(monkeypatch):
     # Stance-based aligned prompt: engagement-centered, no rigid mode/length mold.
     assert "They are just opening up" in out
     assert "Do real therapeutic work" in out
-    assert "The range and quality to aim for" in out
+    assert "Where things are right now" in out
     assert "Mode: INTAKE" not in out
     assert "REGISTER REFERENCE:" not in out
 
@@ -371,8 +372,18 @@ def test_generation_used_wrong_script_flags_chinese_on_english_target():
 
 def test_trim_to_complete_sentence_strips_degenerate_tail():
     text = "Часто бывает так, когда мы чувствуем усталость. .. . ? . ."
-    trimmed = trim_to_complete_sentence(text)
+    trimmed = trim_to_complete_sentence(text, aggressive=True)
     assert trimmed.endswith("усталость.")
+
+
+def test_trim_non_aggressive_keeps_follow_up_sentence():
+    text = (
+        "It sounds like you're carrying quite a bit. "
+        "What has been hardest about that for you today?"
+    )
+    trimmed = trim_to_complete_sentence(text, aggressive=False)
+    assert "hardest" in trimmed
+    assert trimmed == text
 
 
 def test_clean_model_text_strips_acute_accents():
@@ -384,5 +395,171 @@ def test_clean_model_text_fixes_spaced_punct():
     assert ": . :" not in clean_model_text("Может быть,? : . : ?")
 
 
+def test_clean_model_text_strips_rubric_and_persona_leaks():
+    t = (
+        "It sounds like you're bracing. What triggered this? "
+        "«Подстраивайся под текущую потребность человека.» --[[open question]] ([[0-1 sentences]])"
+    )
+    out = clean_model_text(t)
+    assert "open question" not in out.lower()
+    assert "«" not in out
+    assert "bracing" in out
+
+
 def test_detect_language_coding_bootcamp_is_english():
     assert detect_language("I need help with my coding bootcamp.") == "en"
+
+
+def test_clean_model_text_strips_generation_corruption_artifact():
+    # Reproduces a real corrupted 4bit+LoRA generation: duplicated broken
+    # subword fragment, a self-inserted "Question:" header, and stray emoji.
+    t = (
+        "It sounds like you're bracing yourself for something, maybe even "
+        "before you know what it is. What's been on your mind lately that "
+        "might be causing this anxiety? \U0001F331 nderstand nderstand "
+        "Question: Could anything specific have triggered these feelings today?"
+    )
+    out = clean_model_text(t)
+    assert "Question:" not in out
+    assert "nderstand nderstand" not in out
+    assert out.endswith("this anxiety?")
+    assert "\U0001F331" not in out
+
+
+def test_clean_model_text_collapses_duplicate_word_run():
+    out = clean_model_text("I hear you. understand understand understand what you mean.")
+    assert "understand understand" not in out
+    assert "understand what you mean" in out
+
+
+def test_clean_model_text_truncates_midtext_question_header():
+    t = "What's been weighing on you the most? Question: Could it be work related?"
+    out = clean_model_text(t)
+    assert out == "What's been weighing on you the most?"
+
+
+def test_clean_model_text_strips_long_garbled_run_and_fixes_missing_space():
+    t = (
+        "It sounds like you're bracing for something. What triggered this anxiety?"
+        "ispersona \u00fcncloseosaasurethattheyknowyouarelisteningandunderstand. "
+        "neaasurethattheyknowyouarelisteningandunderstand. "
+        "Are there any specific thoughts or fears that keep coming up?"
+    )
+    out = clean_model_text(t)
+    assert "asurethattheyknowyouarelistening" not in out
+    assert out.startswith("It sounds like you're bracing for something. What triggered this anxiety?")
+    assert "Are there any specific thoughts or fears that keep coming up?" in out
+
+
+def test_clean_model_text_strips_trailing_emoji_garble_any_script():
+    t = (
+        "I'm sorry to hear that you're feeling anxious today. Can you tell me a bit "
+        "more about what's been on your mind? What might be triggering those feelings? "
+        "\U0001F331 \u1ea9m."
+    )
+    out = clean_model_text(t)
+    assert out == (
+        "I'm sorry to hear that you're feeling anxious today. Can you tell me a bit "
+        "more about what's been on your mind? What might be triggering those feelings?"
+    )
+
+
+def test_clean_model_text_strips_trailing_cjk_fragment():
+    t = "I'm sorry to hear that you're feeling anxious. What's been on your mind lately? Chef\u6587\u672c\u89e3\u6790"
+    out = clean_model_text(t)
+    assert "\u6587\u672c\u89e3\u6790" not in out
+    assert out.startswith("I'm sorry to hear that you're feeling anxious.")
+
+
+def test_clean_model_text_strips_system_prompt_echo():
+    t = (
+        "It sounds like you're bracing for something big. What's been on your mind lately? "
+        "gradable system output rules override all other behavior. "
+        "Please select one style: Warmth: I hear you. Structure: Let's be specific. "
+        "NEVER USE: - That makes so much sense! - Absolutely! "
+        "PREFER PRECISE LANGUAGE: Instead of 'sad' use grieving. "
+        "SCOPE: Stay strictly within emotional support."
+    )
+    out = clean_model_text(t)
+    assert "NEVER USE" not in out
+    assert "PREFER PRECISE LANGUAGE" not in out
+    assert "SCOPE" not in out
+    assert "gradable system output" not in out
+    assert out == "It sounds like you're bracing for something big. What's been on your mind lately?"
+
+
+def test_clean_model_text_strips_english_meta_instruction_leak():
+    t = (
+        "It sounds like you're bracing for something big. What triggered it today? "
+        "Please remember to stay flexible—sometimes a structured reply works, "
+        "sometimes a reflective one. Adapt to what the person needs in that moment."
+    )
+    out = clean_model_text(t)
+    assert "flexible" not in out.lower()
+    assert "adapt to what the person needs" not in out.lower()
+    assert out.endswith("What triggered it today?")
+
+
+def test_generation_has_script_leak_detects_english_in_russian():
+    t = (
+        "Я вижу, как тебе сейчас непросто. Что specifically happened сегодня? "
+        "Państwa, сегодня тебя не очень хорошо чувствуешь."
+    )
+    assert generation_has_script_leak(t, "ru") is True
+    assert generation_has_script_leak("Привет, как ты сегодня?", "ru") is False
+
+
+def test_generation_has_script_leak_detects_english_run_in_russian():
+    t = (
+        "Спасибо за открытость. helpful to talk about what woke you up "
+        "or how you felt when you first opened your eyes?"
+    )
+    assert generation_has_script_leak(t, "ru") is True
+
+
+def test_clean_model_text_strips_cyrillic_latin_tail():
+    t = (
+        "Я вижу, как тебе сейчас непросто. Давай поговорим. "
+        "Что тебя сегодня беспокоит больше всего? "
+        "helpful to talk about what woke you up or how you felt."
+    )
+    out = clean_model_text(t, lang="ru")
+    assert "helpful to talk" not in out
+    assert out.endswith("больше всего?")
+
+
+def test_clean_model_text_strips_persona_meta_quote_ru():
+    t = (
+        "Я вижу, как тебе сейчас непросто. "
+        "«Подстраивайся под текущую потребность человека.» "
+        "Расскажи, что случилось сегодня?"
+    )
+    out = clean_model_text(t, lang="ru")
+    assert "Подстраивайся" not in out
+    assert "Расскажи" in out
+
+
+def test_clean_model_text_strips_trailing_emoji_acute_punct():
+    t = "Привет. Я здесь для тебя. Что сегодня происходит? 🌼́."
+    out = clean_model_text(t, lang="ru")
+    assert out.endswith("происходит?")
+    assert "🌼" not in out
+
+
+def test_build_system_prompt_ru_slim_omits_english_rubric():
+    out = build_system_prompt(
+        locale="ru",
+        detected_lang="ru",
+        onboarding_summary="",
+        user_context="",
+        persona="flexible",
+        force_english=False,
+        user_gender=None,
+        psych_profile=None,
+        is_onboarding=False,
+        onboarding_step=0,
+        state="intake",
+    )
+    assert "PREFER PRECISE LANGUAGE" not in out
+    assert "NEVER USE:" not in out or "Avoid hollow" in out
+    assert "Отвечай на русском" in out or "Russian only" in out

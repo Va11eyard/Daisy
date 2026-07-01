@@ -18,10 +18,8 @@ from reply_language import language_lock_line, resolve_reply_language
 from therapy_identity import get_persona_obedience_line, get_therapy_scope_guardrail, get_voice_lines
 from voice_contract import (
     BANNED_PHRASES,
-    FEW_SHOT_PAIRS,
     GLOBAL_RULES,
     HOLLOW_CLOSINGS,
-    Phase,
     PRECISION_VOCABULARY,
     STRUCTURAL_RULES,
 )
@@ -41,6 +39,34 @@ def _prompt_mode() -> str:
     return os.environ.get("DAISY_PROMPT_MODE", "aligned").lower().strip()
 
 
+def _legacy_june_prompt() -> bool:
+    return os.environ.get("DAISY_PROMPT_LEGACY_JUNE", "").lower() in ("1", "true", "yes")
+
+
+def _therapy_turn_rules_block() -> str:
+    """Highest-priority rules — must appear in the first ~200 tokens of the system prompt."""
+    return (
+        "THERAPY TURN RULES (follow on every reply):\n"
+        "Never end a response without asking the user one open question about their experience.\n"
+        "A response that only restates or validates what the user said, then stops, is a failure.\n"
+        "Structure: brief reflection (1 sentence max) → one specific observation or gentle reframe "
+        "(1–2 sentences) → ONE open question that invites them to elaborate.\n"
+        "Aim for 3–5 sentences on ordinary therapy turns; never a single sentence.\n"
+        "Do not open with generalized metaphors about anxiety or stress building quietly — "
+        "speak to this person directly about what they just said.\n"
+        "You are Daisy speaking TO the user: use second person (you/your). "
+        "Never speak as the client (no 'myself', 'I feel anxious', 'bracing myself'). "
+        "On intake, do not assign homework or 'one concrete thing to work on' — invite them to say more."
+    )
+
+
+def _optional_therapy_turn_rules() -> str:
+    """June inference overlay — off by default to match v11 training prompts."""
+    if not _legacy_june_prompt():
+        return ""
+    return _therapy_turn_rules_block() + "\n\n"
+
+
 def _training_core_block(reply_lang: str) -> str:
     """Matches training JSONL opener — without 'validate feelings first' sympathy default."""
     lang_note = ""
@@ -50,17 +76,21 @@ def _training_core_block(reply_lang: str) -> str:
         lang_note = "Қазақ тілінде жауап бер."
     else:
         lang_note = "Respond in the same language the user writes in."
+    critical = (
+        _slim_critical_block(reply_lang)
+        if reply_lang in ("ru", "kk")
+        else _critical_override_block()
+    )
     return (
-        "You are Daisy, a warm, perceptive companion for emotional support. "
+        critical
+        + "\n\n"
+        + _optional_therapy_turn_rules()
+        + "You are Daisy, a warm, perceptive companion for emotional support. "
         "You think like a skilled clinician and speak like a trusted friend who has read the research.\n"
         "Do real therapeutic work: engage with this specific person, help them open up or sort through "
-        "what's on their mind, and move the conversation somewhere useful. Read where they actually are and "
-        "choose the move that fits — reflecting precisely, sitting with them, gently probing, normalizing, "
-        "explaining what's underneath it, or offering one small concrete step — then usually give them "
-        "something to respond to. Let the moment decide the shape; don't force the same structure every time, "
-        "and stay specific to what they actually said.\n"
-        "Do not reply with a single poetic generalization or metaphor that only describes the feeling and "
-        "then stops — that isn't therapy. Therapy is a dialogue; give this person a way to continue.\n"
+        "what's on their mind, and move the conversation somewhere useful.\n"
+        "Do not reply with a single poetic generalization or metaphor that only names the feeling and "
+        "then stops — that isn't therapy. Therapy is a dialogue.\n"
         "You are not a substitute for emergency or professional care.\n"
         f"{lang_note}\n"
         + get_therapy_scope_guardrail()
@@ -69,32 +99,17 @@ def _training_core_block(reply_lang: str) -> str:
 
 def _compact_voice_overlay(state: DaisyState) -> str:
     top_banned = BANNED_PHRASES[:3]
-    return "\n".join(
-        [
-            f"Where things are right now: {STATE_TONE[state]}",
-            "Avoid hollow therapy clichés — don't sound like: "
-            + "; ".join(f'"{p}"' for p in top_banned)
-            + ".",
-            "Vary your length and shape to fit the moment; sound like a real person, not a template. "
-            "Stay engaged — respond to what they actually said and leave them a way to keep going.",
-        ]
-    )
-
-
-# Calibration moves shown to the model: diverse situations so it matches the depth and
-# engagement of good therapy without collapsing to one shape or copying the topic.
-_RANGE_EXEMPLAR_PHASES: tuple[Phase, ...] = ("intake", "psychoeducation", "action_planning")
-
-
-def _range_exemplars_block() -> str:
     lines = [
-        "The range and quality to aim for (different topics on purpose — match their depth "
-        "and engagement, do not copy their wording or topic):"
+        f"Where things are right now: {STATE_TONE[state]}",
+        "Avoid hollow therapy clichés — don't sound like: "
+        + "; ".join(f'"{p}"' for p in top_banned)
+        + ".",
+        "Vary your length and shape to fit the moment; sound like a real person, not a template.",
     ]
-    for phase in _RANGE_EXEMPLAR_PHASES:
-        pair = FEW_SHOT_PAIRS.get(phase)
-        if pair:
-            lines.append(f"- {pair['good']}")
+    if _legacy_june_prompt():
+        lines.append(
+            "Every turn must end with one open question — reflection alone is not enough."
+        )
     return "\n".join(lines)
 
 
@@ -114,6 +129,31 @@ def _critical_override_block() -> str:
         "If you feel an urge to quote a book passage, STOP and instead write one original sentence that reflects what the user said",
     )
     return "CRITICAL OUTPUT RULES — OVERRIDE ALL OTHER BEHAVIOR:\n" + _bulleted(rules)
+
+
+def _slim_critical_block(reply_lang: str) -> str:
+    """Short critical rules for RU/KK — avoids dumping English rubric into Cyrillic replies."""
+    if reply_lang == "ru":
+        rules = (
+            "Ты в живом разговоре — отвечай как человек, не как учебник.",
+            "Никогда не цитируй книги, исследования или рубрики дословно.",
+            "Не вставляй мета-заголовки и инструкции в ответ.",
+            "Не больше 6 предложений за раз.",
+            "Пиши только по-русски — без английских фраз и без латиницы.",
+        )
+        header = "КРИТИЧЕСКИЕ ПРАВИЛА:"
+    elif reply_lang == "kk":
+        rules = (
+            "Сен тірі сөйлесудесің — оқулық емес, адамша жауап бер.",
+            "Кітаптар мен рубрикаларды досын айтпа.",
+            "Жауапқа мета-тақырыптар мен нұсқауларды қоспа.",
+            "Бір жауапта 6 сөйлемнен артық болма.",
+            "Тек қазақша жаз — ағылшын немесе латын әріптерін қолданба.",
+        )
+        header = "МАҢЫЗДЫ ЕРЕЖЕЛЕР:"
+    else:
+        return _critical_override_block()
+    return header + "\n" + _bulleted(rules)
 
 
 def _banned_phrases_block() -> str:
@@ -149,18 +189,87 @@ def _interaction_mode_block(state: DaisyState) -> str:
 
 
 def _few_shot_block(state: DaisyState) -> str | None:
-    if state not in FEW_SHOT_PAIRS:
-        return None
-    pair = FEW_SHOT_PAIRS[state]  # type: ignore[index]
-    return (
-        "REGISTER REFERENCE:\n"
-        f"AVOID:\n{pair['bad']}\n\n"
-        f"PREFER:\n{pair['good']}"
-    )
+    """Few-shot exemplars are for training data only — never inject into live prompts."""
+    _ = state
+    return None
 
 
 def _global_rules_block() -> str:
     return "ALWAYS:\n" + _bulleted(GLOBAL_RULES)
+
+
+def build_minimal_system_prompt(
+    *,
+    locale: str | None,
+    detected_lang: str,
+    onboarding_summary: str,
+    user_context: str,
+    persona: str,
+    force_english: bool,
+    user_gender: str | None,
+    psych_profile: dict[str, Any] | None,
+    is_onboarding: bool,
+    onboarding_step: int,
+    user_image_block: str | None = None,
+    state: DaisyState = "intake",
+) -> str:
+    """Short therapist prompt for base-model simple inference (no voice-contract stack)."""
+    reply_lang = resolve_reply_language(detected_lang, locale)
+    lang_line = language_lock_line(reply_lang, force_english=force_english)
+    core1, core2 = get_voice_lines(os.environ.get("DAISY_VOICE", "therapist"))
+    lines = [
+        core1,
+        core2,
+        lang_line,
+        get_therapy_scope_guardrail(),
+        "Respond in a warm, conversational tone. Ask one open question when appropriate.",
+        "You are not a substitute for emergency or professional care.",
+    ]
+
+    gender_line = ""
+    if user_gender == "female" and not force_english:
+        if reply_lang == "ru":
+            gender_line = "Пользователь — женщина. Используй женский род в обращении."
+        elif reply_lang == "kk":
+            gender_line = "Пайдаланушы — әйел."
+    elif user_gender == "male" and not force_english:
+        if reply_lang == "ru":
+            gender_line = "Пользователь — мужчина. Используй мужской род в обращении."
+    if gender_line:
+        lines.append(gender_line)
+
+    if user_image_block and user_image_block.strip():
+        lines.append(user_image_block.strip())
+    if onboarding_summary:
+        lines.append("About this person:\n" + truncate_chars(onboarding_summary, 4000))
+    if user_context:
+        lines.append("Remember from past conversations:\n" + truncate_chars(user_context, 2000))
+
+    if psych_profile and isinstance(psych_profile, dict):
+        risk = psych_profile.get("riskLevel") or psych_profile.get("risk_level")
+        parts = [f"{k}={psych_profile.get(k)}" for k in ("ESI", "BSI", "SSI", "MRI") if psych_profile.get(k) is not None]
+        if parts or risk:
+            lines.append("Psych profile: " + ", ".join(parts) + (f", risk={risk}" if risk else ""))
+
+    pi, pe = resolve_persona(persona)
+    lines.append(get_persona_obedience_line())
+    lines.append(pi)
+    if pe:
+        lines.append("Example tone: " + pe)
+
+    if is_onboarding:
+        if onboarding_step <= 0:
+            lines.append(
+                "First message after onboarding: greet warmly as Daisy, acknowledge what you learned, "
+                "invite them to share how they feel."
+            )
+        elif onboarding_step == 1:
+            lines.append("Ask ONE short question about their main goal.")
+        else:
+            lines.append("Warm closing: summarize and invite them to continue anytime.")
+
+    _ = state
+    return "\n".join(lines)
 
 
 def build_system_prompt(
@@ -182,6 +291,8 @@ def build_system_prompt(
     reply_lang = resolve_reply_language(detected_lang, locale)
     lang_line = language_lock_line(reply_lang, force_english=force_english)
     aligned = _prompt_mode() != "full"
+    use_slim_cyrillic = reply_lang in ("ru", "kk") and not force_english
+    slim_prompt = aligned or use_slim_cyrillic
 
     gender_line = ""
     if user_gender == "female" and not force_english:
@@ -195,12 +306,26 @@ def build_system_prompt(
         if loc == "ru":
             gender_line = "Пользователь — мужчина. Используй мужской род в обращении."
 
-    if aligned:
+    if slim_prompt:
         lines = [_training_core_block(reply_lang), lang_line]
     else:
         voice = os.environ.get("DAISY_VOICE", "companion")
         core1, core2 = get_voice_lines(voice)
-        lines = [_critical_override_block(), "", core1, core2, lang_line, get_therapy_scope_guardrail()]
+        june_rules = _optional_therapy_turn_rules()
+        lines = []
+        if june_rules:
+            lines.append(june_rules.rstrip())
+            lines.append("")
+        lines.extend(
+            [
+                _critical_override_block(),
+                "",
+                core1,
+                core2,
+                lang_line,
+                get_therapy_scope_guardrail(),
+            ]
+        )
 
     if gender_line:
         lines.append(gender_line)
@@ -225,9 +350,8 @@ def build_system_prompt(
     if pe:
         lines.append("Example tone: " + pe)
 
-    if aligned:
+    if slim_prompt:
         lines.append("\n" + _compact_voice_overlay(state))
-        lines.append("\n" + _range_exemplars_block())
         lines.append("\n" + _global_rules_block())
     else:
         lines.append("\n" + _banned_phrases_block())
