@@ -1,0 +1,50 @@
+# RU translate A/B v2 — post-translate QC env vars (wired in score.py).
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: gpu-deployment-ru-translate
+endpoint_name: daisy-therapy
+model: azureml:daisy-finetuned-lora:11
+code_configuration:
+  code: ../inference
+  scoring_script: score.py
+environment:
+  conda_file: ../inference/conda.yaml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04
+environment_variables:
+  BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
+  MODEL_DISPLAY_NAME: "daisy-model"
+  INFERENCE_QUANTIZATION: "4bit"
+  ENABLE_ROUTER_PASS: "false"
+  DEFER_MEMORY_UPDATE: "true"
+  USE_AZURE_TRANSLATOR: "false"
+  USE_OPENAI_TRANSLATION: "true"
+  USE_AZURE_OPENAI: "true"
+  DAISY_DIRECT_MULTILINGUAL: "false"
+  USE_TEMPLATE_FALLBACK: "false"
+  DAISY_INFERENCE_MODE: "simple"
+  DAISY_PROMPT_MODE: "full"
+  INFERENCE_BUILD: "2026-07-lora-v11-ru-translate-v2"
+  DAISY_RAG: "false"
+  DAISY_BM25: "false"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_DEFAULT_MAX_TOKENS: "90"
+  DAISY_THERAPY_MIN_NEW: "48"
+  DAISY_LORA_DEFAULT_TEMP: "0.55"
+  DAISY_AGGRESSIVE_TRIM: "false"
+  DAISY_POST_TRANSLATE_QC: "true"
+  DAISY_TRANSLATE_MIN_LENGTH: "40"
+  DAISY_TRANSLATE_SCRIPT_GUARD: "true"
+  DAISY_TRANSLATE_MAX_LATIN_RATIO: "0.08"
+  DAISY_TRANSLATE_FALLBACK_LOCALE: "en"
+instance_type: Standard_NC4as_T4_v3
+instance_count: 1
+request_settings:
+  request_timeout_ms: 180000
+  max_concurrent_requests_per_instance: 1
+liveness_probe:
+  initial_delay: 600
+  period: 60
+  timeout: 30
+readiness_probe:
+  initial_delay: 600
+  period: 60
+  timeout: 30

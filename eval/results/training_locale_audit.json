@@ -1,0 +1,2074 @@
+{
+  "files_audited": 12,
+  "total_examples": 31079,
+  "by_file": [
+    {
+      "path": "data\\raw\\_rendered_v12_ru_dialogues\\train.jsonl",
+      "n_examples": 9,
+      "row_locale_mix": {
+        "en": 9
+      },
+      "assistant_locale_mix": {
+        "ru": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 0,
+      "cyrillic_assistant_latin_leak_fraction": 0.0,
+      "leak_samples": []
+    },
+    {
+      "path": "data\\raw\\_rendered_v13_shape_synth\\train.jsonl",
+      "n_examples": 15,
+      "row_locale_mix": {
+        "en": 14,
+        "kk": 1
+      },
+      "assistant_locale_mix": {
+        "ru": 6,
+        "en": 8,
+        "kk": 1
+      },
+      "cyrillic_assistant_latin_leak_count": 0,
+      "cyrillic_assistant_latin_leak_fraction": 0.0,
+      "leak_samples": []
+    },
+    {
+      "path": "data\\raw\\train.jsonl",
+      "n_examples": 9,
+      "row_locale_mix": {
+        "en": 9
+      },
+      "assistant_locale_mix": {
+        "ru": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 0,
+      "cyrillic_assistant_latin_leak_fraction": 0.0,
+      "leak_samples": []
+    },
+    {
+      "path": "data\\train_v12.jsonl",
+      "n_examples": 2565,
+      "row_locale_mix": {
+        "en": 2563,
+        "kk": 2
+      },
+      "assistant_locale_mix": {
+        "en": 1712,
+        "ru": 851,
+        "kk": 2
+      },
+      "cyrillic_assistant_latin_leak_count": 677,
+      "cyrillic_assistant_latin_leak_fraction": 0.2639,
+      "leak_samples": [
+        {
+          "line": 5,
+          "row_locale": "en",
+          "preview": "Наблюдающая часть уже включена, потому что вы видите последовательность, а не только живёте внутри неё. Daisy noticed разрыв между чувством и комментарием о чувстве. Этот разрыв может стать полезным, ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.049,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 6,
+          "row_locale": "en",
+          "preview": "Сбалансированный взгляд не должен означать сглаживание вреда. Daisy noticed, что ваш отказ может защищать запись событий от слишком быстрого переписывания. Полезный вызов уже: даёт ли слияние с этой з",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0349,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 7,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что злость приходится прятать стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0632,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 9,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что настроение комнаты снова повесили на вас стоит рядом со вторым страхом: вас обвинят в том, чт",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0436,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 11,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вас загнали в моральный угол стоит рядом со вторым страхом: вас обвинят в том, что вы усложня",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0462,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 13,
+          "row_locale": "en",
+          "preview": "Ваша реакция похожа на накопленное сдерживание. Daisy noticed, как что чинить снова приходится вам снова превращается в самоконтроль, а самоконтроль со временем начинает ощущаться как согласие с проис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0405,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 20,
+          "row_locale": "en",
+          "preview": "Это не выглядит как случайный взрыв. Daisy noticed повторяющуюся сделку: вы принимаете удар, переводите его на приемлемый язык, а потом вас ещё оценивают за то, что внутри осталась реакция. Поэтому те",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0623,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 25,
+          "row_locale": "en",
+          "preview": "Ваша реакция похожа на накопленное сдерживание. Daisy noticed, как что вас просят извиниться за сам факт замечания снова превращается в самоконтроль, а самоконтроль со временем начинает ощущаться как ",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0447,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 26,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что для реакции нет места стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете атм",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0462,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 28,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил близкая подруга за ужином; она ещё и в требовании оставаться аккуратной, пока вы это",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0383,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 29,
+          "row_locale": "en",
+          "preview": "Вы не просите безусловного оправдания; вы проверяете, заслуживает ли сигнал в вашей реакции серьёзного отношения. Daisy noticed, как быстро внимание ушло от события к предполагаемой чрезмерности вашей",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0405,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 30,
+          "row_locale": "en",
+          "preview": "Не нужно выбрасывать список претензий. Daisy noticed, что более трудная задача — отделить ответственность другого человека от постоянного захвата вашего внимания. Если дело остаётся открытым бесконечн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0375,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 33,
+          "row_locale": "en",
+          "preview": "Паттерн звучит не как дефект, а как старое правило внутренней организации. Daisy noticed, что что очевидное приходится доказывать сначала приходит как чувство, а затем быстро превращается в теорию о т",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.034,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 34,
+          "row_locale": "en",
+          "preview": "Вы не просите безусловного оправдания; вы проверяете, заслуживает ли сигнал в вашей реакции серьёзного отношения. Daisy noticed, как быстро внимание ушло от события к предполагаемой чрезмерности вашей",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.041,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 35,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вы что-то испортили стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете атмос",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0465,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "data\\train_v13.jsonl",
+      "n_examples": 2414,
+      "row_locale_mix": {
+        "en": 2411,
+        "kk": 3
+      },
+      "assistant_locale_mix": {
+        "en": 1579,
+        "ru": 832,
+        "kk": 3
+      },
+      "cyrillic_assistant_latin_leak_count": 445,
+      "cyrillic_assistant_latin_leak_fraction": 0.1843,
+      "leak_samples": [
+        {
+          "line": 3,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что сестра сместил фокус с произошедшего на допустимость вашей реакци",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0392,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 4,
+          "row_locale": "en",
+          "preview": "Сила реакции понятна, когда пространство снова требует быть меньше самого удара. Daisy noticed, что что очевидное приходится доказывать не побочная деталь, а механизм, который превращает боль в давлен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0329,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 5,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 6,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил подруга из прежнего круга после небольшой границы; она ещё и в требовании оставаться",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.036,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 7,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил брат после долгого молчания; она ещё и в требовании оставаться аккуратной, пока вы э",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0376,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 8,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вы несёте слишком много стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете а",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0423,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 12,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил коллега до того, как вы успели объяснить; она ещё и в требовании оставаться аккуратн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0387,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 23,
+          "row_locale": "en",
+          "preview": "То, что вы видите паттерн, уже важно. Daisy noticed, что болезненна не только сама реакция, но и скорость, с которой реакция становится доказательством против вас. Рефлексия становится мягче, когда из",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0451,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 27,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что отец сместил фокус с произошедшего на допустимость вашей реакции.",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0407,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 53,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что бывший партнёр сместил фокус с произошедшего на допустимость ваше",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0383,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 56,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил человек, которому вы доверяли за ужином; она ещё и в требовании оставаться аккуратно",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0372,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 67,
+          "row_locale": "en",
+          "preview": "Есть разница между потребностью в подтверждении и попыткой оправдать каждое своё действие. Daisy noticed, что вы всё ещё рассматриваете свою часть, а значит это не слепая самозащита. Стыд будто требуе",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0369,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 71,
+          "row_locale": "en",
+          "preview": "Не нужно выбрасывать список претензий. Daisy noticed, что более трудная задача — отделить ответственность другого человека от постоянного захвата вашего внимания. Если дело остаётся открытым бесконечн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0369,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 80,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 83,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "data\\train_v2.jsonl",
+      "n_examples": 387,
+      "row_locale_mix": {
+        "en": 378,
+        "kk": 9
+      },
+      "assistant_locale_mix": {
+        "en": 168,
+        "ru": 210,
+        "kk": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 16,
+      "cyrillic_assistant_latin_leak_fraction": 0.0413,
+      "leak_samples": [
+        {
+          "line": 19,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 59,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, называется усталостью сострадания (compassion fatigue) — это состояние, при котором способность откликаться на чужое страдание истощается из-за её хронического и интенсивного ис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0138,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "compassion",
+            "fatigue"
+          ]
+        },
+        {
+          "line": 93,
+          "row_locale": "en",
+          "preview": "В DBT есть специфическая схема для таких разговоров, называется DEAR MAN — это не манипуляция, а структура, которая снижает тревогу и удерживает и границы, и отношения. Первая половина — подготовка со",
+          "leak": true,
+          "latin_word_count": 11,
+          "latin_alpha_ratio": 0.0954,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "DEAR",
+            "MAN",
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Mindful"
+          ]
+        },
+        {
+          "line": 117,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это диалектическое устройство реальности, и DBT построена на признании этого устройства: две противоположные правды могут быть истинны одновременно, и попытка свести их к одно",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0037,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 122,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это фузия с мыслью: мысль воспринимается не как мысль, а как сигнал к действию, равнозначный реальному событию. В метакогнитивной терапии предлагается практика 'отстранённого ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0284,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "detached",
+            "mindfulness"
+          ]
+        },
+        {
+          "line": 171,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 173,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        },
+        {
+          "line": 228,
+          "row_locale": "en",
+          "preview": "Замени автоматизм на конкретную последовательность коротких шагов — она даёт тебе время не скатиться в fixing. Один: когда подруга начинает рассказывать, первые 5 минут установи себе правило — только ",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.008,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "fixing"
+          ]
+        },
+        {
+          "line": 245,
+          "row_locale": "en",
+          "preview": "В традиции христианской мистики состояние, которое ты описываешь, имеет очень точное имя — тёмная ночь души — это выражение восходит к испанскому мистику XVI века Иоанну Креста, но сейчас оно использу",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XVI"
+          ]
+        },
+        {
+          "line": 271,
+          "row_locale": "en",
+          "preview": "В литературе по выгоранию выделен специфический фактор, часто недооценённый — рассогласование ценностей (values misalignment), и он способен создавать выгорание при относительно небольшой объёмной наг",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0164,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "values",
+            "misalignment"
+          ]
+        },
+        {
+          "line": 286,
+          "row_locale": "en",
+          "preview": "В диалектической поведенческой терапии (DBT) есть специфическая концепция — радикальное принятие. Она отличается от смирения, одобрения или безразличия: радикальное принятие — это полное признание тог",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.004,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 333,
+          "row_locale": "en",
+          "preview": "Работай не с решимостью в один момент, а с постепенным разрыванием биохимической связи и одновременным укреплением внешних опор. Один: составь два списка на бумаге — 'что он сделал в жестокой фазе' (д",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0173,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "domestic",
+            "violence"
+          ]
+        },
+        {
+          "line": 337,
+          "row_locale": "en",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 343,
+          "row_locale": "en",
+          "preview": "В DBT эта дилемма устраняется не выбором одной стороны, а концепцией 'мудрого разума' (wise mind) — третьего состояния, где доступ есть к обеим системам одновременно, и решение принимается из их перес",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0141,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "wise",
+            "mind"
+          ]
+        },
+        {
+          "line": 361,
+          "row_locale": "en",
+          "preview": "В психологии и юриспруденции признано, что насилие в отношениях включает не только физические формы — есть отдельный феномен, называемый коэрсивным контролем (coercive control), и в ряде стран он квал",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0153,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "coercive",
+            "control"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "data\\train_v3.jsonl",
+      "n_examples": 2827,
+      "row_locale_mix": {
+        "en": 2818,
+        "kk": 9
+      },
+      "assistant_locale_mix": {
+        "en": 1876,
+        "ru": 942,
+        "kk": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 740,
+      "cyrillic_assistant_latin_leak_fraction": 0.2618,
+      "leak_samples": [
+        {
+          "line": 19,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 59,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, называется усталостью сострадания (compassion fatigue) — это состояние, при котором способность откликаться на чужое страдание истощается из-за её хронического и интенсивного ис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0138,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "compassion",
+            "fatigue"
+          ]
+        },
+        {
+          "line": 93,
+          "row_locale": "en",
+          "preview": "В DBT есть специфическая схема для таких разговоров, называется DEAR MAN — это не манипуляция, а структура, которая снижает тревогу и удерживает и границы, и отношения. Первая половина — подготовка со",
+          "leak": true,
+          "latin_word_count": 11,
+          "latin_alpha_ratio": 0.0954,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "DEAR",
+            "MAN",
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Mindful"
+          ]
+        },
+        {
+          "line": 117,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это диалектическое устройство реальности, и DBT построена на признании этого устройства: две противоположные правды могут быть истинны одновременно, и попытка свести их к одно",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0037,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 122,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это фузия с мыслью: мысль воспринимается не как мысль, а как сигнал к действию, равнозначный реальному событию. В метакогнитивной терапии предлагается практика 'отстранённого ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0284,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "detached",
+            "mindfulness"
+          ]
+        },
+        {
+          "line": 171,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 173,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        },
+        {
+          "line": 228,
+          "row_locale": "en",
+          "preview": "Замени автоматизм на конкретную последовательность коротких шагов — она даёт тебе время не скатиться в fixing. Один: когда подруга начинает рассказывать, первые 5 минут установи себе правило — только ",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.008,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "fixing"
+          ]
+        },
+        {
+          "line": 245,
+          "row_locale": "en",
+          "preview": "В традиции христианской мистики состояние, которое ты описываешь, имеет очень точное имя — тёмная ночь души — это выражение восходит к испанскому мистику XVI века Иоанну Креста, но сейчас оно использу",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XVI"
+          ]
+        },
+        {
+          "line": 271,
+          "row_locale": "en",
+          "preview": "В литературе по выгоранию выделен специфический фактор, часто недооценённый — рассогласование ценностей (values misalignment), и он способен создавать выгорание при относительно небольшой объёмной наг",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0164,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "values",
+            "misalignment"
+          ]
+        },
+        {
+          "line": 286,
+          "row_locale": "en",
+          "preview": "В диалектической поведенческой терапии (DBT) есть специфическая концепция — радикальное принятие. Она отличается от смирения, одобрения или безразличия: радикальное принятие — это полное признание тог",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.004,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 333,
+          "row_locale": "en",
+          "preview": "Работай не с решимостью в один момент, а с постепенным разрыванием биохимической связи и одновременным укреплением внешних опор. Один: составь два списка на бумаге — 'что он сделал в жестокой фазе' (д",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0173,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "domestic",
+            "violence"
+          ]
+        },
+        {
+          "line": 337,
+          "row_locale": "en",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 343,
+          "row_locale": "en",
+          "preview": "В DBT эта дилемма устраняется не выбором одной стороны, а концепцией 'мудрого разума' (wise mind) — третьего состояния, где доступ есть к обеим системам одновременно, и решение принимается из их перес",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0141,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "wise",
+            "mind"
+          ]
+        },
+        {
+          "line": 361,
+          "row_locale": "en",
+          "preview": "В психологии и юриспруденции признано, что насилие в отношениях включает не только физические формы — есть отдельный феномен, называемый коэрсивным контролем (coercive control), и в ряде стран он квал",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0153,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "coercive",
+            "control"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "training\\train.jsonl",
+      "n_examples": 14660,
+      "row_locale_mix": {
+        "ru": 10094,
+        "en": 4471,
+        "kk": 95
+      },
+      "assistant_locale_mix": {
+        "ru": 10425,
+        "en": 4144,
+        "kk": 91
+      },
+      "cyrillic_assistant_latin_leak_count": 3710,
+      "cyrillic_assistant_latin_leak_fraction": 0.2531,
+      "leak_samples": [
+        {
+          "line": 4,
+          "row_locale": "en",
+          "preview": "Вот как это можно прочитать бережно:\n\nwww.koob.ru \nKaplan H.S. The Evaluation of Sexual Disorders: Psychological and Medical Aspects. New \nYork: Brunner/Mazel, 1983. \nKaplan H.S. Sexual relationships ",
+          "leak": true,
+          "latin_word_count": 57,
+          "latin_alpha_ratio": 0.924,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "www",
+            "koob",
+            "Kaplan",
+            "The",
+            "Evaluation",
+            "Sexual",
+            "Disorders",
+            "Psychological"
+          ]
+        },
+        {
+          "line": 11,
+          "row_locale": "ru",
+          "preview": "Держу рядом с тобой тон. Главное из материала:\n\nСодержание\n12\nАнтипсихотические\nпрепараты\nНасколько\nантипсихотики\nэффективны\nпри\nПРЛ\nПольза\nмедикаментозного\nлечения\nпри\nПРЛ\nПодходит\nли\nвам\nмедикаменто",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0048,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "NEA",
+            "BPD",
+            "DBTCV"
+          ]
+        },
+        {
+          "line": 15,
+          "row_locale": "en",
+          "preview": "Перенос на жизнь — всегда маленькими шагами. Из текста можно взять:\n\nOlga V. Fedorova The role of potential referential conflict\nwww.cogjournal.org 16\nRussian Journal of Cognitive Science Vol. 1, Issu",
+          "leak": true,
+          "latin_word_count": 250,
+          "latin_alpha_ratio": 0.967,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Olga",
+            "Fedorova",
+            "The",
+            "role",
+            "potential",
+            "referential",
+            "conflict",
+            "www"
+          ]
+        },
+        {
+          "line": 19,
+          "row_locale": "ru",
+          "preview": "Один конкретный микро-шаг из этого фрагмента:\n\nА. Штерн (Stern, 1938)\n1. Нарциссизм – одновременно идеализация и презрительное\nуничижение аналитика, а также других значимых лиц в прошлом.\n2. Психическ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0083,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Stern",
+            "Deutsch"
+          ]
+        },
+        {
+          "line": 21,
+          "row_locale": "ru",
+          "preview": "По смыслу терминов, как в разговоре:\n\nСамость – вот воплощение взаимности всех связей в живом организме. Ее можно назвать архитектором целостности. Что непрестанно отслеживает ваш биологический баланс",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0033,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XIX"
+          ]
+        },
+        {
+          "line": 25,
+          "row_locale": "kk",
+          "preview": "Here's a careful reading:\n\nPоѕіtіvе Attrасtѕ Pоѕіtіvе\nPоѕіtіvе реорlе attract оthеrѕ tо them whо hаvе thе ѕаmе роѕіtіvе thоughtѕ\nand еnеrgіеѕ. It іѕ аlѕо truе that nеgаtіvе аttrасtѕ nеgаtіvе. It іѕ th",
+          "leak": true,
+          "latin_word_count": 101,
+          "latin_alpha_ratio": 0.6514,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Here",
+            "careful",
+            "reading",
+            "attract",
+            "them",
+            "and",
+            "that",
+            "you"
+          ]
+        },
+        {
+          "line": 26,
+          "row_locale": "ru",
+          "preview": "По смыслу терминов, как в разговоре:\n\n# Кресвелл К, Уиллеттс Л. - Спокойные. Как помочь детям справиться со страхами и тревогой\n\nA Self-Help Guide for Parents\n\nНаучный редактор канд. мед. наук Дмитрий",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0241,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Self",
+            "Help",
+            "Guide",
+            "for",
+            "Parents"
+          ]
+        },
+        {
+          "line": 28,
+          "row_locale": "ru",
+          "preview": "Практично и без «надо всё успеть»:\n\n\u0000;020\n1\n.\nКраткая\nкогнитивно\n-\nповеденческая\nтерапия\nпозволяет\n.\n.\n.\n37\nмежду\nпациентами\nна\nкогнитивной\nтерапии\nи\nна\nстандартном\nлече\n-\nнии\nбыли\nминимальные\nразличи",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0179,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Brown",
+            "Ten",
+            "Have"
+          ]
+        },
+        {
+          "line": 31,
+          "row_locale": "ru",
+          "preview": "Стараюсь говорить просто и без давления. По тексту:\n\n24 ЧАСТЬ I. Психологические аспекты эмоционального выгорания\n3. «Хронические симптомы». Чрезмерная работа \nбез отдыха приводит к измождению и подве",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0268,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "ICD",
+            "Burnout",
+            "State",
+            "vital",
+            "exhaustion"
+          ]
+        },
+        {
+          "line": 37,
+          "row_locale": "ru",
+          "preview": "Держу рядом с тобой тон. Главное из материала:\n\nand Psyc ho ge ne \u0000c In ves \u0000 ga \u0000 ons; Eli as, 1939/2000). Эли ас прос ле дил из ме не ния пра вил в от -но ше нии речи, пи та ния, одеж ды, при вет с ",
+          "leak": true,
+          "latin_word_count": 7,
+          "latin_alpha_ratio": 0.0463,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "and",
+            "Psyc",
+            "ves",
+            "ons",
+            "Eli",
+            "XIII",
+            "urt"
+          ]
+        },
+        {
+          "line": 39,
+          "row_locale": "ru",
+          "preview": "Один конкретный микро-шаг из этого фрагмента:\n\nо\nв\nРис. 1. Подкорковые отделы мозга, общие для человека и низших млекопитаю­\nщих. Кора лимбической доли, окружающая ствол, обозначена черным цве­\nтом, н",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0217,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "MacLean",
+            "Saimiris",
+            "sciurea"
+          ]
+        },
+        {
+          "line": 42,
+          "row_locale": "ru",
+          "preview": "По смыслу терминов, как в разговоре:\n\n30\nЧАСТЬ\nI\n.\nОСНОВЫ\nИ\nМОДЕЛЬ\nощущения\nстали\nрассматриваться\nпреимущественно\nкак\n“\nсимптомы\n”\n.\nСчитается\n,\nчто\nналичие\nопределенного\nтипа\nи\nколичества\nсимптомов\nо",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0121,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Schultz"
+          ]
+        },
+        {
+          "line": 46,
+          "row_locale": "ru",
+          "preview": "По смыслу терминов, как в разговоре:\n\nстатистические руководства по психическим расстройствам (\nDiagnostic\nand Statistical Manual of Mental Disorders – DSM\n ), опубликованные\nАмериканской психиатричес",
+          "leak": true,
+          "latin_word_count": 9,
+          "latin_alpha_ratio": 0.0542,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Diagnostic",
+            "and",
+            "Statistical",
+            "Manual",
+            "Mental",
+            "Disorders",
+            "DSM",
+            "DSM"
+          ]
+        },
+        {
+          "line": 47,
+          "row_locale": "en",
+          "preview": "Твоё состояние здесь важно. Из написанного опираюсь на такое:\n\nə ɮɚɧɬɚɡɢɪɭɸ ɢɥɢ ɹ ɛɨɥɟɧ? \n17 \nɂɩɨɯɨɧɞɪɢɹ, ɬɪɟɜɨɠɧɨɟ ɪɚɫɫɬɪɨɣɫɬɜɨ, ɫɜɹɡɚɧɧɨɟ ɫɨ ɫɬɪɚɯɨɦ \nɡɚɛɨɥɟɜɚɧɢɣ, ɢ ɪɚɫɫɬɪɨɣɫɬɜɨ ɫ ɫɨɦɚɬɢɱɟɫɤɢɦɢ ɫɢɦɩ",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0128,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "APA",
+            "DSM",
+            "mare",
+            "magnum"
+          ]
+        },
+        {
+          "line": 48,
+          "row_locale": "ru",
+          "preview": "По смыслу терминов, как в разговоре:\n\n32 Глава 1\nнеотложной помощи. Даже во время приема лекарств от эпилепсии Ан­\nжела продолжала страдать припадками. Врачи Анжелы объяснили, что ее \nнизкий вес и огр",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0145,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Bahia",
+            "Chu",
+            "Mehler"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "training\\train_v12.jsonl",
+      "n_examples": 2565,
+      "row_locale_mix": {
+        "en": 2563,
+        "kk": 2
+      },
+      "assistant_locale_mix": {
+        "en": 1712,
+        "ru": 851,
+        "kk": 2
+      },
+      "cyrillic_assistant_latin_leak_count": 677,
+      "cyrillic_assistant_latin_leak_fraction": 0.2639,
+      "leak_samples": [
+        {
+          "line": 5,
+          "row_locale": "en",
+          "preview": "Наблюдающая часть уже включена, потому что вы видите последовательность, а не только живёте внутри неё. Daisy noticed разрыв между чувством и комментарием о чувстве. Этот разрыв может стать полезным, ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.049,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 6,
+          "row_locale": "en",
+          "preview": "Сбалансированный взгляд не должен означать сглаживание вреда. Daisy noticed, что ваш отказ может защищать запись событий от слишком быстрого переписывания. Полезный вызов уже: даёт ли слияние с этой з",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0349,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 7,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что злость приходится прятать стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0632,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 9,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что настроение комнаты снова повесили на вас стоит рядом со вторым страхом: вас обвинят в том, чт",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0436,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 11,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вас загнали в моральный угол стоит рядом со вторым страхом: вас обвинят в том, что вы усложня",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0462,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 13,
+          "row_locale": "en",
+          "preview": "Ваша реакция похожа на накопленное сдерживание. Daisy noticed, как что чинить снова приходится вам снова превращается в самоконтроль, а самоконтроль со временем начинает ощущаться как согласие с проис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0405,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 20,
+          "row_locale": "en",
+          "preview": "Это не выглядит как случайный взрыв. Daisy noticed повторяющуюся сделку: вы принимаете удар, переводите его на приемлемый язык, а потом вас ещё оценивают за то, что внутри осталась реакция. Поэтому те",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0623,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 25,
+          "row_locale": "en",
+          "preview": "Ваша реакция похожа на накопленное сдерживание. Daisy noticed, как что вас просят извиниться за сам факт замечания снова превращается в самоконтроль, а самоконтроль со временем начинает ощущаться как ",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0447,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed",
+            "Daisy"
+          ]
+        },
+        {
+          "line": 26,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что для реакции нет места стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете атм",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0462,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 28,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил близкая подруга за ужином; она ещё и в требовании оставаться аккуратной, пока вы это",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0383,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 29,
+          "row_locale": "en",
+          "preview": "Вы не просите безусловного оправдания; вы проверяете, заслуживает ли сигнал в вашей реакции серьёзного отношения. Daisy noticed, как быстро внимание ушло от события к предполагаемой чрезмерности вашей",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0405,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 30,
+          "row_locale": "en",
+          "preview": "Не нужно выбрасывать список претензий. Daisy noticed, что более трудная задача — отделить ответственность другого человека от постоянного захвата вашего внимания. Если дело остаётся открытым бесконечн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0375,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 33,
+          "row_locale": "en",
+          "preview": "Паттерн звучит не как дефект, а как старое правило внутренней организации. Daisy noticed, что что очевидное приходится доказывать сначала приходит как чувство, а затем быстро превращается в теорию о т",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.034,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 34,
+          "row_locale": "en",
+          "preview": "Вы не просите безусловного оправдания; вы проверяете, заслуживает ли сигнал в вашей реакции серьёзного отношения. Daisy noticed, как быстро внимание ушло от события к предполагаемой чрезмерности вашей",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.041,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 35,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вы что-то испортили стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете атмос",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0465,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "training\\train_v13.jsonl",
+      "n_examples": 2414,
+      "row_locale_mix": {
+        "en": 2411,
+        "kk": 3
+      },
+      "assistant_locale_mix": {
+        "en": 1579,
+        "ru": 832,
+        "kk": 3
+      },
+      "cyrillic_assistant_latin_leak_count": 445,
+      "cyrillic_assistant_latin_leak_fraction": 0.1843,
+      "leak_samples": [
+        {
+          "line": 3,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что сестра сместил фокус с произошедшего на допустимость вашей реакци",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0392,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 4,
+          "row_locale": "en",
+          "preview": "Сила реакции понятна, когда пространство снова требует быть меньше самого удара. Daisy noticed, что что очевидное приходится доказывать не побочная деталь, а механизм, который превращает боль в давлен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0329,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 5,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 6,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил подруга из прежнего круга после небольшой границы; она ещё и в требовании оставаться",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.036,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 7,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил брат после долгого молчания; она ещё и в требовании оставаться аккуратной, пока вы э",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0376,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 8,
+          "row_locale": "en",
+          "preview": "Ваша реакция может быть соразмерной, даже если кому-то неудобно с ней сталкиваться. Daisy noticed, что что вы несёте слишком много стоит рядом со вторым страхом: вас обвинят в том, что вы усложняете а",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0423,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 12,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил коллега до того, как вы успели объяснить; она ещё и в требовании оставаться аккуратн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0387,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 23,
+          "row_locale": "en",
+          "preview": "То, что вы видите паттерн, уже важно. Daisy noticed, что болезненна не только сама реакция, но и скорость, с которой реакция становится доказательством против вас. Рефлексия становится мягче, когда из",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0451,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 27,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что отец сместил фокус с произошедшего на допустимость вашей реакции.",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0407,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 53,
+          "row_locale": "en",
+          "preview": "Желание свериться с реальностью не является слабостью; психика проверяет, не исказили ли давление и вина саму рану. Daisy noticed, что бывший партнёр сместил фокус с произошедшего на допустимость ваше",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0383,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 56,
+          "row_locale": "en",
+          "preview": "Злость здесь несёт информацию, а не только громкость. Daisy noticed, что рана связана не только с тем, как поступил человек, которому вы доверяли за ужином; она ещё и в требовании оставаться аккуратно",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0372,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 67,
+          "row_locale": "en",
+          "preview": "Есть разница между потребностью в подтверждении и попыткой оправдать каждое своё действие. Daisy noticed, что вы всё ещё рассматриваете свою часть, а значит это не слепая самозащита. Стыд будто требуе",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0369,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 71,
+          "row_locale": "en",
+          "preview": "Не нужно выбрасывать список претензий. Daisy noticed, что более трудная задача — отделить ответственность другого человека от постоянного захвата вашего внимания. Если дело остаётся открытым бесконечн",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0369,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Daisy",
+            "noticed"
+          ]
+        },
+        {
+          "line": 80,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 83,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "training\\train_v2.jsonl",
+      "n_examples": 387,
+      "row_locale_mix": {
+        "en": 378,
+        "kk": 9
+      },
+      "assistant_locale_mix": {
+        "en": 168,
+        "ru": 210,
+        "kk": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 16,
+      "cyrillic_assistant_latin_leak_fraction": 0.0413,
+      "leak_samples": [
+        {
+          "line": 19,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 59,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, называется усталостью сострадания (compassion fatigue) — это состояние, при котором способность откликаться на чужое страдание истощается из-за её хронического и интенсивного ис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0138,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "compassion",
+            "fatigue"
+          ]
+        },
+        {
+          "line": 93,
+          "row_locale": "en",
+          "preview": "В DBT есть специфическая схема для таких разговоров, называется DEAR MAN — это не манипуляция, а структура, которая снижает тревогу и удерживает и границы, и отношения. Первая половина — подготовка со",
+          "leak": true,
+          "latin_word_count": 11,
+          "latin_alpha_ratio": 0.0954,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "DEAR",
+            "MAN",
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Mindful"
+          ]
+        },
+        {
+          "line": 117,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это диалектическое устройство реальности, и DBT построена на признании этого устройства: две противоположные правды могут быть истинны одновременно, и попытка свести их к одно",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0037,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 122,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это фузия с мыслью: мысль воспринимается не как мысль, а как сигнал к действию, равнозначный реальному событию. В метакогнитивной терапии предлагается практика 'отстранённого ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0284,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "detached",
+            "mindfulness"
+          ]
+        },
+        {
+          "line": 171,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 173,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        },
+        {
+          "line": 228,
+          "row_locale": "en",
+          "preview": "Замени автоматизм на конкретную последовательность коротких шагов — она даёт тебе время не скатиться в fixing. Один: когда подруга начинает рассказывать, первые 5 минут установи себе правило — только ",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.008,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "fixing"
+          ]
+        },
+        {
+          "line": 245,
+          "row_locale": "en",
+          "preview": "В традиции христианской мистики состояние, которое ты описываешь, имеет очень точное имя — тёмная ночь души — это выражение восходит к испанскому мистику XVI века Иоанну Креста, но сейчас оно использу",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XVI"
+          ]
+        },
+        {
+          "line": 271,
+          "row_locale": "en",
+          "preview": "В литературе по выгоранию выделен специфический фактор, часто недооценённый — рассогласование ценностей (values misalignment), и он способен создавать выгорание при относительно небольшой объёмной наг",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0164,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "values",
+            "misalignment"
+          ]
+        },
+        {
+          "line": 286,
+          "row_locale": "en",
+          "preview": "В диалектической поведенческой терапии (DBT) есть специфическая концепция — радикальное принятие. Она отличается от смирения, одобрения или безразличия: радикальное принятие — это полное признание тог",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.004,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 333,
+          "row_locale": "en",
+          "preview": "Работай не с решимостью в один момент, а с постепенным разрыванием биохимической связи и одновременным укреплением внешних опор. Один: составь два списка на бумаге — 'что он сделал в жестокой фазе' (д",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0173,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "domestic",
+            "violence"
+          ]
+        },
+        {
+          "line": 337,
+          "row_locale": "en",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 343,
+          "row_locale": "en",
+          "preview": "В DBT эта дилемма устраняется не выбором одной стороны, а концепцией 'мудрого разума' (wise mind) — третьего состояния, где доступ есть к обеим системам одновременно, и решение принимается из их перес",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0141,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "wise",
+            "mind"
+          ]
+        },
+        {
+          "line": 361,
+          "row_locale": "en",
+          "preview": "В психологии и юриспруденции признано, что насилие в отношениях включает не только физические формы — есть отдельный феномен, называемый коэрсивным контролем (coercive control), и в ряде стран он квал",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0153,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "coercive",
+            "control"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "training\\train_v3.jsonl",
+      "n_examples": 2827,
+      "row_locale_mix": {
+        "en": 2818,
+        "kk": 9
+      },
+      "assistant_locale_mix": {
+        "en": 1876,
+        "ru": 942,
+        "kk": 9
+      },
+      "cyrillic_assistant_latin_leak_count": 740,
+      "cyrillic_assistant_latin_leak_fraction": 0.2618,
+      "leak_samples": [
+        {
+          "line": 19,
+          "row_locale": "en",
+          "preview": "В состоянии острого аффекта (ярость, паника, сильный импульс) когнитивные стратегии работают плохо, потому что префронтальная кора — часть мозга, отвечающая за рассуждение и планирование — временно по",
+          "leak": true,
+          "latin_word_count": 10,
+          "latin_alpha_ratio": 0.0732,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "TIPP",
+            "Temperature",
+            "Intense",
+            "exercise",
+            "Paced",
+            "breathing",
+            "Paired"
+          ]
+        },
+        {
+          "line": 59,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, называется усталостью сострадания (compassion fatigue) — это состояние, при котором способность откликаться на чужое страдание истощается из-за её хронического и интенсивного ис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0138,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "compassion",
+            "fatigue"
+          ]
+        },
+        {
+          "line": 93,
+          "row_locale": "en",
+          "preview": "В DBT есть специфическая схема для таких разговоров, называется DEAR MAN — это не манипуляция, а структура, которая снижает тревогу и удерживает и границы, и отношения. Первая половина — подготовка со",
+          "leak": true,
+          "latin_word_count": 11,
+          "latin_alpha_ratio": 0.0954,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "DEAR",
+            "MAN",
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Mindful"
+          ]
+        },
+        {
+          "line": 117,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это диалектическое устройство реальности, и DBT построена на признании этого устройства: две противоположные правды могут быть истинны одновременно, и попытка свести их к одно",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0037,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 122,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это фузия с мыслью: мысль воспринимается не как мысль, а как сигнал к действию, равнозначный реальному событию. В метакогнитивной терапии предлагается практика 'отстранённого ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0284,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "detached",
+            "mindfulness"
+          ]
+        },
+        {
+          "line": 171,
+          "row_locale": "en",
+          "preview": "То, что ты описываешь, — это травматическая привязанность (trauma bonding), и её механика хорошо описана в психологии и нейробиологии. В центре — паттерн интермиттирующего (перемежающегося) подкреплен",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0115,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "trauma",
+            "bonding"
+          ]
+        },
+        {
+          "line": 173,
+          "row_locale": "en",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        },
+        {
+          "line": 228,
+          "row_locale": "en",
+          "preview": "Замени автоматизм на конкретную последовательность коротких шагов — она даёт тебе время не скатиться в fixing. Один: когда подруга начинает рассказывать, первые 5 минут установи себе правило — только ",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.008,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "fixing"
+          ]
+        },
+        {
+          "line": 245,
+          "row_locale": "en",
+          "preview": "В традиции христианской мистики состояние, которое ты описываешь, имеет очень точное имя — тёмная ночь души — это выражение восходит к испанскому мистику XVI века Иоанну Креста, но сейчас оно использу",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XVI"
+          ]
+        },
+        {
+          "line": 271,
+          "row_locale": "en",
+          "preview": "В литературе по выгоранию выделен специфический фактор, часто недооценённый — рассогласование ценностей (values misalignment), и он способен создавать выгорание при относительно небольшой объёмной наг",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0164,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "values",
+            "misalignment"
+          ]
+        },
+        {
+          "line": 286,
+          "row_locale": "en",
+          "preview": "В диалектической поведенческой терапии (DBT) есть специфическая концепция — радикальное принятие. Она отличается от смирения, одобрения или безразличия: радикальное принятие — это полное признание тог",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.004,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 333,
+          "row_locale": "en",
+          "preview": "Работай не с решимостью в один момент, а с постепенным разрыванием биохимической связи и одновременным укреплением внешних опор. Один: составь два списка на бумаге — 'что он сделал в жестокой фазе' (д",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0173,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "domestic",
+            "violence"
+          ]
+        },
+        {
+          "line": 337,
+          "row_locale": "en",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 5,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 343,
+          "row_locale": "en",
+          "preview": "В DBT эта дилемма устраняется не выбором одной стороны, а концепцией 'мудрого разума' (wise mind) — третьего состояния, где доступ есть к обеим системам одновременно, и решение принимается из их перес",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0141,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "wise",
+            "mind"
+          ]
+        },
+        {
+          "line": 361,
+          "row_locale": "en",
+          "preview": "В психологии и юриспруденции признано, что насилие в отношениях включает не только физические формы — есть отдельный феномен, называемый коэрсивным контролем (coercive control), и в ряде стран он квал",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0153,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "coercive",
+            "control"
+          ]
+        }
+      ]
+    }
+  ]
+}

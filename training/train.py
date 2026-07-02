@@ -126,6 +126,27 @@ def main() -> None:
     val_ds = load_dataset("json", data_files=VAL_FILE, split="train")
     print(f"Train rows: {len(train_ds)}, Val rows: {len(val_ds)}")
 
+    def _messages_to_text(messages: list[dict]) -> str:
+        parts: list[str] = []
+        for msg in messages:
+            role = (msg.get("role") or "user").strip()
+            content = (msg.get("content") or "").strip()
+            if content:
+                parts.append(f"<|im_start|>{role}\n{content}")
+        return "\n".join(parts)
+
+    def to_text(example: dict) -> dict:
+        text = (example.get("text") or "").strip()
+        if not text:
+            text = _messages_to_text(example.get("messages") or [])
+        return {"text": text}
+
+    train_ds = train_ds.map(to_text, remove_columns=train_ds.column_names)
+    val_ds = val_ds.map(to_text, remove_columns=val_ds.column_names)
+    train_ds = train_ds.filter(lambda x: bool((x.get("text") or "").strip()))
+    val_ds = val_ds.filter(lambda x: bool((x.get("text") or "").strip()))
+    print(f"After format: train={len(train_ds)}, val={len(val_ds)}")
+
     _default_max = "512" if USE_LORA else "1024"
     max_len = int(os.environ.get("MAX_SEQ_LENGTH", _default_max))
 

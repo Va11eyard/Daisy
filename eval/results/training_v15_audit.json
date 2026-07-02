@@ -1,0 +1,291 @@
+{
+  "timestamp": "2026-07-01T15:57:08.051747+00:00",
+  "files_audited": 1,
+  "audit_before": [
+    {
+      "path": "data\\train_v15.jsonl",
+      "n_examples": 2815,
+      "row_locale_mix": {
+        "ru": 953,
+        "kk": 706
+      },
+      "assistant_locale_mix": {
+        "ru": 953,
+        "kk": 706
+      },
+      "cyrillic_assistant_latin_leak_count": 60,
+      "cyrillic_assistant_latin_leak_fraction": 0.0362,
+      "leak_samples": [
+        {
+          "line": 5,
+          "row_locale": "ru",
+          "preview": "В DBT эта дилемма устраняется не выбором одной стороны, а концепцией 'мудрого разума' (wise mind) — третьего состояния, где доступ есть к обеим системам одновременно, и решение принимается из их перес",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0141,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT",
+            "wise",
+            "mind"
+          ]
+        },
+        {
+          "line": 51,
+          "row_locale": "ru",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 6,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "X",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 162,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, называется в психологии условной самоценностью — состояние, при котором внутреннее ощущение 'я окей' привязано к конкретному условию (продуктивность, успех, одобрение, внешний в",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "X"
+          ]
+        },
+        {
+          "line": 253,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, называется в психологии условной самоценностью — состояние, при котором внутреннее ощущение 'я окей' привязано к конкретному условию (продуктивность, успех, одобрение, внешний в",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "X"
+          ]
+        },
+        {
+          "line": 321,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, — это диалектическое устройство реальности, и DBT построена на признании этого устройства: две противоположные правды могут быть истинны одновременно, и попытка свести их к одно",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0037,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 349,
+          "row_locale": "ru",
+          "preview": "Несоразмерные реакции почти всегда указывают на то, что поверхностная мысль (раздражение, обида, стыд) опирается на более глубокое убеждение о себе — то, что в КПТ называется глубинным или core belief",
+          "leak": true,
+          "latin_word_count": 4,
+          "latin_alpha_ratio": 0.0313,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "core",
+            "belief",
+            "downward",
+            "arrow"
+          ]
+        },
+        {
+          "line": 375,
+          "row_locale": "ru",
+          "preview": "Сформулируй их явно и держи их рядом, в одном предложении — это физически меняет отношения с ними. Один: запиши на бумаге обе правды в формате 'X и Y' в одном предложении ('моя мать любила меня, и моя",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0035,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "Y"
+          ]
+        },
+        {
+          "line": 491,
+          "row_locale": "ru",
+          "preview": "В литературе по психологической поддержке и сопровождению различают две принципиально разных формы отклика на чужое страдание: помощь-решение (fixing) и держание пространства (holding space). Помощь-р",
+          "leak": true,
+          "latin_word_count": 3,
+          "latin_alpha_ratio": 0.0159,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "fixing",
+            "holding",
+            "space"
+          ]
+        },
+        {
+          "line": 568,
+          "row_locale": "ru",
+          "preview": "В диалектической поведенческой терапии (DBT) есть специфическая концепция — радикальное принятие. Она отличается от смирения, одобрения или безразличия: радикальное принятие — это полное признание тог",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.004,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "DBT"
+          ]
+        },
+        {
+          "line": 597,
+          "row_locale": "ru",
+          "preview": "Сформулируй их явно и держи их рядом, в одном предложении — это физически меняет отношения с ними. Один: запиши на бумаге обе правды в формате 'X и Y' в одном предложении ('моя мать любила меня, и моя",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0035,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "Y"
+          ]
+        },
+        {
+          "line": 605,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, — это фузия с мыслью: мысль воспринимается не как мысль, а как сигнал к действию, равнозначный реальному событию. В метакогнитивной терапии предлагается практика 'отстранённого ",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0284,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "detached",
+            "mindfulness"
+          ]
+        },
+        {
+          "line": 679,
+          "row_locale": "ru",
+          "preview": "Пройдём первую половину вместе — запиши каждую часть одним коротким предложением, это снимет половину тревоги. Один: на бумаге Describe — один абзац фактами: стаж, ответственность, конкретные результа",
+          "leak": true,
+          "latin_word_count": 6,
+          "latin_alpha_ratio": 0.0671,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "Describe",
+            "Express",
+            "Assert",
+            "X",
+            "Reinforce",
+            "Describe"
+          ]
+        },
+        {
+          "line": 687,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, называется в психологии условной самоценностью — состояние, при котором внутреннее ощущение 'я окей' привязано к конкретному условию (продуктивность, успех, одобрение, внешний в",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "X"
+          ]
+        },
+        {
+          "line": 691,
+          "row_locale": "ru",
+          "preview": "Работай с интерпретацией данных, а не с накоплением данных — мозг не сможет 'прозреть' сам. Один: в конце каждого дня запиши одно действие, где ты проявила компетентность, и рядом — как мозг это объяс",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0036,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "X"
+          ]
+        },
+        {
+          "line": 711,
+          "row_locale": "ru",
+          "preview": "Создай внешние точки опоры, которые не подвержены переопределению — это восстанавливает реальность. Один: веди приватный письменный дневник с датами и точными цитатами — что он сказал, что ты ответила",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0028,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "Y"
+          ]
+        },
+        {
+          "line": 740,
+          "row_locale": "ru",
+          "preview": "В психологии и юриспруденции признано, что насилие в отношениях включает не только физические формы — есть отдельный феномен, называемый коэрсивным контролем (coercive control), и в ряде стран он квал",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0153,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "coercive",
+            "control"
+          ]
+        },
+        {
+          "line": 757,
+          "row_locale": "ru",
+          "preview": "Верни маленькие петли обратной связи — не через новые прорывы, а через уменьшение масштаба. Один: выбери одно действие в день, где связь между усилием и результатом заведомо надёжна (приготовить ужин,",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0036,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "Y"
+          ]
+        },
+        {
+          "line": 780,
+          "row_locale": "ru",
+          "preview": "Создай внешние точки опоры, которые не подвержены переопределению — это восстанавливает реальность. Один: веди приватный письменный дневник с датами и точными цитатами — что он сказал, что ты ответила",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0028,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "X",
+            "Y"
+          ]
+        },
+        {
+          "line": 790,
+          "row_locale": "ru",
+          "preview": "В традиции христианской мистики состояние, которое ты описываешь, имеет очень точное имя — тёмная ночь души — это выражение восходит к испанскому мистику XVI века Иоанну Креста, но сейчас оно использу",
+          "leak": true,
+          "latin_word_count": 1,
+          "latin_alpha_ratio": 0.0021,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "XVI"
+          ]
+        },
+        {
+          "line": 860,
+          "row_locale": "ru",
+          "preview": "То, что ты описываешь, называется усталостью сострадания (compassion fatigue) — это состояние, при котором способность откликаться на чужое страдание истощается из-за её хронического и интенсивного ис",
+          "leak": true,
+          "latin_word_count": 2,
+          "latin_alpha_ratio": 0.0138,
+          "polish_diacritics": false,
+          "sample_latin_words": [
+            "compassion",
+            "fatigue"
+          ]
+        }
+      ]
+    }
+  ]
+}

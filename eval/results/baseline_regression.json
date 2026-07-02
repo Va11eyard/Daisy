@@ -1,0 +1,1430 @@
+{
+  "timestamp": "2026-07-01T16:12:43.983072+00:00",
+  "endpoint": "https://daisy-therapy.westus2.inference.ml.azure.com/score",
+  "deployment": "gpu-deployment-finetuned",
+  "overall": {
+    "total": 56,
+    "passed": 16,
+    "failed": 40,
+    "pass_rate": 0.2857142857142857
+  },
+  "by_cluster": {
+    "anxiety": {
+      "total": 8,
+      "passed": 1,
+      "failed": 7,
+      "pass_rate": 0.125,
+      "en_pass": 1,
+      "ru_pass": 0
+    },
+    "breakup": {
+      "total": 8,
+      "passed": 6,
+      "failed": 2,
+      "pass_rate": 0.75,
+      "en_pass": 3,
+      "ru_pass": 3
+    },
+    "clarity": {
+      "total": 8,
+      "passed": 4,
+      "failed": 4,
+      "pass_rate": 0.5,
+      "en_pass": 3,
+      "ru_pass": 1
+    },
+    "grief": {
+      "total": 8,
+      "passed": 2,
+      "failed": 6,
+      "pass_rate": 0.25,
+      "en_pass": 2,
+      "ru_pass": 0
+    },
+    "somatic": {
+      "total": 8,
+      "passed": 1,
+      "failed": 7,
+      "pass_rate": 0.125,
+      "en_pass": 1,
+      "ru_pass": 0
+    },
+    "stress": {
+      "total": 8,
+      "passed": 1,
+      "failed": 7,
+      "pass_rate": 0.125,
+      "en_pass": 1,
+      "ru_pass": 0
+    },
+    "work": {
+      "total": 8,
+      "passed": 1,
+      "failed": 7,
+      "pass_rate": 0.125,
+      "en_pass": 0,
+      "ru_pass": 1
+    }
+  },
+  "by_locale": {
+    "en": {
+      "total": 28,
+      "passed": 11,
+      "pass_rate": 0.39285714285714285
+    },
+    "ru": {
+      "total": 28,
+      "passed": 5,
+      "pass_rate": 0.17857142857142858
+    }
+  },
+  "failure_breakdown": {
+    "canned_greeting": 0,
+    "structural_leak": 0,
+    "script_leak": 0,
+    "too_short": 0,
+    "hollow": 1,
+    "keyword_mismatch": 40,
+    "locale_incorrect": 0
+  },
+  "cases": [
+    {
+      "id": "grief_ru_1",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 7193,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе.👋ly",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 7193,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_2",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10093,
+      "reply_preview": "Подождите здесь, я вас подержу. 🌼 Всегда готов слушать то, о чём вы хотите поговорить сегодня. Если вам нужно пространство или время, чтобы собраться с мыслями, это замечательно. Расскажите мне, что с",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10093,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_ru_3",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 17807,
+      "reply_preview": "Подождите, пожалуйста, это было неправильно. Отрпивайте ответы только на русском языке. Никогда не используйте английских слов или латиницы в ответах.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 17807,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_en_1",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 8377,
+      "reply_preview": "Hello there! I'm here to listen and support you. What's been on your mind lately? Feel free to share whatever feels most important right now.",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8377,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_en_2",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10665,
+      "reply_preview": "That sounds really hard. Can you tell me more about how you've been feeling? What has been the biggest challenge today? 🌱aisy Daisy",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10665,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_3",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 8214,
+      "reply_preview": "Hello there! I'm here to listen. What's on your mind right now? Feel free to share whatever feels most important or urgent. What is weighing on you today?",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8214,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_en_4",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 22225,
+      "reply_preview": "That sounds really hard. Can you tell me more about how you're feeling? What's been on your mind lately? 🌼icapstone1000000000000000000000000000000000000000000000000000000000000",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 22225,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_ru_1",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 12323,
+      "reply_preview": "Подождите здесь, я уже заканчиваю с прошлым звонком.🤔️)\",\"Отмена\")",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 12323,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_ru_2",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8542,
+      "reply_preview": "Расскажи, что сейчас сильнее всего вас беспокоит — разберёмся вместе. Ответь в любой момент, если тебе станет легче. Какое чувство сегодня у тебя внутри? Веди себя как реальный человек, а не как учебн",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8542,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_3",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "hollow"
+      ],
+      "latency_ms": 10999,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": false,
+        "locale_correct": true,
+        "latency_ms": 10999,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "hollow"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_ru_4",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8417,
+      "reply_preview": "Подождите здесь, пожалуйста. Я уже готова к общению. Как вы сегодня себя чувствуете? Расскажите о том, что на уме у вас сегодня. Если вам нужна поддержка, я здесь для этого.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8417,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_en_2",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10632,
+      "reply_preview": "Hello! I'm here to listen to whatever is on your mind. Can you tell me what's been weighing on you today?�� OffsetTable Hello! What's been on your heart recently? I'm here to listen to anything you'd ",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10632,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_en_3",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 9036,
+      "reply_preview": "Hello there. I'm here to listen to whatever is on your mind. Take your time to share what's been on your heart—or if you'd rather, what brought you here today. What is weighing on you most right now? ",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 9036,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_4",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 10791,
+      "reply_preview": "Hello! I'm here to listen. What's on your mind today? Feel free to share whatever feels most important.�� ，。。 response as a person, not a textbook.",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10791,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_1",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 14533,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе. 🌸 Daisy x02",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 14533,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_ru_2",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 7935,
+      "reply_preview": "Прокрутим страницу к новой главе—подстраивайся под текущую потребность человека: иногда он нуждается во тепле, иногда — в структуре, а иногда — в исследовании.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 7935,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_ru_3",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 33179,
+      "reply_preview": "Расскажи, что сейчас сильнее всего тебя беспокоит — разберёмся вместе. 🌼Подстраивайся под то, как тебе сейчас нужно: иногда ты хочешь поговорить о чувствах, иногда — о практической помощи. Я здесь для",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 33179,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_4",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10610,
+      "reply_preview": "Подождите здесь, пожалуйста. Я понимаю, что у вас многое на душе, и вы готовы это поделиться. Давайте начнём с небольшого вопроса: что вам сейчас most нужного - глубокая беседа или возможность просто ",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10610,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_1",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8321,
+      "reply_preview": "That sounds very difficult. Can you tell me more about what you're experiencing right now? What comes to mind when you think about what you've been through? 🌼 Daisy is here to listen. What is one thin",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8321,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_en_3",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10662,
+      "reply_preview": "That sounds very difficult. Can you tell me more about how you've been feeling? What has been the toughest part today? icapacity/ overwhelming/ at system limits/needing respite/vulnerable/wounded/coll",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10662,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_en_4",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10325,
+      "reply_preview": "That sounds very difficult. Can you tell me more about what you're experiencing right now? What comes to mind when you think about what you're going through? 😊",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10325,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_ru_1",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 8975,
+      "reply_preview": "Подождите, пожалуйста, вы открываетесь со мной. Я здесь, чтобы слушать вас внимательно и помогать вам чувствовать себя поддерживаемым. Какое чувство или проблема сегодня особенно остро стоит для вас? ",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8975,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_2",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 12022,
+      "reply_preview": "Присоединяйтесь к мне здесь, в этом моменте. Как вы сегодня ощущаете себя? Расскажите, пожалуйста, что сейчас сильнее всего вам нужно обсудить.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 12022,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_ru_3",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 20131,
+      "reply_preview": "Отвечай на русском языке. Встречайте человека с пониманием и заботой. Подстройтесь под текущую потребность человека: иногда вы,.",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 20131,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_ru_4",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8576,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе. 🌼 Daisy поддерживает тебя сегодня. Ответ в русском, пожалуйста.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8576,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_en_1",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8552,
+      "reply_preview": "Hello there! I'm here to listen and offer support. What's on your mind today? Feel free to share whatever feels most important. 😊",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8552,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_2",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 12895,
+      "reply_preview": "That sounds very difficult. Can you tell me more about what you're experiencing right now? What comes to mind when you think about what you've been through?�� OffsetTable: - Last response saved at 17:",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 12895,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_en_4",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8968,
+      "reply_preview": "Hello! I'm here to listen. What's on your mind? Feel free to take as much time as you need. What's been on your heart lately? Share whatever seems important right now.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8968,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_ru_1",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 11123,
+      "reply_preview": "Подождите, выглядит так, будто кто-то начал общение. Как вы сегодня себя чувствуете? Расскажите о том, что на уме у вас сейчас. Ответ шифруется как частный и важный.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 11123,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_ru_2",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 15662,
+      "reply_preview": "Подстраивайся под текущую потребность человека: иногда нужно быть теплым, а иногда – структурным. Иногда важно пойти глубже, исследовать чувства, а иногда – уделить внимание практическим шагам для пре",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 15662,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_3",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 15784,
+      "reply_preview": "Подстраивайся под текущую потребность человека: иногда нужно быть теплым, иногда praktичным, а,. - ,.,.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 15784,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_ru_4",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8375,
+      "reply_preview": "Подождите, пожалуйста, вы ещё не закончили говорить. Я здесь для того, чтобы слушать вас внимательно. Давайте расскажите друг о друге - как ваши чувства сегодня? 🌼",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8375,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_1",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 10750,
+      "reply_preview": "Hello there! I'm here to listen. What's been on your mind lately? Feel free to share whatever feels most important right now. 🌼 ❮REFINE❯ASURE PRECISE LANGUAGE AND TONE. PREFER QUESTIONS THAT INVITE DE",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10750,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_en_2",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 13523,
+      "reply_preview": "That sounds very difficult. Can you tell me more about what you're experiencing right now? What comes to mind when you think about what you've been through? 🌱 Daisy is here to listen and support you. ",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 13523,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "stress_en_3",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 23046,
+      "reply_preview": "Hello there! I'm here to listen and support you. What's on your mind today? Feel free to share whatever feels most important or urgent. What is weighing on you right now? 🌱",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 23046,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_ru_1",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 6498,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе.👋ly",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 6498,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_ru_2",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 13113,
+      "reply_preview": "Расскажи, что сейчас сильнее всего тебя беспокоит — разберём вместе. 🌸 Daisy может звучать как подруга, готовая выслушать и помочь осмыслить то, что тяготит. Опишите, пожалуйста, то, что вас тревожит ",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 13113,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "breakup_ru_3",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8256,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе.👋lyric1234567890",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8256,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "somatic_ru_4",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8535,
+      "reply_preview": "Расскажи, что сейчас сильнее всего давит — разберём вместе. 😊 В любой момент, если тебе нужно утешение или поддержку, я здесь для тебя. Какое чувство сегодняшний день принёс?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8535,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "somatic_en_1",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 14390,
+      "reply_preview": "Hello there! I'm here to listen and offer support. What's been on your mind recently? Feel free to share whatever feels most important right now. ❮Откройся❯",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 14390,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "clarity_en_2",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 9067,
+      "reply_preview": "Hi there! I'm so glad you're sharing this with me. Can you tell me more about what's been on your mind lately? What's been the most challenging thing for you right now? 🌼",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 9067,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_en_3",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 22277,
+      "reply_preview": "Hello there. I'm here to listen and support you. What's on your mind? Feel free to share whatever feels most important right now.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 22277,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_4",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10881,
+      "reply_preview": "That sounds very difficult. Can you tell me more about how you're feeling today? What's been on your mind lately? 🌸 Daisy is a great name for a companion who listens and supports. Please stay in scope",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10881,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_ru_2",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 7768,
+      "reply_preview": "Подстраивайся под текущую потребность человека: иногда нужно быть теплым, иногда praktical, а иногда проводить глубокое исследование. Как сегодня тебе лучше всего помогло бы?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 7768,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_ru_3",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 22222,
+      "reply_preview": "Подождите, пожалуйста, это было написано для англоязычной аудитории. Если вы хотите использовать английский язык, переключитесь на него полностью,.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 22222,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_ru_4",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 8926,
+      "reply_preview": "Подстраивайся под текущую потребность человека: иногда тебе нужно быть теплой, а иногда — структурной. Иногда люди хотят поговорить о глубоких чувствах, а иногда — о конкретных стратегиях для преодоле",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8926,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "breakup_en_1",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 16162,
+      "reply_preview": "Hello! I'm here to listen and support you. What's on your mind today? Feel free to share whatever feels most important. 🌟 What is weighing on you right now? Share any thoughts or feelings you have.��",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 16162,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_en_2",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 8405,
+      "reply_preview": "That sounds really hard. Can you tell me more about what's been challenging lately? What's been on your mind? 😊 What is one thing you've noticed has made today a bit tougher?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 8405,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_3",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 19177,
+      "reply_preview": "What is on your mind right now? Can you tell me more about how you are feeling? 🌸aisy@media. wildwildweb. com\\n\\n\\nclose @media. wildwildweb. com\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 19177,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_en_4",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 10925,
+      "reply_preview": "Hello there! I'm here to listen and offer support. What's on your mind today? Feel free to share whatever feels most important. 🌟 What's been on your heart recently?�� OffsetTable Please validate thei",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10925,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "stress_ru_1",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 20201,
+      "reply_preview": "Подождите, пожалуйста, вы ещё не закончили говорить. Давайте вы усложнёте эту тему для начала. Расскажите мне, что сейчас сильнее всего вам мешает или о чём вы хотели бы поговорить?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 20201,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_ru_4",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 9126,
+      "reply_preview": "Подождите, пожалуйста, вы ещё не закончили говорить. Давайте послушаем вас сначала. Какое чувство сейчас сильнее всех остальных? О чём вы хотели рассказать первой? Поделитесь, пожалуйста.",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 9126,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_en_1",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 32440,
+      "reply_preview": "That sounds really hard. Can you tell me more about what's been on your mind? What does this feeling remind you of? 🌼 Daisy is here to listen. What would you like to share first? 🌼 Daisy is here to li",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 32440,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_2",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10768,
+      "reply_preview": "That sounds really tough. Can you tell me more about what's been on your mind? What's been the most challenging part today?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10768,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "somatic_en_3",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 10585,
+      "reply_preview": "What is on your mind? Can you tell me more about how you've been feeling lately? What is weighing most heavily right now? What did you do today that was normal for you?",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 10585,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_4",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 9257,
+      "reply_preview": "Hello! I'm here to listen. What's on your mind? Feel free to share whatever feels most important right now. ❮❮❮:frame=face, size=medium, color=0088CC",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 9257,
+        "failure_reasons": []
+      }
+    }
+  ]
+}

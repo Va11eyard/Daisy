@@ -1,0 +1,126 @@
+# ============================================================================
+# deployment-qwen3-lora-v15.yaml
+# Azure ML deployment spec for Daisy Qwen3-8B + LoRA v15
+# ============================================================================
+# DEPLOYMENT: gpu-deployment-v14 (existing slot)
+# MODEL:      azureml:daisy-finetuned-lora:15 (after training)
+# BASE:       Qwen/Qwen3-8B
+#
+# NOTE: v11 LoRA is Qwen2.5-7B and incompatible with Qwen3-8B.
+#       This deployment uses Qwen3-8B base + freshly trained LoRA v15.
+#
+# TRAINING DATA: Expects LoRA v15 trained on balanced EN/RU/KK data
+#                (build_balanced_dataset.py → train_v15.jsonl)
+# ============================================================================
+
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: gpu-deployment-v14
+endpoint_name: daisy-therapy
+model: azureml:daisy-finetuned-lora:15
+  # For smoke test without LoRA, comment above and use:
+  # model: azureml:qwen3-8b-base:1
+  # path: huggingface/Qwen/Qwen3-8B
+
+environment_variables:
+  # --- Build identity ---
+  INFERENCE_BUILD: "2026-07-qwen3-v1"
+  INFERENCE_QUANTIZATION: "4bit"
+
+  # --- Base model ---
+  BASE_MODEL: "Qwen/Qwen3-8B"
+  # For latency-sensitive: use Qwen/Qwen3-4B instead
+  # BASE_MODEL: "Qwen/Qwen3-4B"
+
+  # --- Multilingual routing ---
+  DAISY_DIRECT_MULTILINGUAL: "true"
+  # When true: score_qwen3.py handles EN/RU/KK natively without translation pipeline
+
+  # --- Generation params ---
+  DAISY_DEFAULT_MAX_TOKENS: "120"
+  DAISY_LORA_DEFAULT_TEMP: "0.6"
+  # Temperature 0.6 (up from 0.55) for more natural variation
+  # Max tokens 120 (up from 90) for more complete responses
+
+  # --- Voice QC (RE-ENABLED) ---
+  DAISY_VOICE_QC: "true"
+  DAISY_MAX_VOICE_REGENS: "2"
+  # v11 had QC disabled in 'simple' mode — this re-enables full voice quality control
+
+  # --- Safety ---
+  DAISY_CRISIS_ESCALATION: "true"
+  DAISY_PROMPT_INJECTION_GUARD: "true"
+  DAISY_OFF_TOPIC_REDIRECT: "true"
+
+  # --- Logging ---
+  LOG_LEVEL: "INFO"
+  PYTHONUNBUFFERED: "1"
+
+  # --- REMOVED (no longer referenced) ---
+  # DAISY_RAG: "false"              # RAG pipeline removed
+  # DAISY_BM25: "false"             # BM25 retriever removed
+  # DAISY_CONFIDENCE_GATE: "false"  # Confidence gating removed
+  # DAISY_RUBRIC_JUDGE: "false"     # Rubric judge removed (inline QC instead)
+  # DAISY_EMBED_MODEL: ""           # Embedding model removed
+  # DAISY_AGGRESSIVE_TRIM: "false"  # Aggressive trimming removed
+  # ENABLE_ROUTER_PASS: "false"     # Router pass removed
+
+environment:
+  # Pre-built Azure ML environment with transformers, torch, bitsandbytes
+  image: mcr.microsoft.com/azureml/curated/acpt-pytorch-2.2-cuda12.1-py310:latest
+  conda_file:
+    name: daisy-qwen3-inference
+    channels:
+      - conda-forge
+      - pytorch
+      - nvidia
+    dependencies:
+      - python=3.10
+      - pip:
+        - torch>=2.2.0
+        - transformers>=4.40.0
+        - accelerate>=0.29.0
+        - bitsandbytes>=0.43.0
+        - flask>=3.0.0
+        # fastapi alternative: uncomment below
+        # - fastapi>=0.110.0
+        # - uvicorn>=0.29.0
+
+instance_type: Standard_NC6s_v3
+  # GPU: 1 × V100 16GB — sufficient for Qwen3-8B 4-bit
+  # For production: Standard_NC24s_v3 (4 × V100) or Standard_NC4as_T4_v3 (T4)
+  # If using Qwen3-4B: Standard_NC6s_v3 is fine, or even Standard_NC4as_T4_v3
+
+request_settings:
+  request_timeout_ms: 30000
+  max_concurrent_requests_per_instance: 4
+
+  # Liveness probe
+  liveness_probe:
+    initial_delay_seconds: 60
+    period_seconds: 30
+    failure_threshold: 3
+    success_threshold: 1
+    timeout_seconds: 10
+    path: /health
+    port: 5000
+
+  # Readiness probe
+  readiness_probe:
+    initial_delay_seconds: 60
+    period_seconds: 10
+    failure_threshold: 3
+    success_threshold: 1
+    timeout_seconds: 10
+    path: /health
+    port: 5000
+
+# --- Scaling ---
+scale_settings:
+  scale_type: default
+  min_instances: 1
+  max_instances: 3
+
+# --- Code ---
+code_configuration:
+  code: .
+  scoring_script: score_qwen3.py

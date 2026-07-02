@@ -1,0 +1,8 @@
+# RAG/BM25 assets — deployments use DAISY_RAG=false; skip ~150MB upload.
+knowledge/bm25_books.pkl
+knowledge/bm25_meta.json
+knowledge/rag_vectors.npy
+knowledge/rag_index.faiss
+knowledge/rag_meta.json
+knowledge/bm25_dialog.pkl
+__pycache__/

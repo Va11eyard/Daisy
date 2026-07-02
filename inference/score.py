@@ -128,6 +128,42 @@ def _degenerate_last_resort(reply_lang: str) -> str:
     return _DEGENERATE_LAST_RESORT.get(reply_lang) or _DEGENERATE_LAST_RESORT["en"]
 
 
+def _count_script_chars_for_qc(text: str) -> tuple[int, int, bool]:
+    latin = 0
+    cyr = 0
+    has_kk = False
+    for c in text:
+        if not c.isalpha():
+            continue
+        if "\u0400" <= c <= "\u04ff":
+            cyr += 1
+        elif c.isascii() and c.isalpha():
+            latin += 1
+    return latin, cyr, has_kk
+
+
+def _apply_post_translate_qc(response: str, reply_lang: str) -> str:
+    """Optional QC on back-translated RU/KK replies (translate deployment v2)."""
+    if reply_lang not in ("ru", "kk"):
+        return response
+    if os.environ.get("DAISY_POST_TRANSLATE_QC", "false").lower() not in ("1", "true", "yes"):
+        return response
+    text = (response or "").strip()
+    min_len = int(os.environ.get("DAISY_TRANSLATE_MIN_LENGTH", "40"))
+    if len(text) < min_len:
+        return _degenerate_last_resort(reply_lang)
+    if os.environ.get("DAISY_TRANSLATE_SCRIPT_GUARD", "true").lower() in ("1", "true", "yes"):
+        if generation_has_script_leak(text, reply_lang):
+            return _degenerate_last_resort(reply_lang)
+        latin, cyr, _ = _count_script_chars_for_qc(text)
+        alpha = latin + cyr
+        if alpha > 0:
+            max_ratio = float(os.environ.get("DAISY_TRANSLATE_MAX_LATIN_RATIO", "0.08"))
+            if latin / alpha > max_ratio:
+                return _degenerate_last_resort(reply_lang)
+    return text
+
+
 def _last_assistant_content(history: list[dict[str, str]]) -> str | None:
     for m in reversed(history):
         if m.get("role") == "assistant" and m.get("content"):
@@ -925,6 +961,7 @@ def run(raw_data: str | bytes) -> str:
 
         if use_translation and translator:
             response = translator.translate(response, "en", reply_lang, user_gender=user_gender)
+            response = _apply_post_translate_qc(response, reply_lang)
 
         defer_memory = os.environ.get("DEFER_MEMORY_UPDATE", "true").lower() in ("1", "true", "yes")
         ai_profile = None

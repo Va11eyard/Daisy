@@ -1,0 +1,13 @@
+# Legacy mega JSONL — job uses TRAIN_FILE/VAL_FILE only (v15).
+train.jsonl
+val.json
+train_v2.jsonl
+val_v2.jsonl
+train_v3.jsonl
+val_v3.jsonl
+train_v12.jsonl
+val_v12.jsonl
+train_v13.jsonl
+val_v13.jsonl
+__pycache__/
+outputs/

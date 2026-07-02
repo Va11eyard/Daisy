@@ -1,0 +1,11 @@
+{
+  "display_name": "daisy-lora-v15-qwen3",
+  "job_name": "purple_net_55lwkbc0zp",
+  "previous_failed_job": "goofy_sugar_1vc73ds9sn",
+  "base_model": "Qwen/Qwen3-8B",
+  "train_file": "train_v15.jsonl",
+  "val_file": "val_v15.jsonl",
+  "output_dir": "./outputs/daisy-lora-v15",
+  "submitted_at": "2026-07-01T16:40:00Z",
+  "studio_url": "https://ml.azure.com/runs/goofy_sugar_1vc73ds9sn?wsid=/subscriptions/9239bc75-105c-486e-8957-da8e49309c55/resourcegroups/Daisy_group/workspaces/Daisy"
+}

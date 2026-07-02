@@ -1,0 +1,56 @@
+{"id": "breakup_en_1", "cluster": "breakup", "locale": "en", "message": "we broke up last month and I still cant stop thinking about him", "keywords": ["breakup", "miss", "think", "left", "feel"], "history": []}
+{"id": "breakup_en_2", "cluster": "breakup", "locale": "en", "message": "my boyfriend left me and my heart feels empty", "keywords": ["breakup", "empty", "left", "miss", "feel"], "history": []}
+{"id": "breakup_en_3", "cluster": "breakup", "locale": "en", "message": "after the breakup I miss him even though I was angry at first", "keywords": ["breakup", "miss", "angry", "feel"], "history": []}
+{"id": "breakup_en_4", "cluster": "breakup", "locale": "en", "message": "I ended things but now I regret it and cant sleep", "keywords": ["breakup", "regret", "sleep", "ended", "feel"], "history": []}
+{"id": "breakup_ru_1", "cluster": "breakup", "locale": "ru", "message": "привет я рассталась с парнем", "keywords": ["расста", "парн", "чувств", "разрыв", "тяжел"], "history": [], "user_gender": "female"}
+{"id": "breakup_ru_2", "cluster": "breakup", "locale": "ru", "message": "привет я рассталась с парнем и чувствую пустоту внутри", "keywords": ["пуст", "расста", "чувств", "внутр"], "history": [], "user_gender": "female"}
+{"id": "breakup_ru_3", "cluster": "breakup", "locale": "ru", "message": "мы расстались и я не могу перестать о нем думать", "keywords": ["расста", "дум", "перест", "чувств"], "history": [], "user_gender": "female"}
+{"id": "breakup_ru_4", "cluster": "breakup", "locale": "ru", "message": "после расставания тоскую хотя сначала была злость", "keywords": ["расста", "тоск", "зл", "чувств"], "history": [], "user_gender": "female"}
+{"id": "work_en_1", "cluster": "work", "locale": "en", "message": "my ceo is raging at me every day", "keywords": ["ceo", "boss", "work", "stress", "angry"], "history": []}
+{"id": "work_en_2", "cluster": "work", "locale": "en", "message": "My boss keeps yelling at me and I cant take it anymore", "keywords": ["boss", "yell", "work", "stress"], "history": []}
+{"id": "work_en_3", "cluster": "work", "locale": "en", "message": "Work has been crushing me my manager is furious every day", "keywords": ["work", "manager", "crush", "furious"], "history": []}
+{"id": "work_en_4", "cluster": "work", "locale": "en", "message": "I might get fired and Im panicking about money", "keywords": ["fired", "panic", "money", "work", "job"], "history": []}
+{"id": "work_ru_1", "cluster": "work", "locale": "ru", "message": "на работе всё давит начальник орёт я выгораю", "keywords": ["работ", "начальник", "дав", "выгор", "стресс"], "history": []}
+{"id": "work_ru_2", "cluster": "work", "locale": "ru", "message": "руководитель каждый день на меня срывается сил нет", "keywords": ["руковод", "срыв", "сил", "работ"], "history": []}
+{"id": "work_ru_3", "cluster": "work", "locale": "ru", "message": "меня могут уволить и я в панике", "keywords": ["увол", "паник", "работ", "деньг"], "history": []}
+{"id": "work_ru_4", "cluster": "work", "locale": "ru", "message": "коллеги токсичные а начальник требует невозможного", "keywords": ["коллег", "начальник", "токс", "работ"], "history": []}
+{"id": "anxiety_en_1", "cluster": "anxiety", "locale": "en", "message": "Im feeling anxious today", "keywords": ["anxious", "anxiety", "today", "feel", "worry"], "history": []}
+{"id": "anxiety_en_2", "cluster": "anxiety", "locale": "en", "message": "my chest is tight and I cant calm down", "keywords": ["chest", "calm", "anx", "tight", "body"], "history": []}
+{"id": "anxiety_en_3", "cluster": "anxiety", "locale": "en", "message": "I keep worrying something bad will happen", "keywords": ["worry", "bad", "happen", "anx"], "history": []}
+{"id": "anxiety_en_4", "cluster": "anxiety", "locale": "en", "message": "panic attacks are back and Im scared", "keywords": ["panic", "scared", "attack", "anx"], "history": []}
+{"id": "anxiety_ru_1", "cluster": "anxiety", "locale": "ru", "message": "привет сегодня мне не хорошо", "keywords": ["сегодн", "плох", "тяжел", "чувств", "тревог"], "history": []}
+{"id": "anxiety_ru_2", "cluster": "anxiety", "locale": "ru", "message": "сегодня я проснулась тревожно", "keywords": ["утр", "тревог", "просн", "чувств"], "history": [], "user_gender": "female"}
+{"id": "anxiety_ru_3", "cluster": "anxiety", "locale": "ru", "message": "грудь сжимается от тревоги не могу успокоиться", "keywords": ["груд", "тревог", "успок", "сжим"], "history": []}
+{"id": "anxiety_ru_4", "cluster": "anxiety", "locale": "ru", "message": "боюсь что случится что-то плохое", "keywords": ["бою", "плох", "тревог", "случ"], "history": []}
+{"id": "stress_en_1", "cluster": "stress", "locale": "en", "message": "Lets talk about stress", "keywords": ["stress", "stressed", "pressure", "feel"], "history": []}
+{"id": "stress_en_2", "cluster": "stress", "locale": "en", "message": "everything feels overwhelming lately", "keywords": ["overwhelm", "stress", "lately", "feel"], "history": []}
+{"id": "stress_en_3", "cluster": "stress", "locale": "en", "message": "I cant switch off after work", "keywords": ["work", "switch", "stress", "cant"], "history": []}
+{"id": "stress_en_4", "cluster": "stress", "locale": "en", "message": "my shoulders are always tense", "keywords": ["tense", "shoulder", "body", "stress"], "history": []}
+{"id": "stress_ru_1", "cluster": "stress", "locale": "ru", "message": "давай поговорим о стрессе", "keywords": ["стресс", "напряж", "устал", "давлен"], "history": []}
+{"id": "stress_ru_2", "cluster": "stress", "locale": "ru", "message": "всё навалилось и я на грани", "keywords": ["навал", "гран", "тяжел", "устал"], "history": []}
+{"id": "stress_ru_3", "cluster": "stress", "locale": "ru", "message": "после работы не могу расслабиться", "keywords": ["работ", "расслаб", "после", "напряж"], "history": []}
+{"id": "stress_ru_4", "cluster": "stress", "locale": "ru", "message": "плечи постоянно напряжены", "keywords": ["плеч", "напряж", "тел", "стресс"], "history": []}
+{"id": "grief_en_1", "cluster": "grief", "locale": "en", "message": "my mother died last year and holidays are hard", "keywords": ["mother", "died", "grief", "loss", "hard"], "history": []}
+{"id": "grief_en_2", "cluster": "grief", "locale": "en", "message": "I still cry when I think about my dad", "keywords": ["dad", "cry", "think", "loss", "miss"], "history": []}
+{"id": "grief_en_3", "cluster": "grief", "locale": "en", "message": "the anniversary of their death is coming up", "keywords": ["anniversary", "death", "coming", "loss"], "history": []}
+{"id": "grief_en_4", "cluster": "grief", "locale": "en", "message": "I feel guilty for laughing sometimes", "keywords": ["guilty", "laugh", "grief", "feel"], "history": []}
+{"id": "grief_ru_1", "cluster": "grief", "locale": "ru", "message": "мама умерла год назад праздники тяжёлые", "keywords": ["мам", "умер", "праздн", "тяжел", "гор"], "history": []}
+{"id": "grief_ru_2", "cluster": "grief", "locale": "ru", "message": "плачу когда вспоминаю отца", "keywords": ["отц", "плач", "вспом", "гор"], "history": []}
+{"id": "grief_ru_3", "cluster": "grief", "locale": "ru", "message": "скоро годовщина смерти близкого", "keywords": ["годовщ", "смерт", "близк", "гор"], "history": []}
+{"id": "grief_ru_4", "cluster": "grief", "locale": "ru", "message": "чувствую вину когда мне бывает весело", "keywords": ["вин", "весел", "гор", "чувств"], "history": []}
+{"id": "clarity_en_1", "cluster": "clarity", "locale": "en", "message": "help me sort out my thoughts", "keywords": ["thought", "sort", "clarify", "mind"], "history": []}
+{"id": "clarity_en_2", "cluster": "clarity", "locale": "en", "message": "my head is spinning with too many decisions", "keywords": ["decision", "head", "spin", "thought"], "history": []}
+{"id": "clarity_en_3", "cluster": "clarity", "locale": "en", "message": "I cant tell what I actually want", "keywords": ["want", "tell", "confus", "feel"], "history": []}
+{"id": "clarity_en_4", "cluster": "clarity", "locale": "en", "message": "everything feels tangled and I need clarity", "keywords": ["tangle", "clarity", "feel", "sort"], "history": []}
+{"id": "clarity_ru_1", "cluster": "clarity", "locale": "ru", "message": "помоги разобраться в мыслях", "keywords": ["мысл", "разобр", "помог", "голов"], "history": []}
+{"id": "clarity_ru_2", "cluster": "clarity", "locale": "ru", "message": "в голове каша из решений", "keywords": ["голов", "реш", "каш", "мысл"], "history": []}
+{"id": "clarity_ru_3", "cluster": "clarity", "locale": "ru", "message": "не понимаю чего я на самом деле хочу", "keywords": ["хоч", "поним", "сам", "дел"], "history": []}
+{"id": "clarity_ru_4", "cluster": "clarity", "locale": "ru", "message": "всё перепуталось нужна ясность", "keywords": ["ясн", "перепут", "нуж", "мысл"], "history": []}
+{"id": "somatic_en_1", "cluster": "somatic", "locale": "en", "message": "I feel emptiness in my chest after the breakup", "keywords": ["chest", "empt", "body", "feel"], "history": []}
+{"id": "somatic_en_2", "cluster": "somatic", "locale": "en", "message": "my stomach knots up when I think about work", "keywords": ["stomach", "knot", "work", "body"], "history": []}
+{"id": "somatic_en_3", "cluster": "somatic", "locale": "en", "message": "I cant sleep my body wont relax", "keywords": ["sleep", "body", "relax", "cant"], "history": []}
+{"id": "somatic_en_4", "cluster": "somatic", "locale": "en", "message": "there is a lump in my throat when I try to speak", "keywords": ["throat", "lump", "speak", "body"], "history": []}
+{"id": "somatic_ru_1", "cluster": "somatic", "locale": "ru", "message": "чувствую пустоту в груди", "keywords": ["груд", "пуст", "чувств", "тел"], "history": []}
+{"id": "somatic_ru_2", "cluster": "somatic", "locale": "ru", "message": "живот сжимается когда думаю о работе", "keywords": ["живот", "работ", "сжим", "дума"], "history": []}
+{"id": "somatic_ru_3", "cluster": "somatic", "locale": "ru", "message": "тело не расслабляется ночью", "keywords": ["тел", "ноч", "расслаб", "сон"], "history": []}
+{"id": "somatic_ru_4", "cluster": "somatic", "locale": "ru", "message": "ком в горле когда пытаюсь говорить", "keywords": ["горл", "ком", "говор", "тел"], "history": []}

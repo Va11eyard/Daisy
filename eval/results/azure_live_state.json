@@ -1,0 +1,68 @@
+{
+  "captured_at": "2026-07-01T00:00:00Z",
+  "subscription_id": "9239bc75-105c-486e-8957-da8e49309c55",
+  "resource_group": "Daisy_group",
+  "workspace": "Daisy",
+  "region": "westus2",
+  "endpoint": {
+    "name": "daisy-therapy",
+    "scoring_uri": "https://daisy-therapy.westus2.inference.ml.azure.com/score",
+    "provisioning_state": "Succeeded",
+    "traffic_percent": {
+      "gpu-deployment-finetuned": 100,
+      "gpu-deployment-ru-translate": 0,
+      "gpu-deployment-v14": 0
+    }
+  },
+  "deployments": [
+    {
+      "name": "gpu-deployment-finetuned",
+      "provisioning_state": "Succeeded",
+      "instance_type": "Standard_NC4as_T4_v3",
+      "model": "daisy-finetuned-lora:11",
+      "role": "production",
+      "key_env": {
+        "BASE_MODEL": "Qwen/Qwen2.5-7B-Instruct",
+        "INFERENCE_BUILD": "2026-07-lora-v11-natural4-ru",
+        "INFERENCE_QUANTIZATION": "4bit",
+        "DAISY_INFERENCE_MODE": "simple",
+        "DAISY_PROMPT_MODE": "full",
+        "DAISY_DIRECT_MULTILINGUAL": "true",
+        "DAISY_RAG": "false",
+        "DAISY_BM25": "false",
+        "DAISY_CONFIDENCE_GATE": "false",
+        "DAISY_DEFAULT_MAX_TOKENS": "90",
+        "DAISY_THERAPY_MIN_NEW": "48",
+        "DAISY_LORA_DEFAULT_TEMP": "0.55",
+        "DAISY_AGGRESSIVE_TRIM": "false"
+      }
+    },
+    {
+      "name": "gpu-deployment-ru-translate",
+      "provisioning_state": "Succeeded",
+      "instance_type": "Standard_NC4as_T4_v3",
+      "model": "daisy-finetuned-lora:11",
+      "role": "ab_zero_traffic",
+      "key_env": {
+        "INFERENCE_BUILD": "2026-07-lora-v11-ru-translate",
+        "DAISY_DIRECT_MULTILINGUAL": "false"
+      }
+    },
+    {
+      "name": "gpu-deployment-v14",
+      "provisioning_state": "Succeeded",
+      "instance_type": "Standard_NC4as_T4_v3",
+      "model": null,
+      "role": "ab_zero_traffic",
+      "key_env": {
+        "BASE_MODEL": "Qwen/Qwen3-8B",
+        "INFERENCE_BUILD": "2026-06-hollow-qc-gate-v11"
+      }
+    }
+  ],
+  "notes": [
+    "gpu-deployment-v12-hollowfix and gpu-deployment-finetuned-8bit not present in live list at capture time",
+    "Frontend routes 100% traffic to gpu-deployment-finetuned via default endpoint routing",
+    "Raw az CLI dumps with secrets are gitignored; re-capture with scripts/capture_azure_live_state.ps1"
+  ]
+}
