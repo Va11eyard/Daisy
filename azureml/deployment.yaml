@@ -14,8 +14,17 @@ environment:
 environment_variables:
   BASE_MODEL: "Qwen/Qwen2.5-7B-Instruct"
   MODEL_DISPLAY_NAME: "daisy-model"
+  INFERENCE_BUILD: "2026-07-bare-minimum-v17"
   # VRAM: none=fp16 | 4bit | 8bit (bitsandbytes). 4bit recommended on T4 16GB for 7B + headroom.
   INFERENCE_QUANTIZATION: "4bit"
+  DAISY_BARE_MINIMUM: "true"
+  DAISY_MAX_TOKENS: "512"
+  DAISY_TEMP: "0.7"
+  DAISY_VOICE_QC: "false"
+  DAISY_DIRECT_MULTILINGUAL: "true"
+  DAISY_CONFIDENCE_GATE: "false"
+  DAISY_RAG: "false"
+  DAISY_BM25: "false"
   # Two-pass routing: short JSON plan → main reply. Set "false" to save latency.
   ENABLE_ROUTER_PASS: "false"
   DEFER_MEMORY_UPDATE: "true"
@@ -32,7 +41,6 @@ environment_variables:
   USE_OPENAI_TRANSLATION: "true"
   # Alias read by inference/translator.py (live Studio may set this instead of USE_OPENAI_TRANSLATION).
   USE_AZURE_OPENAI: "true"
-  DAISY_DIRECT_MULTILINGUAL: "true"
 # Set HF_TOKEN (and optional translator / Azure OpenAI keys) in the deployment — do not commit secrets.
 instance_type: Standard_NC4as_T4_v3
 instance_count: 1

@@ -66,6 +66,15 @@ from voice_qc import (
     violates_voice_contract,
     voice_regen_suffix,
 )
+from minimal_inference import (
+    bare_minimum_enabled,
+    build_minimal_system_prompt as build_bare_system_prompt,
+    cap_history,
+    generation_temperature,
+    max_generation_tokens,
+    minimal_clean,
+)
+from system_prompt_qwen3 import summarize_history_for_prompt
 
 DEBUG_MODE = os.environ.get("DEBUG_MODE", "").lower() in ("1", "true", "yes")
 MAX_REQUEST_BYTES = int(os.environ.get("MAX_REQUEST_BYTES", "262144"))
@@ -358,6 +367,87 @@ def _extract_gender(data: dict) -> str | None:
     return None
 
 
+def _bare_minimum_json_response(
+    *,
+    mdl: Any,
+    tok: PreTrainedTokenizer,
+    data: dict[str, Any],
+    user_message_en: str,
+    history_for_prompt: list[dict[str, str]],
+    reply_lang: str,
+    locale: str | None,
+    onboarding_summary: str,
+    user_context: str,
+    persona: str,
+    use_translation: bool,
+    user_gender: str | None,
+    layer_trace: list[dict[str, Any]],
+) -> str:
+    """Single-pass generation with minimal prompt and clean — no QC/RAG/regen."""
+    history_capped = cap_history(history_for_prompt)
+    history_summary = summarize_history_for_prompt(history_capped, reply_lang)
+    system_content = build_bare_system_prompt(
+        reply_lang,
+        history_summary=history_summary,
+        user_context=user_context,
+        onboarding_summary=onboarding_summary,
+    )
+    messages: list[dict[str, str]] = [{"role": "system", "content": system_content}]
+    for msg in history_capped:
+        messages.append({"role": msg["role"], "content": msg["content"]})
+    messages.append({"role": "user", "content": user_message_en})
+
+    prompt = _apply_chat_template(tok, messages, enable_thinking=False)
+    max_tokens = max_generation_tokens()
+    temperature = generation_temperature()
+    raw_response = generate_reply(
+        mdl,
+        tok,
+        prompt,
+        max_new_tokens=max_tokens,
+        temperature=temperature,
+        repetition_penalty=None,
+        min_new_tokens=None,
+    )
+    if generation_used_wrong_script(raw_response, reply_lang):
+        raw_response = strip_cjk_from_response(raw_response)
+    response = minimal_clean(raw_response.strip())
+    if not response:
+        response = _degenerate_last_resort(reply_lang)
+
+    layer_trace.append(
+        {
+            "layer": "bare",
+            "name": "single_pass_generate",
+            "max_tokens": max_tokens,
+            "temperature": temperature,
+            "raw_len": len(raw_response),
+        }
+    )
+
+    if use_translation and translator:
+        response = translator.translate(response, "en", reply_lang, user_gender=user_gender)
+        response = minimal_clean(_apply_post_translate_qc(response, reply_lang))
+
+    out: dict[str, Any] = {
+        "response": response.encode("utf-8", errors="replace").decode("utf-8").replace("\u0000", ""),
+        "persona_used": get_canonical_persona_key(persona),
+        "protocol_used": "cbt",
+        "language": reply_lang,
+        "model": MODEL_LABEL,
+        "inference_build": INFERENCE_BUILD,
+        "inference_mode": "bare_minimum",
+        "adapter_loaded": adapter_loaded(),
+        "translation_enabled": bool(translator and translator.openai_client),
+        "crisis_detected": False,
+        "disclaimer_ru": DISCLAIMER_RU,
+        "disclaimer_en": DISCLAIMER_EN,
+    }
+    if DEBUG_MODE or bool(data.get("debug")):
+        out["debug_context"] = {"layer_trace": layer_trace, "inference_build": INFERENCE_BUILD}
+    return json.dumps(out, ensure_ascii=False)
+
+
 def run(raw_data: str | bytes) -> str:
     global model, tokenizer, translator
     try:
@@ -547,6 +637,23 @@ def run(raw_data: str | bytes) -> str:
         else:
             user_message_en = user_message
             history_for_prompt = list(history_original)
+
+        if bare_minimum_enabled():
+            return _bare_minimum_json_response(
+                mdl=mdl,
+                tok=tok,
+                data=data,
+                user_message_en=user_message_en,
+                history_for_prompt=history_for_prompt,
+                reply_lang=reply_lang,
+                locale=locale,
+                onboarding_summary=onboarding_summary,
+                user_context=user_context,
+                persona=persona,
+                use_translation=use_translation,
+                user_gender=_extract_gender(data) or og_gender,
+                layer_trace=layer_trace,
+            )
 
         user_gender = _extract_gender(data) or og_gender
 

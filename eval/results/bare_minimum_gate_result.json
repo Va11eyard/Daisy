@@ -1,0 +1,35 @@
+{
+  "gate": "bare_minimum_inference",
+  "inference_build": "2026-07-qwen3-v17-bare-minimum",
+  "deployment": "gpu-deployment-v14",
+  "single_turn": {
+    "report": "eval/results/qwen3_bare_single_regression.json",
+    "threshold_pass_rate": 0.6,
+    "threshold_passed_cases": 34,
+    "baseline_report": "eval/results/qwen3_memory_single_regression.json",
+    "baseline_pass_rate": 0.5,
+    "baseline_passed": 28,
+    "candidate_pass_rate": 0.464,
+    "candidate_passed": 26,
+    "gate_passed": false
+  },
+  "multi_turn": {
+    "report": "eval/results/qwen3_bare_memory_regression.json",
+    "threshold_pass_rate": 0.5,
+    "threshold_passed_cases": 6,
+    "baseline_report": "eval/results/qwen3_memory_regression.json",
+    "baseline_pass_rate": 0.0,
+    "baseline_passed": 0,
+    "candidate_pass_rate": 0.0,
+    "candidate_passed": 0,
+    "total": 12,
+    "gate_passed": false,
+    "primary_failure": "prior_topic_mismatch"
+  },
+  "combined_gate_passed": false,
+  "action": "v16_gpu_training_blocked",
+  "reason": "Single-turn 26/56 (46.4%) below 60% gate; multi-turn 0/12 below 50% gate",
+  "quality_notes": "0 structural_leak, 0 script_leak; RU single 78.6% (+10.7pp vs memory); EN single 14.3%",
+  "comparison": "eval/results/regression_bare_minimum_comparison.md",
+  "timestamp": "2026-07-02T09:33:44Z"
+}

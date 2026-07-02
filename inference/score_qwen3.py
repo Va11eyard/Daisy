@@ -1,11 +1,8 @@
 """
-score_qwen3.py — Simplified 3-layer inference pipeline for Daisy therapy chatbot.
+score_qwen3.py — Bare-minimum inference pipeline for Daisy therapy chatbot.
 
-Replaces the 23-module score.py with a clean, auditable architecture:
-
-    Layer 0: Safety    — crisis detection, injection guard, off-topic routing
-    Layer 1: Generate  — single generation with locale-aware system prompt
-    Layer 2: QC        — lightweight checks (script leak, structural leak, min length)
+    Layer 0: Safety   — crisis detection, injection guard, off-topic routing
+    Layer 1: Generate — single pass, stop strings, one-pass clean()
 
 Model: Qwen/Qwen3-8B (or Qwen3-4B for latency) via transformers + bitsandbytes 4-bit.
 """
@@ -22,6 +19,16 @@ import warnings
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
+
+from minimal_inference import (
+    bare_minimum_enabled,
+    build_minimal_system_prompt,
+    cap_history,
+    generation_temperature,
+    load_stop_strings,
+    max_generation_tokens,
+    minimal_clean,
+)
 
 # ---------------------------------------------------------------------------
 # Logging setup
@@ -43,10 +50,6 @@ INFERENCE_QUANTIZATION: str = os.environ.get("INFERENCE_QUANTIZATION", "4bit")
 DAISY_DIRECT_MULTILINGUAL: bool = (
     os.environ.get("DAISY_DIRECT_MULTILINGUAL", "true").lower() == "true"
 )
-DAISY_DEFAULT_MAX_TOKENS: int = int(os.environ.get("DAISY_DEFAULT_MAX_TOKENS", "256"))
-DAISY_LORA_DEFAULT_TEMP: float = float(os.environ.get("DAISY_LORA_DEFAULT_TEMP", "0.6"))
-DAISY_VOICE_QC: bool = os.environ.get("DAISY_VOICE_QC", "true").lower() == "true"
-DAISY_MAX_VOICE_REGENS: int = int(os.environ.get("DAISY_MAX_VOICE_REGENS", "2"))
 
 # ---------------------------------------------------------------------------
 # Dataclasses for layer results
@@ -66,14 +69,6 @@ class GenerationResult:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     generation_time_ms: float = 0.0
-
-
-@dataclass
-class QCResult:
-    passed: bool
-    failures: List[str] = field(default_factory=list)
-    can_regen: bool = True
-    regen_attempted: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -321,7 +316,22 @@ def _build_system_prompt(
     history: List[Dict],
     user_context: str = "",
 ) -> str:
-    """Build the system prompt using the shared prompt builder."""
+    """Build the system prompt — bare-minimum by default."""
+    if bare_minimum_enabled():
+        try:
+            from system_prompt_qwen3 import summarize_history_for_prompt
+        except ImportError:
+            summarize_history_for_prompt = None  # type: ignore
+
+        history_summary = ""
+        if summarize_history_for_prompt and history:
+            history_summary = summarize_history_for_prompt(history, locale)
+        return build_minimal_system_prompt(
+            locale,
+            history_summary=history_summary,
+            user_context=user_context,
+        )
+
     try:
         from system_prompt_qwen3 import (
             build_system_prompt,
@@ -371,59 +381,7 @@ def _fallback_system_prompt(locale: str, history: List[Dict]) -> str:
 # Layer 1: Generate
 # ---------------------------------------------------------------------------
 
-_DEFAULT_STOP_STRINGS: List[str] = [
-    "Assistant:",
-    "Question:",
-    "User:",
-    "Human:",
-    "\n\nUser",
-    "\nUser:",
-    "\nAssistant:",
-    "\n\nAssistant",
-    "assistant",
-    "system prompt",
-    "**Rubric**",
-    "ASURE",
-    "❮REFINE❯",
-    "OffsetTable",
-    "Daisy x",
-    "👋ly",
-    "\n\n",
-]
-
-
-def _load_stop_strings() -> List[str]:
-    """Load stop strings from env or use defaults."""
-    raw = os.environ.get("DAISY_STOP_STRINGS", "").strip()
-    if not raw:
-        return list(_DEFAULT_STOP_STRINGS)
-    return [s.strip() for s in raw.split(",") if s.strip()]
-
-
-_STOP_STRINGS: List[str] = _load_stop_strings()
-
-# Trailing debris patterns stripped from end of response (GENERATION_FIX.md)
-_TRAILING_LEAK_PATTERNS: List[re.Pattern] = [
-    re.compile(r"Assistant\s*[:;,.\s]*.*", re.IGNORECASE),
-    re.compile(r"Question\s*[:;,.\s]*.*", re.IGNORECASE),
-    re.compile(r"User\s*[:;,.\s]*.*", re.IGNORECASE),
-    re.compile(r"Human\s*[:;,.\s]*.*", re.IGNORECASE),
-    re.compile(r"❮REFINE❯.*", re.IGNORECASE),
-    re.compile(r"ASURE.*", re.IGNORECASE),
-    re.compile(r"OffsetTable.*", re.IGNORECASE),
-    re.compile(r"Daisy\s*x\d*.*", re.IGNORECASE),
-    re.compile(r"👋ly.*", re.IGNORECASE),
-]
-
-_META_PHRASE_PATTERNS: List[re.Pattern] = [
-    re.compile(
-        r"Подстраивайся под текущую потребность человека[^.]*\.",
-        re.IGNORECASE,
-    ),
-    re.compile(r"Веди себя как реальный человек[^.]*\.", re.IGNORECASE),
-    re.compile(r"Ответь на русском языке[^.]*\.", re.IGNORECASE),
-    re.compile(r"response as a person[^.]*\.", re.IGNORECASE),
-]
+_STOP_STRINGS: List[str] = load_stop_strings()
 
 
 def _build_stopping_criteria(tokenizer, prompt_length: int):
@@ -433,7 +391,7 @@ def _build_stopping_criteria(tokenizer, prompt_length: int):
     except ImportError:
         return None
 
-    stop_strings = _load_stop_strings()
+    stop_strings = load_stop_strings()
 
     class _StopStringCriteria(StoppingCriteria):
         def __init__(self):
@@ -460,74 +418,17 @@ def _apply_stop_strings(text: str) -> str:
 
 
 def clean_model_text(text: str) -> str:
-    """Clean model-generated text before returning to user.
-
-    Applies all post-processing rules:
-      - Strip role headers and stop strings
-      - Collapse duplicate words ("nderstand nderstand" → "nderstand")
-      - Remove punctuation loops (".,.,.,." → "")
-      - Strip trailing emoji garbage
-      - Remove persona meta-instructions
-    """
+    """One-pass cleanup via minimal_inference.minimal_clean."""
     if not text:
         return ""
-
-    cleaned = text.strip()
-
-    # 1. Strip explicit role headers at start first
-    cleaned = re.sub(r"^(Assistant|Question|User|Human)[:\s—-]+\s*", "", cleaned, flags=re.IGNORECASE)
-
-    # 2. Apply stop strings (hard truncation for mid-text occurrences)
-    cleaned = _apply_stop_strings(cleaned)
-
-    # 3. Collapse duplicate words (e.g., "understand nderstand")
-    cleaned = re.sub(r"(\b\w{3,}\b)\s+\1", r"\1", cleaned, flags=re.IGNORECASE)
-
-    # 4. Remove punctuation loops (. , . , . or .,.,.,)
-    cleaned = re.sub(r"(?:[.,;:!?]\s*){3,}", ".", cleaned)
-    cleaned = re.sub(r"[.,]{3,}", ".", cleaned)
-
-    # 5. Strip emoji and unicode garbage at end
-    cleaned = re.sub(r"[🌼🌱💙🌸🌿✨🍃🌺🔆💚🌻🌷]+.*$", "", cleaned)
-    # Strip combining diacritics that appear as artifacts
-    cleaned = re.sub(r"[́̈̇̊̋̄̀̂̌̆]+", "", cleaned)
-
-    # 6. Strip trailing debris from first leak pattern to end
-    for pattern in _TRAILING_LEAK_PATTERNS:
-        cleaned = pattern.sub("", cleaned)
-
-    # 7. Remove persona meta-instructions that leaked
     cleaned = re.sub(
-        r"\b(Never output|Do not output|You are|You're a|Your goal is|"
-        r"As an AI|As a language model|I am an AI)\b[^.]*\.?",
+        r"^(Assistant|Question|User|Human)[:\s—-]+\s*",
         "",
-        cleaned,
+        text.strip(),
         flags=re.IGNORECASE,
     )
-    for pattern in _META_PHRASE_PATTERNS:
-        cleaned = pattern.sub("", cleaned)
-
-    # 8. Trim incomplete tail after colon (mid-sentence truncation artifact)
-    if re.search(r":\s*$", cleaned):
-        cleaned = re.sub(r"\s+для:\s*$", "?", cleaned)
-        cleaned = re.sub(r":\s*$", "?", cleaned)
-
-    # 9. Clean up whitespace artifacts
-    cleaned = re.sub(r"\s{2,}", " ", cleaned)
-    cleaned = re.sub(r"\s+([.,;:!?)])", r"\1", cleaned)
-
-    # 10. Trim to last complete sentence if ending mid-thought
-    if cleaned and cleaned[-1] not in ".!?":
-        for end in (". ", "? ", "! "):
-            cut = cleaned.rfind(end)
-            if cut >= 0 and cut >= len(cleaned) * 0.5:
-                cleaned = cleaned[: cut + 1].strip()
-                break
-
-    # 11. Final strip
-    cleaned = cleaned.strip(" .,;:!?—-\n")
-
-    return cleaned
+    cleaned = _apply_stop_strings(cleaned)
+    return minimal_clean(cleaned)
 
 
 async def layer1_generate(
@@ -546,8 +447,13 @@ async def layer1_generate(
     """
     model, tokenizer, device = _load_model()
 
-    # Build system prompt
-    history = messages[:-1] if len(messages) > 1 else []
+    # Build system prompt (cap history for context window)
+    prior = messages[:-1] if len(messages) > 1 else []
+    prior = cap_history(prior)
+    current = messages[-1:] if messages else []
+    messages = prior + current
+
+    history = prior
     system_prompt = _build_system_prompt(locale, history, user_context=user_context)
 
     # Build ChatML-formatted prompt
@@ -580,8 +486,8 @@ async def layer1_generate(
     gen_start = time.time()
     stopping = _build_stopping_criteria(tokenizer, prompt_tokens)
     gen_kwargs: Dict[str, Any] = {
-        "max_new_tokens": DAISY_DEFAULT_MAX_TOKENS,
-        "temperature": DAISY_LORA_DEFAULT_TEMP,
+        "max_new_tokens": max_generation_tokens(),
+        "temperature": generation_temperature(),
         "top_p": 0.9,
         "do_sample": True,
         "pad_token_id": tokenizer.pad_token_id,
@@ -645,93 +551,6 @@ def _manual_chat_format(messages: List[Dict], tokenizer) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Layer 2: Quality Control
-# ---------------------------------------------------------------------------
-
-async def layer2_qc(text: str, locale: str) -> QCResult:
-    """Layer 2: Lightweight quality control.
-
-    Checks:
-      - Min length (>=25 chars)
-      - Structural leaks (Assistant:, Question:, punctuation loops)
-      - Script leaks for RU/KK (Latin words, Polish diacritics)
-
-    If QC fails → ONE regen attempt with stricter prompt, then ship with warning.
-
-    Args:
-        text:   Generated text from Layer 1.
-        locale: "en" | "ru" | "kk".
-
-    Returns:
-        QCResult with pass/fail status and failure details.
-    """
-    if not DAISY_VOICE_QC:
-        return QCResult(passed=True, qc_ran=False)
-
-    try:
-        from voice_qc_lightweight import VoiceQC
-    except ImportError:
-        logger.warning("voice_qc_lightweight.py not found — running basic QC")
-        return _fallback_qc(text, locale)
-
-    qc = VoiceQC()
-    result = qc.check(text, locale)
-
-    if result.passed:
-        return QCResult(
-            passed=True,
-            failures=[],
-            can_regen=False,
-        )
-
-    # QC failed — can we regen?
-    if not result.can_regen:
-        return QCResult(
-            passed=False,
-            failures=result.failures,
-            can_regen=False,
-        )
-
-    # One regen attempt
-    logger.info(f"QC failed ({result.failures}) — attempting regen")
-    # We'll signal back to the caller to retry with guardrails
-    return QCResult(
-        passed=False,
-        failures=result.failures,
-        can_regen=True,
-        regen_attempted=False,  # Caller will set True after regen
-    )
-
-
-async def _fallback_qc(text: str, locale: str) -> QCResult:
-    """Basic QC when voice_qc_lightweight is not available."""
-    failures = []
-
-    if not text or len(text.strip()) < 25:
-        failures.append("too_short")
-
-    if re.search(r"Assistant:|Question:|\n\nUser", text):
-        failures.append("structural_leak")
-
-    if re.search(r"[.,;:!?]{3,}", text):
-        failures.append("punctuation_loop")
-
-    if locale in ("ru", "kk"):
-        words = text.split()
-        latin_count = sum(
-            1 for w in words if re.match(r"^[a-zA-Z]+$", re.sub(r"[^\w\s]", "", w))
-        )
-        if words and latin_count / len(words) > 0.10:
-            failures.append("script_leak")
-
-    return QCResult(
-        passed=len(failures) == 0,
-        failures=failures,
-        can_regen="script_leak" in failures or "too_short" in failures,
-    )
-
-
-# ---------------------------------------------------------------------------
 # Main entry point: run()
 # ---------------------------------------------------------------------------
 
@@ -779,9 +598,9 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
                 },
             }
 
-        # Merge history into messages
+        # Merge history into messages (capped in layer1_generate)
         if history:
-            messages = history + messages
+            messages = cap_history(history) + messages
 
         # --- Layer 0: Safety ---
         safety = await layer0_safety(messages, locale)
@@ -814,125 +633,6 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
             "completion_tokens": gen_result.completion_tokens,
             "generation_time_ms": round(gen_result.generation_time_ms, 1),
         })
-
-        # --- Layer 2: QC ---
-        qc = await layer2_qc(reply, locale)
-
-        if not qc.passed and qc.can_regen:
-            # ONE regen attempt with stricter prompt
-            if not qc.regen_attempted:
-                logger.info("Attempting QC regen with stricter prompt")
-
-                try:
-                    from voice_qc_lightweight import VoiceQC
-                    from system_prompt_qwen3 import build_system_prompt, get_phase_from_history
-
-                    qc_obj = VoiceQC()
-                    phase = get_phase_from_history(messages[:-1])
-                    original_prompt = build_system_prompt(locale, phase, history=messages[:-1])
-                    stricter_prompt = qc_obj.regenerate_prompt(
-                        original_prompt, qc.failures
-                    )
-
-                    # Temporarily override with stricter system prompt
-                    stricter_messages = [{"role": "system", "content": stricter_prompt}]
-                    stricter_messages.extend([
-                        m for m in messages if m.get("role") != "system"
-                    ])
-
-                    model, tokenizer, device = _load_model()
-                    try:
-                        prompt_text = tokenizer.apply_chat_template(
-                            stricter_messages,
-                            tokenize=False,
-                            add_generation_prompt=True,
-                        )
-                    except Exception:
-                        prompt_text = _manual_chat_format(stricter_messages, tokenizer)
-
-                    inputs = tokenizer(
-                        prompt_text,
-                        return_tensors="pt",
-                        padding=True,
-                        truncation=True,
-                        max_length=2048,
-                    ).to(device)
-
-                    prompt_len = inputs["input_ids"].shape[1]
-                    stopping = _build_stopping_criteria(tokenizer, prompt_len)
-                    regen_kwargs: Dict[str, Any] = {
-                        "max_new_tokens": DAISY_DEFAULT_MAX_TOKENS,
-                        "temperature": max(DAISY_LORA_DEFAULT_TEMP - 0.1, 0.3),
-                        "top_p": 0.85,
-                        "do_sample": True,
-                        "pad_token_id": tokenizer.pad_token_id,
-                        "eos_token_id": tokenizer.eos_token_id,
-                    }
-                    if stopping is not None:
-                        regen_kwargs["stopping_criteria"] = stopping
-                    with warnings.catch_warnings():
-                        warnings.simplefilter("ignore")
-                        output_ids = model.generate(
-                            **inputs,
-                            **regen_kwargs,
-                        )
-                    regen_time_ms = (time.time() - gen_start) * 1000
-
-                    new_tokens = output_ids[0][inputs["input_ids"].shape[1]:]
-                    raw_regen = tokenizer.decode(new_tokens, skip_special_tokens=True)
-                    regen_text = clean_model_text(raw_regen)
-
-                    # Re-check QC on regen
-                    qc2 = qc_obj.check(regen_text, locale)
-                    if qc2.passed:
-                        reply = regen_text
-                        qc_passed = True
-                        layers_log.append({
-                            "layer": 2,
-                            "action": "regen_passed",
-                            "original_failures": qc.failures,
-                            "regen_time_ms": round(regen_time_ms, 1),
-                        })
-                    else:
-                        # Keep original, ship with warning
-                        qc_passed = False
-                        layers_log.append({
-                            "layer": 2,
-                            "action": "regen_failed",
-                            "original_failures": qc.failures,
-                            "regen_failures": qc2.failures,
-                            "regen_time_ms": round(regen_time_ms, 1),
-                        })
-
-                except Exception as exc:
-                    logger.error(f"Regen failed: {exc}")
-                    qc_passed = False
-                    layers_log.append({
-                        "layer": 2,
-                        "action": "regen_error",
-                        "error": str(exc),
-                        "original_failures": qc.failures,
-                    })
-            else:
-                qc_passed = False
-                layers_log.append({
-                    "layer": 2,
-                    "action": "qc_failed",
-                    "failures": qc.failures,
-                })
-        elif qc.passed:
-            qc_passed = True
-            layers_log.append({
-                "layer": 2,
-                "action": "qc_passed",
-            })
-        else:
-            qc_passed = False
-            layers_log.append({
-                "layer": 2,
-                "action": "qc_failed_no_regen",
-                "failures": qc.failures,
-            })
 
         # Final fallback: if reply is empty, return a safe message
         if not reply or not reply.strip():
@@ -1087,13 +787,13 @@ def _self_test():
     print("score_qwen3.py self-test")
     print("=" * 60)
 
-    # Test 1: clean_model_text
+    # Test 1: clean_model_text (minimal_clean)
     print("\n--- clean_model_text ---")
     assert clean_model_text("Assistant: Hello there") == "Hello there"
-    assert clean_model_text("Hello  hello world") == "Hello world"
-    assert clean_model_text("Ok.,.,.,that's fine") == "Ok.that's fine"
-    assert clean_model_text("It is hard 🌼́. Tell me more") == "It is hard"
-    assert clean_model_text("Never output role headers like 'Assistant:'") == ""
+    assert "hello" in clean_model_text("hello hello hello world").lower()
+    assert "icaponecessario" not in clean_model_text(
+        "I'm anxious icaponecessario Valentino Respini Ricciotti"
+    )
     screenshot = (
         "О, это действительно непростая ситуация. Когда шеф ругается — это больно. "
         "Как тебе кажется, есть ли что-то конкретное, что ты можешь сделать для: Assistant: ,."
@@ -1134,23 +834,7 @@ def _self_test():
 
     asyncio.run(_test_safety())
 
-    # Test 4: Fallback QC
-    print("\n--- fallback QC ---")
-    async def _test_fallback_qc():
-        r = await _fallback_qc("Short.", "en")
-        assert not r.passed
-        assert "too_short" in r.failures
-
-        r = await _fallback_qc("This is a perfectly fine response." * 3, "en")
-        assert r.passed
-
-        r = await _fallback_qc("Это ответ на русском. It is fine.", "ru")
-        assert not r.passed
-        print("  [PASS] fallback QC")
-
-    asyncio.run(_test_fallback_qc())
-
-    # Test 5: run() with empty messages
+    # Test 4: run() with empty messages
     print("\n--- run() empty ---")
     async def _test_run_empty():
         r = await run({"messages": [], "locale": "en", "history": []})
@@ -1160,11 +844,10 @@ def _self_test():
 
     asyncio.run(_test_run_empty())
 
-    # Test 6: Env var sanity
+    # Test 5: Env var sanity
     print("\n--- env vars ---")
-    assert DAISY_VOICE_QC is True, "Voice QC should be enabled by default"
-    assert DAISY_DEFAULT_MAX_TOKENS == 256
-    assert DAISY_LORA_DEFAULT_TEMP == 0.6
+    assert bare_minimum_enabled()
+    assert max_generation_tokens() >= 256
     print("  [PASS] env vars")
 
     print("\n" + "=" * 60)
@@ -1199,5 +882,5 @@ if __name__ == "__main__":
         print("\nEnv vars:")
         print(f"  BASE_MODEL={BASE_MODEL}")
         print(f"  INFERENCE_BUILD={INFERENCE_BUILD}")
-        print(f"  DAISY_VOICE_QC={DAISY_VOICE_QC}")
-        print(f"  DAISY_LORA_DEFAULT_TEMP={DAISY_LORA_DEFAULT_TEMP}")
+        print(f"  DAISY_BARE_MINIMUM={bare_minimum_enabled()}")
+        print(f"  max_tokens={max_generation_tokens()}")

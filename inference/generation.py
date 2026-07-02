@@ -25,6 +25,8 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizer
 
+from minimal_inference import bare_minimum_enabled
+
 logger = logging.getLogger(__name__)
 
 _DEGEN_PUNCT_CLUSTER = re.compile(
@@ -476,6 +478,11 @@ _GENERATION_STOP_STRINGS = [
     "<|im_start|>",
     "Powered by",
     "Impressum",
+    "Assistant:",
+    "Question:",
+    "ASURE",
+    "❮REFINE❯",
+    "OffsetTable",
 ]
 
 
@@ -488,15 +495,19 @@ def _gen_kwargs(
     repetition_penalty: float | None,
     min_new_tokens: int | None,
 ) -> dict:
-    penalty = repetition_penalty if repetition_penalty is not None else 1.15
     kwargs: dict = {
         "max_new_tokens": max_new_tokens,
         "pad_token_id": tokenizer.eos_token_id,
-        "repetition_penalty": penalty,
         "stop_strings": _GENERATION_STOP_STRINGS,
         "tokenizer": tokenizer,
     }
-    if min_new_tokens is not None and min_new_tokens > 0:
+    if bare_minimum_enabled():
+        if repetition_penalty is not None:
+            kwargs["repetition_penalty"] = repetition_penalty
+    else:
+        penalty = repetition_penalty if repetition_penalty is not None else 1.15
+        kwargs["repetition_penalty"] = penalty
+    if min_new_tokens is not None and min_new_tokens > 0 and not bare_minimum_enabled():
         kwargs["min_new_tokens"] = min_new_tokens
     if do_sample:
         # Qwen3 thinking-mode sampling (greedy decoding is discouraged in thinking mode).
@@ -529,7 +540,10 @@ def generate_reply(
     """
     import torch
 
-    floor = int(os.environ.get("DAISY_GEN_MIN_MAX_NEW_TOKENS", "32"))
+    if bare_minimum_enabled():
+        floor = 0
+    else:
+        floor = int(os.environ.get("DAISY_GEN_MIN_MAX_NEW_TOKENS", "32"))
     max_new_tokens = max(floor, max_new_tokens)
     device = next(model.parameters()).device
     inputs = tokenizer(prompt, return_tensors="pt").to(device)

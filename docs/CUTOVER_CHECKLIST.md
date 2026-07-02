@@ -27,6 +27,12 @@
 | Memory regression gate (multi) | `eval/results/qwen3_memory_regression.json` | **FAILED gate** — 0/12 (0.0%); need ≥75% (9/12); 11× `prior_topic_mismatch` |
 | train_v16 data | `data/train_v16.jsonl` + `data/val_v16.jsonl` | **Ready** — 2502 train / 140 val; anchored RU/KK synth; 0 Latin leaks |
 | LoRA v16 training | — | **Blocked** — memory gate failed; see `eval/results/memory_gate_result.json` |
+| Bare-minimum inference strip | `INFERENCE_BUILD=2026-07-qwen3-v17-bare-minimum` | **Deployed** — removed QC regen, repetition_penalty, min_tokens floor; `minimal_inference.py` |
+| Bare-minimum regression gate | `eval/results/bare_minimum_gate_result.json` | **FAILED gate** — single 26/56 (46.4%); multi 0/12; 0 leaks; RU 78.6% |
+
+**Bare-minimum regression (2026-07-02):** Single 26/56 (46.4%) vs memory 50.0%. Multi 0/12. RU single 78.6% (+10.7pp vs memory), EN 14.3% (−17.8pp). 0 structural/script leaks. Comparison: `eval/results/regression_bare_minimum_comparison.md`
+
+**Bare-minimum strip (2026-07-02):** Root cause of screenshot corruption: `repetition_penalty` (icaponecessario garbage), QC regen loops (`Я понимаю, это.,?`), 256-token cap + prompt overload. Fix: single-pass generate (`max_tokens=512`, `temp=0.7`), `minimal_clean()` only, crisis safety kept. Both `score_qwen3.py` (v14) and `score.py` (finetuned) use `DAISY_BARE_MINIMUM=true`. gpu-deployment-v14 uses LoRA **v15** (trained); v16 never submitted.
 
 **Memory fix (2026-07-02):** CBT `/api/cbt/chat` was not passing `history` (amnesiac multi-turn). Fixed via `loadConversationHistory` in Daisy frontend. Inference: history summary in system prompt, register lock, anti-generic rules, `user_context` injection, tightened `Assistant:` leak cleanup. Multi-turn eval: `eval/multi_turn_regression.jsonl` (12 cases with `must_reference_prior`). Gates: single-turn ≥60%, multi-turn ≥75% → **both failed**; v16 GPU training not submitted.
 

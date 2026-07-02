@@ -60,7 +60,8 @@ python -c "..."  # 2502 train / 140 val
 | Latin leaks | **0** |
 | Prompt gate (gen-anchor deploy) | **FAILED** — 31/56 (55.4%); v16 GPU training blocked per plan |
 | Memory gate (v16-memory deploy) | **FAILED** — single 28/56 (50.0%), multi 0/12 (0.0%); v16 GPU training still blocked |
+| Bare-minimum gate (v17 deploy) | **FAILED** — single 26/56 (46.4%), multi 0/12; 0 leaks; RU +10.7pp |
 
-Gate artifacts: `eval/results/v16_gate_result.json`, `eval/results/memory_gate_result.json`
+Gate artifacts: `eval/results/v16_gate_result.json`, `eval/results/memory_gate_result.json`, `eval/results/bare_minimum_gate_result.json`
 
 **Memory gate detail:** Multi-turn failures are predominantly `prior_topic_mismatch` — model answers current message keywords but does not echo prior-topic stems (e.g. anxiety thread when user pivots to boss/model). Prompt-only memory wiring insufficient without v16 LoRA retrain; retrain remains gated until memory deploy passes single ≥60% and multi ≥75%.
