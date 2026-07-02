@@ -10,7 +10,35 @@
 
 ---
 
-## Integration status (2026-07-01)
+## Integration status (2026-07-02)
+
+| Stage | Artifact | Status |
+|-------|----------|--------|
+| Baseline regression | `eval/results/baseline_regression.json` | **Done** — 16/56 (28.6%); 0 script/structural leaks |
+| train_v15 | `data/train_v15.jsonl` | **Done** — 2675 rows, 48% RU, 0 Latin leaks |
+| RU translate v2 | `gpu-deployment-ru-translate` | **Deprioritized** — 18/56 (32.1%); keep as short-term RU fallback only |
+| LoRA v15 training | `purple_net_55lwkbc0zp` | **Done** — registered `daisy-finetuned-lora:15` |
+| Qwen3 v14 deploy | `gpu-deployment-v14` | **Done** — `score_qwen3_aml.py`, Qwen3-8B + LoRA v15 |
+| Qwen3 regression (v15) | `eval/results/qwen3_regression.json` | **Done** — 32/56 (57.1%); 24× keyword_mismatch only |
+| Gen fix + topic-anchor prompt | `INFERENCE_BUILD=2026-07-qwen3-v15-gen-anchor` | **Done** — deployed to `gpu-deployment-v14` |
+| Gen-anchor regression gate | `eval/results/qwen3_gen_anchor_regression.json` | **FAILED gate** — 31/56 (55.4%); need ≥65% (37/56) before v16 training |
+| Conversation memory fix | `INFERENCE_BUILD=2026-07-qwen3-v16-memory` | **Deployed** — CBT history, history-aware prompts, user_context, multi-turn eval |
+| Memory regression gate (single) | `eval/results/qwen3_memory_single_regression.json` | **FAILED gate** — 28/56 (50.0%); need ≥60% (34/56); regressed −7.1pp vs v15 |
+| Memory regression gate (multi) | `eval/results/qwen3_memory_regression.json` | **FAILED gate** — 0/12 (0.0%); need ≥75% (9/12); 11× `prior_topic_mismatch` |
+| train_v16 data | `data/train_v16.jsonl` + `data/val_v16.jsonl` | **Ready** — 2502 train / 140 val; anchored RU/KK synth; 0 Latin leaks |
+| LoRA v16 training | — | **Blocked** — memory gate failed; see `eval/results/memory_gate_result.json` |
+
+**Memory fix (2026-07-02):** CBT `/api/cbt/chat` was not passing `history` (amnesiac multi-turn). Fixed via `loadConversationHistory` in Daisy frontend. Inference: history summary in system prompt, register lock, anti-generic rules, `user_context` injection, tightened `Assistant:` leak cleanup. Multi-turn eval: `eval/multi_turn_regression.jsonl` (12 cases with `must_reference_prior`). Gates: single-turn ≥60%, multi-turn ≥75% → **both failed**; v16 GPU training not submitted.
+
+**Memory regression (2026-07-02):** Single 28/56 (50.0%) vs v15 57.1%. Multi 0/12. RU single 67.9% (+3.6pp), EN single 32.1% (−17.9pp). grief 12.5%, clarity 25%. 0 structural/script leaks. Comparison: `eval/results/regression_memory_comparison.md`
+
+**Gen-anchor regression (2026-07-02):** 31/56 (55.4%) vs v15 57.1%. RU 71.4% (+7.1pp), EN 39.3% (−10.7pp). breakup 100%, clarity/grief/work 25%. All failures `keyword_mismatch`; 0 structural/script leaks.
+
+**Comparison:** `eval/results/regression_gen_anchor_comparison.md`
+
+---
+
+## Integration status (2026-07-01) — historical
 
 | Stage | Artifact | Status |
 |-------|----------|--------|

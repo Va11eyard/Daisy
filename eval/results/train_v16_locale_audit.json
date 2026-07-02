@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-07-02T06:47:34.792715+00:00",
+  "files_audited": 1,
+  "audit_before": [
+    {
+      "path": "data\\train_v16.jsonl",
+      "n_examples": 2643,
+      "row_locale_mix": {
+        "ru": 867,
+        "kk": 643
+      },
+      "assistant_locale_mix": {
+        "ru": 849,
+        "kk": 661
+      },
+      "cyrillic_assistant_latin_leak_count": 0,
+      "cyrillic_assistant_latin_leak_fraction": 0.0,
+      "leak_samples": []
+    }
+  ],
+  "audit_after": [
+    {
+      "path": "data\\train_v16.jsonl",
+      "n_examples": 0,
+      "row_locale_mix": {},
+      "assistant_locale_mix": {},
+      "cyrillic_assistant_latin_leak_count": 0,
+      "cyrillic_assistant_latin_leak_fraction": 0.0,
+      "leak_samples": [],
+      "original_path": "data\\train_v16.jsonl"
+    }
+  ],
+  "fix_results": [
+    {
+      "rows_processed": 0,
+      "rows_fixed": 0,
+      "rows_dropped": 0,
+      "rows_written": 0,
+      "fix_samples": [],
+      "input_path": "data\\train_v16.jsonl",
+      "output_path": "data\\train_v16.jsonl"
+    }
+  ]
+}

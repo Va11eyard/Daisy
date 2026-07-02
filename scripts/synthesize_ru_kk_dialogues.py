@@ -43,6 +43,150 @@ random.seed(SEED)
 # Polish diacritics that must NOT appear
 _POLISH_DIACRITICS = "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ"
 
+# Stopwords skipped when extracting topic anchors from user messages
+_STOPWORDS_RU = {
+    "после", "когда", "очень", "сейчас", "этого", "этом", "больше", "просто",
+    "уже", "если", "меня", "тебя", "тебе", "того", "этот", "этой", "который",
+    "которые", "которую", "которого", "может", "будет", "быть", "есть", "была",
+    "были", "было", "всё", "все", "всего", "каждый", "каждый", "только",
+    "потом", "чтобы", "потому", "ничего", "никто", "никогда", "всегда",
+}
+_STOPWORDS_KK = {
+    "менің", "сенің", "біздің", "олардың", "өте", "қазір", "сонда", "болса",
+    "болды", "болып", "кейін", "үшін", "тек", "барлық", "әр", "бірақ",
+}
+
+
+def _normalize_token(word: str) -> str:
+    return re.sub(r"[^\w]", "", word).lower()
+
+
+def _extract_anchor_stems(user_content: str, locale: str, max_anchors: int = 3) -> List[str]:
+    """Extract content-word stems from user message for topic anchoring."""
+    stopwords = _STOPWORDS_RU if locale == "ru" else _STOPWORDS_KK
+    seen_stems: set[str] = set()
+    candidates: List[str] = []
+    for raw in user_content.split():
+        token = _normalize_token(raw)
+        if len(token) < 4 or token in stopwords:
+            continue
+        stem = token[:4]
+        if stem in seen_stems:
+            continue
+        seen_stems.add(stem)
+        candidates.append(token)
+    candidates.sort(key=len, reverse=True)
+    return candidates[:max_anchors]
+
+
+def _pick_echo_words(user_content: str, stems: List[str]) -> List[str]:
+    """Return original word forms from user message matching anchor stems."""
+    if not stems:
+        return []
+    echoes: List[str] = []
+    for raw in re.split(r"[\s,.;:!?]+", user_content):
+        if not raw:
+            continue
+        token = _normalize_token(raw)
+        for stem in stems:
+            prefix = stem[:4] if len(stem) >= 4 else stem
+            if token.startswith(prefix) or stem.startswith(token[: min(4, len(token))]):
+                clean = re.sub(r"[^\w]", "", raw)
+                if clean and clean not in echoes:
+                    echoes.append(clean)
+                break
+    return echoes[:2]
+
+
+def _anchor_match(text: str, stems: List[str]) -> bool:
+    """Match regression keyword logic: stem prefix substring in response."""
+    text_lower = text.lower()
+    for stem in stems:
+        prefix = stem[:4] if len(stem) >= 4 else stem
+        if prefix and prefix in text_lower:
+            return True
+    return False
+
+
+_ANCHOR_OPENERS_RU = [
+    "{echo} — слышу, как это для тебя важно.",
+    "Ты пишешь про {echo} — правда непросто.",
+    "{echo} — понимаю, почему тебе сейчас тяжело.",
+]
+
+_ANCHOR_FOLLOWUPS_RU: Dict[str, List[str]] = {
+    "breakup": [
+        "Как проходят дни после расставания?",
+        "Что помогает, когда накрывает пустота?",
+    ],
+    "work": [
+        "Как твоё тело реагирует, когда начальник повышает голос?",
+        "Что ты чувствуешь перед входом на работу?",
+    ],
+    "anxiety": [
+        "Перед чем обычно начинается сжимание в груди?",
+        "Что ты делаешь, когда сердце начинает колотиться?",
+    ],
+    "stress": [
+        "Что из всего навалившегося давит сильнее всего?",
+        "Когда последний раз ты позволял себе отдохнуть без вины?",
+    ],
+    "grief": [
+        "Как прошли праздники без неё?",
+        "Что ты чувствуешь, когда вспоминаешь о нём?",
+    ],
+    "clarity": [
+        "Что ты знаешь точно — чего ты НЕ хочешь?",
+        "Что случится в худшем случае, если ошибёшься?",
+    ],
+    "somatic": [
+        "Когда пустота в груди усиливается?",
+        "Что происходит, когда ты просто сидишь с этим ощущением?",
+    ],
+}
+
+_ANCHOR_OPENERS_KK = [
+    "{echo} — мұны айтқаның маңызды екенін естіп тұрмын.",
+    "Сен {echo} туралы жазып тұрсың — бұл шынымен қиын.",
+    "{echo} — неге қазір ауыр екенін түсінемін.",
+]
+
+_ANCHOR_FOLLOWUPS_KK: Dict[str, List[str]] = {
+    "breakup": ["Ажырасқаннан кейін күндер қалай өтіп жатыр?", "Бостық басқанда не көмектеседі?"],
+    "work": ["Басшы дауыс көтергенде денең қалай әрекет етеді?", "Жұмысқа кірер алдында не сезінесің?"],
+    "anxiety": ["Кеуде тарылуы алдында не болады?", "Жүрек соға бастағанда не істейсің?"],
+    "stress": ["Бәрі үйілгенде ең көп не басады?", "Соңғы рет кінәсіз демалғаның қашан?"],
+    "grief": ["Мерекелер олсыз қалай өтті?", "Оны еске алғанда не сезінесің?"],
+    "clarity": ["Нені қаламайтыныңды нақты білесің бе?", "Қате жасасаң, ең нашар не болады?"],
+    "somatic": ["Кеудедегі бостық қашан күшейеді?", "Осы сезіммен отырғанда не болады?"],
+}
+
+
+def _build_anchored_assistant(user_content: str, scenario: str, locale: str) -> str:
+    """Build assistant turn that echoes specific words from the user message."""
+    stems = _extract_anchor_stems(user_content, locale)
+    if locale == "ru":
+        templates = _ASSISTANT_RESPONSES_RU.get(scenario, [])
+        anchored = [t for t in templates if stems and _anchor_match(t, stems)]
+        if anchored:
+            return random.choice(anchored)
+        echoes = _pick_echo_words(user_content, stems)
+        echo = " и ".join(echoes) if len(echoes) >= 2 else (echoes[0] if echoes else "ситуацию")
+        opener = random.choice(_ANCHOR_OPENERS_RU).format(echo=echo)
+        followups = _ANCHOR_FOLLOWUPS_RU.get(scenario, ["Что сейчас чувствуешь больше всего?"])
+        return f"{opener} {random.choice(followups)}"
+    if locale == "kk":
+        templates = _ASSISTANT_RESPONSES_KK.get(scenario, [])
+        anchored = [t for t in templates if stems and _anchor_match(t, stems)]
+        if anchored:
+            return random.choice(anchored)
+        echoes = _pick_echo_words(user_content, stems)
+        echo = " және ".join(echoes) if len(echoes) >= 2 else (echoes[0] if echoes else "жағдай")
+        opener = random.choice(_ANCHOR_OPENERS_KK).format(echo=echo)
+        followups = _ANCHOR_FOLLOWUPS_KK.get(scenario, ["Қазір ең көп не сезінесің?"])
+        return f"{opener} {random.choice(followups)}"
+    raise ValueError(f"Unsupported locale: {locale}")
+
 # ---------------------------------------------------------------------------
 # Scenario definitions
 # Each scenario has:
@@ -376,8 +520,8 @@ def synthesize_dialogue(scenario: str, locale: str, variant_idx: int = 0) -> Dic
     # Pick random user phrasing (deterministic if seed set)
     user_content = random.choice(phrasings)
 
-    # Pick random assistant response
-    assistant_content = random.choice(responses)
+    # Build topic-anchored assistant response echoing user keywords
+    assistant_content = _build_anchored_assistant(user_content, scenario, locale)
 
     # Build ChatML
     return {
@@ -395,7 +539,7 @@ def synthesize_dialogue(scenario: str, locale: str, variant_idx: int = 0) -> Dic
                 "unknown",
             ),
             "synthetic": True,
-            "source": "template_synthesis_v1",
+            "source": "template_synthesis_v2_anchored",
         },
     }
 
@@ -466,33 +610,14 @@ def validate_synthetic(dialogue: Dict) -> Dict:
             informal_ok = False
             failures.append("formal_vy_not_ty")
 
-    # Check 4: References user message
+    # Check 4: Topic anchor — assistant must echo user content words (stem match)
     references_user = False
     if user_msg and assistant_msg:
-        # Check if any word from user appears in assistant response
-        user_words = set(
-            re.sub(r"[^\w\s]", "", w).lower()
-            for w in user_msg.split()
-            if len(w) > 3
-        )
-        assistant_lower = assistant_msg.lower()
-        for uw in user_words:
-            if uw in assistant_lower:
-                references_user = True
-                break
-        # Or check for generic reference markers
+        stems = _extract_anchor_stems(user_msg, locale)
+        if stems:
+            references_user = _anchor_match(assistant_msg, stems)
         if not references_user:
-            ref_markers = [
-                "ты говоришь", "ты сказал", "ты упомянул", "ты пишешь",
-                "тебе сейчас", "это нормально", "ты чувствуешь",
-                "сіз айттыңыз", "сіз сезінесіз", "сіз",
-                "это мощное", "это точное", "похоже",
-            ]
-            if any(m in assistant_lower for m in ref_markers):
-                references_user = True
-
-        if not references_user:
-            failures.append("no_user_reference")
+            failures.append("no_topic_anchor")
 
     # Check 5: No emoji
     emoji_pattern = re.compile(r"[🌼🌱💙🌸🌿✨🍃🌺🔆💚🌻🌷]")
@@ -546,8 +671,13 @@ def generate_batch(
     stats = {"generated": 0, "passed": 0, "failed": 0, "failure_reasons": {}}
 
     for i in range(count):
-        dialogue = synthesize_dialogue(scenario, locale, variant_idx)
-        validation = validate_synthetic(dialogue)
+        dialogue = None
+        validation = {"passed": False, "failures": ["no_attempt"]}
+        for _ in range(5):
+            dialogue = synthesize_dialogue(scenario, locale, variant_idx)
+            validation = validate_synthetic(dialogue)
+            if validation["passed"]:
+                break
 
         stats["generated"] += 1
         if validation["passed"]:
@@ -567,6 +697,8 @@ def main():
     )
     parser.add_argument(
         "--output-dir",
+        "--output",
+        dest="output_dir",
         default="data/synthesized",
         help="Output directory for synthesized data.",
     )
@@ -578,6 +710,7 @@ def main():
     )
     parser.add_argument(
         "--locales",
+        "--locale",
         nargs="+",
         default=["ru", "kk"],
         help="Locales to generate (default: ru kk).",

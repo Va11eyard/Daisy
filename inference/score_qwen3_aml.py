@@ -90,9 +90,11 @@ def run(raw_data: Any, request_headers: dict | None = None) -> dict[str, Any]:
     result = asyncio.run(
         sq3.run(
             {
-                "messages": messages,
+                "messages": messages[-1:] if len(messages) > 1 else messages,
                 "locale": locale,
-                "history": [],
+                "history": messages[:-1] if len(messages) > 1 else [],
+                "user_context": (data.get("user_context") or "").strip(),
+                "onboarding_summary": data.get("onboarding_summary"),
             }
         )
     )

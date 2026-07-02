@@ -39,3 +39,28 @@ python scripts/build_balanced_dataset.py --validate-only data/train_v15.jsonl
 | `build_balanced_dataset` validation | **PASSED** |
 
 Artifacts: `eval/results/training_v15_audit.json`, Azure ML job `daisy-lora-v15-qwen3`.
+
+## train_v16 (2026-07-02 — topic-anchored synthesis)
+
+Pipeline:
+
+```powershell
+python scripts/synthesize_ru_kk_dialogues.py --locale ru --output data/synthesized/ru_v16 --variations 8
+python scripts/synthesize_ru_kk_dialogues.py --locale kk --output data/synthesized/kk_v16 --variations 8
+python scripts/build_balanced_dataset.py --en-sources data/cleaned/train_v13_clean.jsonl --ru-sources data/synthesized/ru_v16 data/raw/_rendered_v12_ru_dialogues --kk-sources data/synthesized/kk_v16 --output data/train_v16.jsonl
+# Split val (do NOT run audit --fix in-place on same path)
+python -c "..."  # 2502 train / 140 val
+```
+
+| Metric | Value |
+|--------|-------|
+| `data/train_v16.jsonl` rows | 2,502 |
+| `data/val_v16.jsonl` rows | 140 |
+| Anchored synth pass rate | RU 100%, KK 97.3% |
+| Latin leaks | **0** |
+| Prompt gate (gen-anchor deploy) | **FAILED** — 31/56 (55.4%); v16 GPU training blocked per plan |
+| Memory gate (v16-memory deploy) | **FAILED** — single 28/56 (50.0%), multi 0/12 (0.0%); v16 GPU training still blocked |
+
+Gate artifacts: `eval/results/v16_gate_result.json`, `eval/results/memory_gate_result.json`
+
+**Memory gate detail:** Multi-turn failures are predominantly `prior_topic_mismatch` — model answers current message keywords but does not echo prior-topic stems (e.g. anxiety thread when user pivots to boss/model). Prompt-only memory wiring insufficient without v16 LoRA retrain; retrain remains gated until memory deploy passes single ≥60% and multi ≥75%.

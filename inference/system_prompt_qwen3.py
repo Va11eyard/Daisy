@@ -22,6 +22,84 @@ _ROLE_HEADER_GUARD = (
     "Never output emoji. Never output rubric tokens or scoring notes."
 )
 
+# Topic anchoring — echo user's specific words before asking a follow-up
+_TOPIC_ANCHOR_EN = (
+    "Response rule: Start by briefly naming what the person shared, "
+    "using their specific words (boss, breakup, anxiety, grief). "
+    "Then ask a question. Example: 'Losing your mom is devastating. "
+    "What was the hardest holiday without her?'"
+)
+_TOPIC_ANCHOR_RU = (
+    "Правило ответа: начни с короткого признания того, что сказал человек, "
+    "используя его конкретные слова (мама, работа, расставание, тревога). "
+    "Потом задай вопрос. Пример: «Расставание с парнем — это больно. "
+    "Что сейчас чувствуешь больше всего?»"
+)
+_TOPIC_ANCHOR_KK = (
+    "Жауап ережесі: адам айтқан нақты сөздерін қолданып (жұмыс, ажырасу, "
+    "мазасыздық, қайғы), қысқаша мойында. Содан кейін сұрақ қой. "
+    "Мысалы: «Анаңды жоғалту — ауыр. Олсыз ең қиын мереке қандай болды?»"
+)
+
+_TOPIC_ANCHOR_BY_LOCALE = {
+    "en": _TOPIC_ANCHOR_EN,
+    "ru": _TOPIC_ANCHOR_RU,
+    "kk": _TOPIC_ANCHOR_KK,
+}
+
+_HISTORY_CONNECTION_EN = (
+    "CRITICAL: Read the conversation history below. Each response must: "
+    "1) Reference what the person said earlier in this chat. "
+    "2) Connect the current topic to previous messages (e.g. morning anxiety + boss yelling). "
+    "3) Use their specific words from this turn AND prior turns when relevant."
+)
+_HISTORY_CONNECTION_RU = (
+    "ВАЖНО: читай историю разговора ниже. Каждый ответ должен: "
+    "1) Ссылаться на то, что человек уже сказал ранее. "
+    "2) Связывать текущую тему с предыдущими сообщениями (например, утренняя тревога + крик шефа). "
+    "3) Использовать конкретные слова человека из этого и прошлых сообщений."
+)
+_HISTORY_CONNECTION_KK = (
+    "МАҢЫЗДЫ: төмендегі әңгіме тарихын оқы. Әр жауап: "
+    "1) Адам бұрын айтқанына сілтеме жасауы керек. "
+    "2) Ағымдағы тақырыпты алдыңғы хабарламалармен байланыстыруы керек. "
+    "3) Оның нақты сөздерін қолдан."
+)
+_HISTORY_CONNECTION_BY_LOCALE = {
+    "en": _HISTORY_CONNECTION_EN,
+    "ru": _HISTORY_CONNECTION_RU,
+    "kk": _HISTORY_CONNECTION_KK,
+}
+
+_REGISTER_LOCK_RU = (
+    "ОБРАЩЕНИЕ: ВСЕГДА «ты», НИКОГДА «вы». "
+    "Избегай учебниковых фраз («известно, что...», «вызывает этот страх»). "
+    "Не используй формальное прошедшее время с родом («уточнил») — перефразируй проще."
+)
+_REGISTER_LOCK_KK = (
+    "СЕНДІЛІК: әрқашан «сен» формасында, ресми «сіз» емес. "
+    "Оқулық стилінен аулақ бол."
+)
+
+_ANTI_GENERIC_EN = (
+    "NEVER open with vague phrases like 'that sounds difficult', 'I understand', "
+    "'that's a tough situation'. Start with the person's specific situation using THEIR nouns."
+)
+_ANTI_GENERIC_RU = (
+    "НИКОГДА не начинай с общих фраз: «это непростая ситуация», «я понимаю», "
+    "«тебе тяжело». Начинай с конкретики — назови ситуацию словами человека "
+    "(шеф, моделька, тревога, работа)."
+)
+_ANTI_GENERIC_KK = (
+    "Ешқашан жалпы фразалармен бастама: «бұл қиын жағдай». "
+    "Адамның нақты сөздерімен баста."
+)
+_ANTI_GENERIC_BY_LOCALE = {
+    "en": _ANTI_GENERIC_EN,
+    "ru": _ANTI_GENERIC_RU,
+    "kk": _ANTI_GENERIC_KK,
+}
+
 # ---------------------------------------------------------------------------
 # Prompt templates by locale
 # ---------------------------------------------------------------------------
@@ -139,13 +217,19 @@ _PROMPTS: Dict[str, Dict[str, str]] = {
 # Core functions
 # ---------------------------------------------------------------------------
 
-def build_system_prompt(locale: str, phase: str = "open") -> str:
+def build_system_prompt(
+    locale: str,
+    phase: str = "open",
+    history: Optional[list] = None,
+) -> str:
     """Build a clean system prompt for the given locale and conversation phase.
 
     Args:
         locale: One of "en", "ru", "kk".
         phase:  One of "open" (first turn), "deepening" (follow-up),
                 "closing" (session end). Default "open".
+        history: Prior conversation turns (user/assistant). When non-empty,
+                 history-connection and anti-generic rules are injected.
 
     Returns:
         A fully formed system prompt string with role-header guardrails appended.
@@ -155,6 +239,7 @@ def build_system_prompt(locale: str, phase: str = "open") -> str:
     """
     locale = locale.lower().strip()
     phase = phase.lower().strip()
+    has_history = bool(history)
 
     if locale not in LOCALES:
         raise ValueError(
@@ -166,26 +251,68 @@ def build_system_prompt(locale: str, phase: str = "open") -> str:
         )
 
     body = _PROMPTS[locale][phase]
-    # Append the universal guardrail (in English — model understands it,
-    # and it keeps the guardrail consistent across all locales).
-    return f"{body}\n\n{_ROLE_HEADER_GUARD}"
+    parts = [body]
+    if phase in ("open", "deepening") or has_history:
+        parts.append(_TOPIC_ANCHOR_BY_LOCALE[locale])
+        parts.append(_ANTI_GENERIC_BY_LOCALE[locale])
+    if has_history and phase in ("open", "deepening"):
+        parts.append(_HISTORY_CONNECTION_BY_LOCALE[locale])
+        if locale == "ru":
+            parts.append(_REGISTER_LOCK_RU)
+        elif locale == "kk":
+            parts.append(_REGISTER_LOCK_KK)
+    parts.append(_ROLE_HEADER_GUARD)
+    return "\n\n".join(parts)
 
 
-def build_user_context(history: list) -> str:
+def summarize_history_for_prompt(history: list, locale: str = "en") -> str:
+    """Summarize prior user turns as bullet lines for system prompt injection."""
+    if not history:
+        return ""
+
+    user_label = {"en": "Person said", "ru": "Человек сказал", "kk": "Адам айтты"}.get(
+        locale, "Person said"
+    )
+    user_turns = [
+        t.get("content", "").strip()
+        for t in history
+        if t.get("role") == "user" and t.get("content", "").strip()
+    ]
+    if not user_turns:
+        return ""
+
+    lines = []
+    for content in user_turns[-4:]:
+        preview = content[:100] + ("..." if len(content) > 100 else "")
+        lines.append(f"- {user_label}: '{preview}'")
+    return "\n".join(lines)
+
+
+def build_user_context(history: list, locale: str = "en") -> str:
     """Summarise prior conversation turns for context injection.
 
     Args:
         history: List of dicts, each with keys 'role' and 'content'.
                  Expected roles: "user" | "assistant".
+        locale: Locale for user-turn labels in summary.
 
     Returns:
-        A compact context string summarising the last 4 turns,
+        A compact context string summarising recent user turns,
         or an empty string if history is empty.
     """
+    summary = summarize_history_for_prompt(history, locale)
+    if summary:
+        header = {
+            "en": "Conversation so far:",
+            "ru": "Контекст разговора:",
+            "kk": "Әңгіме контексті:",
+        }.get(locale, "Conversation so far:")
+        return f"{header}\n{summary}"
+
+    # Fallback: last 4 turns with assistant previews
     if not history:
         return ""
 
-    # Keep only the most recent 4 turns to stay within token budget
     recent = history[-4:]
     parts: List[str] = []
 
@@ -197,7 +324,6 @@ def build_user_context(history: list) -> str:
         if role == "user":
             parts.append(f"User said: {content.strip()}")
         elif role == "assistant":
-            # Truncate assistant turns in context to save tokens
             truncated = content.strip()
             if len(truncated) > 120:
                 truncated = truncated[:120] + "..."
@@ -269,9 +395,8 @@ def _self_test():
     ctx = build_user_context([
         {"role": "user", "content": "I feel sad today"},
         {"role": "assistant", "content": "I hear you. Can you tell me more?"},
-    ])
-    assert "User said:" in ctx
-    assert "Daisy replied:" in ctx
+    ], "en")
+    assert "User said:" in ctx or "Person said" in ctx
     print("  context injection — OK")
 
     # Test get_phase_from_history

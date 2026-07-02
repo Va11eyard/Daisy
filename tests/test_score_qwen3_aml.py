@@ -36,6 +36,37 @@ def test_to_messages_from_history_and_message():
     assert msgs[-1] == {"role": "user", "content": "I feel anxious"}
 
 
+def test_run_passes_history_to_sq3_run():
+    import score_qwen3_aml as aml
+
+    aml._model_ready = True
+    mock_result = {"reply": "Take a breath.", "metadata": {"qc_passed": True}}
+    captured = {}
+
+    async def _capture_run(req):
+        captured.update(req)
+        return mock_result
+
+    with patch.object(aml.sq3, "run", side_effect=_capture_run):
+        aml.run(
+            json.dumps(
+                {
+                    "message": "шеф ругается",
+                    "history": [
+                        {"role": "user", "content": "тревожно"},
+                        {"role": "assistant", "content": "Где тревога?"},
+                    ],
+                    "locale": "ru",
+                    "user_context": "Помню: тревога по утрам",
+                }
+            )
+        )
+
+    assert captured.get("history") and len(captured["history"]) == 2
+    assert captured["messages"][-1]["content"] == "шеф ругается"
+    assert captured.get("user_context") == "Помню: тревога по утрам"
+
+
 def test_run_maps_reply_to_response():
     import score_qwen3_aml as aml
 

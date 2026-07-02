@@ -1,0 +1,18 @@
+﻿{
+  "gate": "prompt_plus_pipeline_regression",
+  "threshold_pass_rate": 0.65,
+  "threshold_passed_cases": 37,
+  "baseline_report": "eval/results/qwen3_regression.json",
+  "baseline_pass_rate": 0.571,
+  "baseline_passed": 32,
+  "candidate_report": "eval/results/qwen3_gen_anchor_regression.json",
+  "candidate_pass_rate": 0.554,
+  "candidate_passed": 31,
+  "inference_build": "2026-07-qwen3-v15-gen-anchor",
+  "deployment": "gpu-deployment-v14",
+  "gate_passed": false,
+  "action": "v16_gpu_training_blocked",
+  "reason": "Prompt+pipeline regression 31/56 (55.4%) below 65% gate",
+  "comparison": "eval/results/regression_gen_anchor_comparison.md",
+  "timestamp": "2026-07-02T07:03:47Z"
+}

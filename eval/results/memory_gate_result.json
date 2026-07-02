@@ -1,0 +1,32 @@
+{
+  "gate": "conversation_memory_regression",
+  "inference_build": "2026-07-qwen3-v16-memory",
+  "deployment": "gpu-deployment-v14",
+  "single_turn": {
+    "report": "eval/results/qwen3_memory_single_regression.json",
+    "threshold_pass_rate": 0.6,
+    "threshold_passed_cases": 34,
+    "baseline_report": "eval/results/qwen3_regression.json",
+    "baseline_pass_rate": 0.571,
+    "baseline_passed": 32,
+    "candidate_pass_rate": 0.5,
+    "candidate_passed": 28,
+    "gate_passed": false
+  },
+  "multi_turn": {
+    "report": "eval/results/qwen3_memory_regression.json",
+    "cases_file": "eval/multi_turn_regression.jsonl",
+    "threshold_pass_rate": 0.75,
+    "threshold_passed_cases": 9,
+    "candidate_pass_rate": 0.0,
+    "candidate_passed": 0,
+    "total": 12,
+    "gate_passed": false,
+    "primary_failure": "prior_topic_mismatch"
+  },
+  "combined_gate_passed": false,
+  "action": "v16_gpu_training_blocked",
+  "reason": "Single-turn 28/56 (50.0%) below 60% gate; multi-turn 0/12 (0.0%) below 75% gate",
+  "comparison": "eval/results/regression_memory_comparison.md",
+  "timestamp": "2026-07-02T08:06:32Z"
+}

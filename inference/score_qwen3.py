@@ -43,7 +43,7 @@ INFERENCE_QUANTIZATION: str = os.environ.get("INFERENCE_QUANTIZATION", "4bit")
 DAISY_DIRECT_MULTILINGUAL: bool = (
     os.environ.get("DAISY_DIRECT_MULTILINGUAL", "true").lower() == "true"
 )
-DAISY_DEFAULT_MAX_TOKENS: int = int(os.environ.get("DAISY_DEFAULT_MAX_TOKENS", "120"))
+DAISY_DEFAULT_MAX_TOKENS: int = int(os.environ.get("DAISY_DEFAULT_MAX_TOKENS", "256"))
 DAISY_LORA_DEFAULT_TEMP: float = float(os.environ.get("DAISY_LORA_DEFAULT_TEMP", "0.6"))
 DAISY_VOICE_QC: bool = os.environ.get("DAISY_VOICE_QC", "true").lower() == "true"
 DAISY_MAX_VOICE_REGENS: int = int(os.environ.get("DAISY_MAX_VOICE_REGENS", "2"))
@@ -316,9 +316,12 @@ async def layer0_safety(messages: List[Dict[str, str]], locale: str) -> SafetyRe
 # System prompt builder integration
 # ---------------------------------------------------------------------------
 
-def _build_system_prompt(locale: str, history: List[Dict]) -> str:
+def _build_system_prompt(
+    locale: str,
+    history: List[Dict],
+    user_context: str = "",
+) -> str:
     """Build the system prompt using the shared prompt builder."""
-    # Import from sibling module
     try:
         from system_prompt_qwen3 import (
             build_system_prompt,
@@ -326,15 +329,18 @@ def _build_system_prompt(locale: str, history: List[Dict]) -> str:
             get_phase_from_history,
         )
     except ImportError:
-        # Fallback: build inline if module not available
         return _fallback_system_prompt(locale, history)
 
     phase = get_phase_from_history(history)
-    sys_prompt = build_system_prompt(locale, phase)
-    context = build_user_context(history)
+    sys_prompt = build_system_prompt(locale, phase, history=history)
+    context = build_user_context(history, locale)
 
     if context:
         sys_prompt += f"\n\n--- Prior conversation ---\n{context}"
+
+    if user_context and user_context.strip():
+        trimmed = user_context.strip()[:300]
+        sys_prompt += f"\n\n--- What you remember about this person ---\n{trimmed}"
 
     return sys_prompt
 
@@ -365,16 +371,82 @@ def _fallback_system_prompt(locale: str, history: List[Dict]) -> str:
 # Layer 1: Generate
 # ---------------------------------------------------------------------------
 
-_STOP_STRINGS: List[str] = [
+_DEFAULT_STOP_STRINGS: List[str] = [
     "Assistant:",
     "Question:",
     "User:",
     "Human:",
     "\n\nUser",
+    "\nUser:",
+    "\nAssistant:",
     "\n\nAssistant",
+    "assistant",
     "system prompt",
     "**Rubric**",
+    "ASURE",
+    "❮REFINE❯",
+    "OffsetTable",
+    "Daisy x",
+    "👋ly",
+    "\n\n",
 ]
+
+
+def _load_stop_strings() -> List[str]:
+    """Load stop strings from env or use defaults."""
+    raw = os.environ.get("DAISY_STOP_STRINGS", "").strip()
+    if not raw:
+        return list(_DEFAULT_STOP_STRINGS)
+    return [s.strip() for s in raw.split(",") if s.strip()]
+
+
+_STOP_STRINGS: List[str] = _load_stop_strings()
+
+# Trailing debris patterns stripped from end of response (GENERATION_FIX.md)
+_TRAILING_LEAK_PATTERNS: List[re.Pattern] = [
+    re.compile(r"Assistant\s*[:;,.\s]*.*", re.IGNORECASE),
+    re.compile(r"Question\s*[:;,.\s]*.*", re.IGNORECASE),
+    re.compile(r"User\s*[:;,.\s]*.*", re.IGNORECASE),
+    re.compile(r"Human\s*[:;,.\s]*.*", re.IGNORECASE),
+    re.compile(r"❮REFINE❯.*", re.IGNORECASE),
+    re.compile(r"ASURE.*", re.IGNORECASE),
+    re.compile(r"OffsetTable.*", re.IGNORECASE),
+    re.compile(r"Daisy\s*x\d*.*", re.IGNORECASE),
+    re.compile(r"👋ly.*", re.IGNORECASE),
+]
+
+_META_PHRASE_PATTERNS: List[re.Pattern] = [
+    re.compile(
+        r"Подстраивайся под текущую потребность человека[^.]*\.",
+        re.IGNORECASE,
+    ),
+    re.compile(r"Веди себя как реальный человек[^.]*\.", re.IGNORECASE),
+    re.compile(r"Ответь на русском языке[^.]*\.", re.IGNORECASE),
+    re.compile(r"response as a person[^.]*\.", re.IGNORECASE),
+]
+
+
+def _build_stopping_criteria(tokenizer, prompt_length: int):
+    """Build generation-time stop criteria from stop strings."""
+    try:
+        from transformers import StoppingCriteria, StoppingCriteriaList
+    except ImportError:
+        return None
+
+    stop_strings = _load_stop_strings()
+
+    class _StopStringCriteria(StoppingCriteria):
+        def __init__(self):
+            self.prompt_length = prompt_length
+
+        def __call__(self, input_ids, scores, **kwargs) -> bool:
+            new_ids = input_ids[0][self.prompt_length :]
+            if new_ids.numel() == 0:
+                return False
+            decoded = tokenizer.decode(new_ids, skip_special_tokens=True)
+            return any(stop in decoded for stop in stop_strings)
+
+    return StoppingCriteriaList([_StopStringCriteria()])
 
 
 def _apply_stop_strings(text: str) -> str:
@@ -420,7 +492,11 @@ def clean_model_text(text: str) -> str:
     # Strip combining diacritics that appear as artifacts
     cleaned = re.sub(r"[́̈̇̊̋̄̀̂̌̆]+", "", cleaned)
 
-    # 6. Remove persona meta-instructions that leaked
+    # 6. Strip trailing debris from first leak pattern to end
+    for pattern in _TRAILING_LEAK_PATTERNS:
+        cleaned = pattern.sub("", cleaned)
+
+    # 7. Remove persona meta-instructions that leaked
     cleaned = re.sub(
         r"\b(Never output|Do not output|You are|You're a|Your goal is|"
         r"As an AI|As a language model|I am an AI)\b[^.]*\.?",
@@ -428,12 +504,27 @@ def clean_model_text(text: str) -> str:
         cleaned,
         flags=re.IGNORECASE,
     )
+    for pattern in _META_PHRASE_PATTERNS:
+        cleaned = pattern.sub("", cleaned)
 
-    # 7. Clean up whitespace artifacts
+    # 8. Trim incomplete tail after colon (mid-sentence truncation artifact)
+    if re.search(r":\s*$", cleaned):
+        cleaned = re.sub(r"\s+для:\s*$", "?", cleaned)
+        cleaned = re.sub(r":\s*$", "?", cleaned)
+
+    # 9. Clean up whitespace artifacts
     cleaned = re.sub(r"\s{2,}", " ", cleaned)
     cleaned = re.sub(r"\s+([.,;:!?)])", r"\1", cleaned)
 
-    # 8. Final strip
+    # 10. Trim to last complete sentence if ending mid-thought
+    if cleaned and cleaned[-1] not in ".!?":
+        for end in (". ", "? ", "! "):
+            cut = cleaned.rfind(end)
+            if cut >= 0 and cut >= len(cleaned) * 0.5:
+                cleaned = cleaned[: cut + 1].strip()
+                break
+
+    # 11. Final strip
     cleaned = cleaned.strip(" .,;:!?—-\n")
 
     return cleaned
@@ -442,6 +533,7 @@ def clean_model_text(text: str) -> str:
 async def layer1_generate(
     messages: List[Dict[str, str]],
     locale: str,
+    user_context: str = "",
 ) -> GenerationResult:
     """Layer 1: Generate a response using the Qwen3 model.
 
@@ -456,7 +548,7 @@ async def layer1_generate(
 
     # Build system prompt
     history = messages[:-1] if len(messages) > 1 else []
-    system_prompt = _build_system_prompt(locale, history)
+    system_prompt = _build_system_prompt(locale, history, user_context=user_context)
 
     # Build ChatML-formatted prompt
     chatml_messages = [{"role": "system", "content": system_prompt}]
@@ -486,17 +578,23 @@ async def layer1_generate(
 
     # Generate
     gen_start = time.time()
+    stopping = _build_stopping_criteria(tokenizer, prompt_tokens)
+    gen_kwargs: Dict[str, Any] = {
+        "max_new_tokens": DAISY_DEFAULT_MAX_TOKENS,
+        "temperature": DAISY_LORA_DEFAULT_TEMP,
+        "top_p": 0.9,
+        "do_sample": True,
+        "pad_token_id": tokenizer.pad_token_id,
+        "eos_token_id": tokenizer.eos_token_id,
+    }
+    if stopping is not None:
+        gen_kwargs["stopping_criteria"] = stopping
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             output_ids = model.generate(
                 **inputs,
-                max_new_tokens=DAISY_DEFAULT_MAX_TOKENS,
-                temperature=DAISY_LORA_DEFAULT_TEMP,
-                top_p=0.9,
-                do_sample=True,
-                pad_token_id=tokenizer.pad_token_id,
-                eos_token_id=tokenizer.eos_token_id,
+                **gen_kwargs,
             )
     except Exception as exc:
         logger.error(f"Generation failed: {exc}")
@@ -668,6 +766,8 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
         locale = request.get("locale", "en").lower().strip()
         history = request.get("history", [])
 
+        user_context = (request.get("user_context") or "").strip()
+
         if not messages:
             return {
                 "reply": "I'm here to listen. What would you like to talk about?",
@@ -706,7 +806,7 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
             }
 
         # --- Layer 1: Generate ---
-        gen_result = await layer1_generate(messages, locale)
+        gen_result = await layer1_generate(messages, locale, user_context=user_context)
         reply = gen_result.text
         layers_log.append({
             "layer": 1,
@@ -729,7 +829,7 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
 
                     qc_obj = VoiceQC()
                     phase = get_phase_from_history(messages[:-1])
-                    original_prompt = build_system_prompt(locale, phase)
+                    original_prompt = build_system_prompt(locale, phase, history=messages[:-1])
                     stricter_prompt = qc_obj.regenerate_prompt(
                         original_prompt, qc.failures
                     )
@@ -758,17 +858,23 @@ async def run(request: Dict[str, Any]) -> Dict[str, Any]:
                         max_length=2048,
                     ).to(device)
 
-                    gen_start = time.time()
+                    prompt_len = inputs["input_ids"].shape[1]
+                    stopping = _build_stopping_criteria(tokenizer, prompt_len)
+                    regen_kwargs: Dict[str, Any] = {
+                        "max_new_tokens": DAISY_DEFAULT_MAX_TOKENS,
+                        "temperature": max(DAISY_LORA_DEFAULT_TEMP - 0.1, 0.3),
+                        "top_p": 0.85,
+                        "do_sample": True,
+                        "pad_token_id": tokenizer.pad_token_id,
+                        "eos_token_id": tokenizer.eos_token_id,
+                    }
+                    if stopping is not None:
+                        regen_kwargs["stopping_criteria"] = stopping
                     with warnings.catch_warnings():
                         warnings.simplefilter("ignore")
                         output_ids = model.generate(
                             **inputs,
-                            max_new_tokens=DAISY_DEFAULT_MAX_TOKENS,
-                            temperature=max(DAISY_LORA_DEFAULT_TEMP - 0.1, 0.3),
-                            top_p=0.85,
-                            do_sample=True,
-                            pad_token_id=tokenizer.pad_token_id,
-                            eos_token_id=tokenizer.eos_token_id,
+                            **regen_kwargs,
                         )
                     regen_time_ms = (time.time() - gen_start) * 1000
 
@@ -988,6 +1094,13 @@ def _self_test():
     assert clean_model_text("Ok.,.,.,that's fine") == "Ok.that's fine"
     assert clean_model_text("It is hard 🌼́. Tell me more") == "It is hard"
     assert clean_model_text("Never output role headers like 'Assistant:'") == ""
+    screenshot = (
+        "О, это действительно непростая ситуация. Когда шеф ругается — это больно. "
+        "Как тебе кажется, есть ли что-то конкретное, что ты можешь сделать для: Assistant: ,."
+    )
+    cleaned_shot = clean_model_text(screenshot)
+    assert "Assistant" not in cleaned_shot
+    assert "шеф" in cleaned_shot.lower() or "руга" in cleaned_shot.lower()
     print("  [PASS] clean_model_text")
 
     # Test 2: _apply_stop_strings
@@ -1050,7 +1163,7 @@ def _self_test():
     # Test 6: Env var sanity
     print("\n--- env vars ---")
     assert DAISY_VOICE_QC is True, "Voice QC should be enabled by default"
-    assert DAISY_DEFAULT_MAX_TOKENS == 120
+    assert DAISY_DEFAULT_MAX_TOKENS == 256
     assert DAISY_LORA_DEFAULT_TEMP == 0.6
     print("  [PASS] env vars")
 

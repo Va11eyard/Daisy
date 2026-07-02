@@ -12,10 +12,11 @@ environment:
 environment_variables:
   BASE_MODEL: "Qwen/Qwen3-8B"
   MODEL_DISPLAY_NAME: "daisy-model"
-  INFERENCE_BUILD: "2026-07-qwen3-v15"
+  INFERENCE_BUILD: "2026-07-qwen3-v16-memory"
   INFERENCE_QUANTIZATION: "4bit"
   DAISY_DIRECT_MULTILINGUAL: "true"
-  DAISY_DEFAULT_MAX_TOKENS: "120"
+  DAISY_DEFAULT_MAX_TOKENS: "256"
+  DAISY_STOP_STRINGS: "Assistant:,Question:,User:,Human:,\\n\\nUser,\\nUser:,\\nAssistant:,assistant,ASURE,❮REFINE❯,OffsetTable,Daisy x,👋ly,\\n\\n"
   DAISY_LORA_DEFAULT_TEMP: "0.6"
   DAISY_VOICE_QC: "true"
   DAISY_MAX_VOICE_REGENS: "2"

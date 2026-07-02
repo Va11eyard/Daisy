@@ -1,0 +1,18 @@
+﻿python : 2026-07-02 11:39:11,252 [INFO] daisy.build_dataset: Validation PASSED: 2643 records checked
+C:\WINDOWS\TEMP\ps-script-dfa7e7bc-b640-48be-84cd-bc4c2c087351.ps1:99 знак:113
++ ... sonl --fix; python scripts/build_balanced_dataset.py --validate-only  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-07-02 11:3...records checked:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "E:\WebstormProjects\Daisy-1\scripts\build_balanced_dataset.py", line 780, in <module>
+    main()
+    ~~~~^^
+  File "E:\WebstormProjects\Daisy-1\scripts\build_balanced_dataset.py", line 632, in main
+    print(json.dumps(report, indent=2, ensure_ascii=False))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1251.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u04af' in position 1598: character maps to <undefined>

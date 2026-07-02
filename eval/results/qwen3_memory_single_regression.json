@@ -1,0 +1,1436 @@
+{
+  "timestamp": "2026-07-02T08:05:23.243277+00:00",
+  "endpoint": "https://daisy-therapy.westus2.inference.ml.azure.com/score",
+  "deployment": "gpu-deployment-v14",
+  "overall": {
+    "total": 56,
+    "passed": 28,
+    "failed": 28,
+    "pass_rate": 0.5
+  },
+  "by_cluster": {
+    "anxiety": {
+      "total": 8,
+      "passed": 6,
+      "failed": 2,
+      "pass_rate": 0.75,
+      "en_pass": 2,
+      "ru_pass": 4
+    },
+    "breakup": {
+      "total": 8,
+      "passed": 5,
+      "failed": 3,
+      "pass_rate": 0.625,
+      "en_pass": 3,
+      "ru_pass": 2
+    },
+    "clarity": {
+      "total": 8,
+      "passed": 2,
+      "failed": 6,
+      "pass_rate": 0.25,
+      "en_pass": 0,
+      "ru_pass": 2
+    },
+    "grief": {
+      "total": 8,
+      "passed": 1,
+      "failed": 7,
+      "pass_rate": 0.125,
+      "en_pass": 0,
+      "ru_pass": 1
+    },
+    "somatic": {
+      "total": 8,
+      "passed": 5,
+      "failed": 3,
+      "pass_rate": 0.625,
+      "en_pass": 1,
+      "ru_pass": 4
+    },
+    "stress": {
+      "total": 8,
+      "passed": 5,
+      "failed": 3,
+      "pass_rate": 0.625,
+      "en_pass": 2,
+      "ru_pass": 3
+    },
+    "work": {
+      "total": 8,
+      "passed": 4,
+      "failed": 4,
+      "pass_rate": 0.5,
+      "en_pass": 1,
+      "ru_pass": 3
+    }
+  },
+  "by_locale": {
+    "en": {
+      "total": 28,
+      "passed": 9,
+      "pass_rate": 0.32142857142857145
+    },
+    "ru": {
+      "total": 28,
+      "passed": 19,
+      "pass_rate": 0.6785714285714286
+    }
+  },
+  "failure_breakdown": {
+    "canned_greeting": 0,
+    "structural_leak": 0,
+    "script_leak": 0,
+    "too_short": 0,
+    "hollow": 0,
+    "keyword_mismatch": 28,
+    "locale_incorrect": 0
+  },
+  "cases": [
+    {
+      "id": "grief_ru_1",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 6484,
+      "reply_preview": "Когда ты впервые понял, что её больше нет, что тогда почувствовал? Ты до сих пор помнишь эту первую волна",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 6484,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_2",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3959,
+      "reply_preview": "Мама рассказывала, как в твоей работе давили — это значит, ты не одинок. А что ты делаешь, когда тревога уже здесь",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3959,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_ru_3",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3778,
+      "reply_preview": "Внутри меня всё сжимается — это больно, что ты заметил. Когда это случается, ты обычно знаешь, что тебя ждёт",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3778,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_en_1",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 6716,
+      "reply_preview": "Понимаю, как это может быть трудно. Что из этого перечислил бы в одном-двух предложениях, чтобы было легче понять, что именно тебя беспокоит",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 6716,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_en_2",
+      "cluster": "work",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 2084,
+      "reply_preview": "That sounds exhausting. Can you describe one time when the yelling felt especially heavy",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2084,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "breakup_en_3",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3840,
+      "reply_preview": "I'm so sorry you're going through this. It sounds like the grief is still so fresh and raw. What was the first time in the last week that you felt that missing him",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3840,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_en_4",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 6426,
+      "reply_preview": "Если бы ты могла сказать этому человеку одно-два слова, какие бы это были? (Пример: 'я вижу тебя, я с тобой, я не уйду, я понимаю, я слушаю.) Какое из этих слов тебе было бы самым трудным сказать",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 6426,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_ru_1",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3266,
+      "reply_preview": "Поподели с нами что тебя тревожит — чем конкретнее, тем лучше. Я здесь слушаю",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3266,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_ru_2",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3371,
+      "reply_preview": "Назови один момент, который сейчас труднее всего. Когда ты впервые заметила, что тебя что-то тревожит",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3371,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_3",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4571,
+      "reply_preview": "Ты упомянула, что после работы не можешь расслабиться — это значит, что работа до сих пор с тобой. Что происходит в твоём теле после выхода",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4571,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_ru_4",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4058,
+      "reply_preview": "Ты о чём-то конкретном боишься? Что-то вроде 'что-то случится и я не справлюсь' или что-то другое",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4058,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_en_2",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3615,
+      "reply_preview": "I hear your chest is so tight it's hard to breathe. What is the sound of your breathing when you're in this state — fast, shallow, or something else",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3615,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_en_3",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 5167,
+      "reply_preview": "Понимаю, как это чувствуется. Меня бы тоже очень бы разозлили на такой неделями. Что из того, что ты делаешь сейчас, вызывает у тебя у тебя самое сильное чувство вины",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5167,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_4",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3570,
+      "reply_preview": "I hear the weight of that decision still pressing on you. What does it feel like to be in your body when you're thinking about it — tight, heavy, empty",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3570,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_1",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3400,
+      "reply_preview": "Ты описал это как пустоту — как она действует в твоём теле? Когда ты впервые её заметил",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3400,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "clarity_ru_2",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3243,
+      "reply_preview": "Ты описываешь это как кашу — точное слово. Что из этих решений тебя тревожит больше всего",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3243,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_ru_3",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 4815,
+      "reply_preview": "Мы с ней не говорили о том, что может случиться. Я не думала, что это может закончиться так. Как ты сейчас переживаешь — больно или как-то иначе",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4815,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_4",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4652,
+      "reply_preview": "Тело сжимается от тревоги — это знак, что чувствуешь что-то глубоко. Когда ты замечаешь напряжение, ты обычно сознательно его чувствуешь",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4652,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "stress_en_1",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 4338,
+      "reply_preview": "I'm here to listen. What would you like to share",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4338,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_en_3",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 6504,
+      "reply_preview": "Ты описал это как 'всегда настороже' — это точное слово, и оно уже говорит о чём-то конкретном. Какая часть этого состояния самая тяжёлая для тебя? Что ты замечаешь в теле, когда оно усиливается",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 6504,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "work_en_4",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 2364,
+      "reply_preview": "That sounds like a clear, present danger. What does your body feel when you think about it",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2364,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_ru_1",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 2950,
+      "reply_preview": "После расставания с парнем боль — это естественно. Что сейчас чувствуешь больше всего",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2950,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_2",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3777,
+      "reply_preview": "То, что сжимается, — оно больно? Когда ты замечаешь это, ты обычно ложишься или идёшь на работу",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3777,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "clarity_ru_3",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4878,
+      "reply_preview": "Ты описываешь себя, как будто ты впервые пытался понять себя — это точка, которую ты сама заметила. Что случилось до этого, что заставило тебя задуматься",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4878,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_ru_4",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4423,
+      "reply_preview": "Разве что-то случилось, что ты могла бы не чувствовать вины? Когда ты вспоминаешь это весёлое время, что тебя трогает в нём",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4423,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "grief_en_1",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3362,
+      "reply_preview": "Паника и тревога после разрыва — это нормально. Что было самым трудным в первые недели после разрыва",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3362,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_2",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3362,
+      "reply_preview": "На работе я чувствую себя беспомощной, а дома — уставшей. Что происходит в эти дни, что ты замечаешь",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3362,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "anxiety_en_4",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3852,
+      "reply_preview": "I'm sorry you're experiencing panic attacks again—this must be so overwhelming. Could you share one thing that helps you feel grounded during an episode? I'm here to listen without interruption",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3852,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_ru_1",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3743,
+      "reply_preview": "Когда начальник кричит, как ты себя чувствуешь перед работой? Ты когда-нибудь говорил ему, что тебе тяжело",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3743,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "breakup_ru_2",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3807,
+      "reply_preview": "Мне тяжело слышать, что ушла первая любовь. Что сейчас чувствует сердце — боль или что-то другое",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3807,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_ru_3",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4657,
+      "reply_preview": "Пиши, что ты обычно чувствуешь на ночь — тоном, в котором тебе доводилось бы говорить маме. Какое слово приходит в голову, когда ты ложишься",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4657,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "clarity_ru_4",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3426,
+      "reply_preview": "Мозг перегружен, и он просит остановиться. Что бы ты сказал ему сейчас, если бы говорил самому себе",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3426,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_1",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 5628,
+      "reply_preview": "Ты не одинок. Я здесь, чтобы вместе разобраться. Что сейчас наиболее ясно в твоих мыслях — что-то одно, без оценки, просто что-то конкретное",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5628,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_en_2",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 4585,
+      "reply_preview": "I'm sorry you're feeling that way. It's so hard to move forward when part of you is still holding on to what you lost. What does it feel like when you're in the middle of something and suddenly rememb",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4585,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_3",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4057,
+      "reply_preview": "Сoncrete details help. What does 'switching off' look like when it works, and when it doesn't? What one thing would you do if you could give yourself that break tonight",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4057,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_ru_1",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3800,
+      "reply_preview": "Мне жаль за тебя, что сегодня так. Какое чувство сейчас с тобой — тревога, грусть или что-то другое",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3800,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_ru_2",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3410,
+      "reply_preview": "Мама ушла, и теперь ты один — это тяжело. Что ты обычно делаешь вечером, когда дома тише",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3410,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_ru_3",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3963,
+      "reply_preview": "Ты уже ответила на то, что я спросила — это значит, что тревога не ушла. Что ты делаешь, когда она становится сильнее",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3963,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "somatic_ru_4",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4034,
+      "reply_preview": "Природа хочет, чтобы ты не говорил. Ты чувствуешь это? Что ты обычно делаешь, когда хочешь говорить, но горло не слушает",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4034,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_en_1",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3013,
+      "reply_preview": "That silence you described sounds heavy. When you're alone, do you have any small things that make it easier to sit with that feeling",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3013,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "clarity_en_2",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3236,
+      "reply_preview": "Понимаю, что делать одно за другим кажется бесконечным. Что было последним решением, которое ты решилась сделать",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3236,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_en_3",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3734,
+      "reply_preview": "Мне жаль, что ты сейчас переживаешь. Как ты обычно проводишь этот день? Что помогает тебе чувствовать связь с ней в этот период",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3734,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_en_4",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 2441,
+      "reply_preview": "I hear that physical weight in your chest. What was the last time you noticed your body feeling lighter",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2441,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "anxiety_ru_2",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4383,
+      "reply_preview": "Мозг сказала: 'не сейчас'. Он вернулся в режим перед уходом. Когда впервые почувствовала это? Что ты уже сделала, чтобы успокоиться",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4383,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_ru_3",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 3290,
+      "reply_preview": "Паника перед увольнением — это нормально. Что ты обычно делаешь, когда чувствуешь тревогу",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3290,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "breakup_ru_4",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3898,
+      "reply_preview": "Мне нравится, что ты заметила разницу — это значит, ты ещё здесь, рядом с собой. Что тебя сейчас держит в этом состоянии",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3898,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_1",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 2393,
+      "reply_preview": "I hear how hard it is to move on. What do you miss most about the relationship",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2393,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "somatic_en_2",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3650,
+      "reply_preview": "Ты описала это как 'закупоривание', что очень точно передаёт ощущение. Где в теле это самое сильное",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3650,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_3",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 9807,
+      "reply_preview": "Подумай, с кем ты обычно обсуждаешь это — с собой или с другими — и каковы были последствия",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 9807,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "grief_en_4",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3150,
+      "reply_preview": "Почему ты не можешь просто быть собой? Что происходит, когда ты возвращаешься к тому, что тебя ранит",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3150,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "stress_ru_1",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 5723,
+      "reply_preview": "Ты попросил поговорить о стрессе — я заметила, что ты обычно не рассказываешь о нём вслух. Когда ты говоришь о нём вслух? Какая часть твоего дня сейчас самая тяжёлая",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5723,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_ru_4",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": true,
+      "failure_reasons": [],
+      "latency_ms": 4885,
+      "reply_preview": "Токсичные коллеги и давление начальника — это не навык работы, это состояние. Что ты делаешь, когда приходится выполнять невозможное",
+      "scores": {
+        "passed": true,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4885,
+        "failure_reasons": []
+      }
+    },
+    {
+      "id": "work_en_1",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 7246,
+      "reply_preview": "Я\nПоказывай мне, когда тебе становится трудно; я не заменю твоего руководителя, но я здесь. Что из этого влияет на тебя больше всего — слова, действия, или то, что ты чувствуешь внутри",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 7246,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "breakup_en_2",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3958,
+      "reply_preview": "Ты описал это так точно — пустота, тело не отвечает. Что из того, что ты сейчас чувствуешь, было самым неожиданным",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3958,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "somatic_en_3",
+      "cluster": "somatic",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 5910,
+      "reply_preview": "Отлично, я здесь. Как ты себя чувствуешь в эти моменты — физически и эмоционально",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5910,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "clarity_en_4",
+      "cluster": "clarity",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 21887,
+      "reply_preview": "Отлично, что ты обратилась за помощью. Что из этого перечисленного тебе знакомо в твоей жизни? Какое из них было самым последним? Какое из них ты можешь упомянуть в разговоре с другим человеком, если ",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 21887,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    }
+  ]
+}

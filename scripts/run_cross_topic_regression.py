@@ -213,6 +213,14 @@ def _is_locale_correct(text: str, locale: str) -> bool:
     return True
 
 
+def _keyword_stem_match(text: str, stem: str) -> bool:
+    """Match regression keyword logic: prefix substring, case-insensitive."""
+    if not stem:
+        return False
+    prefix = stem[:4] if len(stem) >= 4 else stem
+    return prefix.lower() in text.lower()
+
+
 def score_response(text: str, case: dict[str, Any]) -> dict[str, Any]:
     """
     Score a response text against all criteria.
@@ -231,12 +239,14 @@ def score_response(text: str, case: dict[str, Any]) -> dict[str, Any]:
     """
     locale = case.get("locale", "en")
     keywords = case.get("keywords", [])
+    must_reference_prior = case.get("must_reference_prior", [])
 
     length_ok = len(text) >= 25
     no_canned_greeting = not _has_canned_greeting(text)
     no_structural_leak = not _has_structural_leak(text)
     no_script_leak = not _has_script_leak(text, locale)
     kw_match = _keyword_match(text, keywords)
+    prior_match = all(_keyword_stem_match(text, stem) for stem in must_reference_prior) if must_reference_prior else True
     not_hollow = not _is_hollow(text)
     locale_correct = _is_locale_correct(text, locale)
 
@@ -251,6 +261,8 @@ def score_response(text: str, case: dict[str, Any]) -> dict[str, Any]:
         failure_reasons.append("script_leak")
     if not kw_match:
         failure_reasons.append("keyword_mismatch")
+    if not prior_match:
+        failure_reasons.append("prior_topic_mismatch")
     if not not_hollow:
         failure_reasons.append("hollow")
     if not locale_correct:
@@ -262,6 +274,7 @@ def score_response(text: str, case: dict[str, Any]) -> dict[str, Any]:
         no_structural_leak,
         no_script_leak,
         kw_match,
+        prior_match,
         not_hollow,
         locale_correct,
     ])
@@ -273,6 +286,7 @@ def score_response(text: str, case: dict[str, Any]) -> dict[str, Any]:
         "no_structural_leak": no_structural_leak,
         "no_script_leak": no_script_leak,
         "keyword_match": kw_match,
+        "prior_topic_match": prior_match,
         "not_hollow": not_hollow,
         "locale_correct": locale_correct,
         "latency_ms": 0,  # caller fills this
@@ -395,7 +409,7 @@ async def run_case(
     message = case["message"]
 
     payload = {
-        "messages": [{"role": "user", "content": message}],
+        "message": message,
         "locale": locale,
         "history": case.get("history", []),
     }

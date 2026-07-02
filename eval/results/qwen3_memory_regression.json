@@ -1,0 +1,416 @@
+{
+  "timestamp": "2026-07-02T08:06:32.427720+00:00",
+  "endpoint": "https://daisy-therapy.westus2.inference.ml.azure.com/score",
+  "deployment": "gpu-deployment-v14",
+  "overall": {
+    "total": 12,
+    "passed": 0,
+    "failed": 12,
+    "pass_rate": 0.0
+  },
+  "by_cluster": {
+    "anxiety": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "breakup": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "clarity": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "grief": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "somatic": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "stress": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    },
+    "work": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0,
+      "en_pass": 0,
+      "ru_pass": 0
+    }
+  },
+  "by_locale": {
+    "en": {
+      "total": 5,
+      "passed": 0,
+      "pass_rate": 0.0
+    },
+    "ru": {
+      "total": 7,
+      "passed": 0,
+      "pass_rate": 0.0
+    }
+  },
+  "failure_breakdown": {
+    "canned_greeting": 0,
+    "structural_leak": 0,
+    "script_leak": 0,
+    "too_short": 0,
+    "hollow": 0,
+    "keyword_mismatch": 7,
+    "locale_incorrect": 0
+  },
+  "cases": [
+    {
+      "id": "memory_grief_en_1",
+      "cluster": "grief",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 5322,
+      "reply_preview": "That sounds really heavy. Are you able to do anything small to take care of yourself",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5322,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_breakup_ru_1",
+      "cluster": "breakup",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3349,
+      "reply_preview": "Видеть его фото после расставания и снова накрыть — это больно. Что тебя сейчас держит",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3349,
+        "failure_reasons": [
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_somatic_ru_1",
+      "cluster": "somatic",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3688,
+      "reply_preview": "Вечером грустнее, потому что день был наполнен. Что происходит в тот вечер, когда не думаешь о нём",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3688,
+        "failure_reasons": [
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_stress_ru_1",
+      "cluster": "stress",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3278,
+      "reply_preview": "Плечи каменные — это тело говорит, что держит всё. Что сейчас в твоих плечах",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3278,
+        "failure_reasons": [
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_anxiety_work_en_1",
+      "cluster": "anxiety",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 1783,
+      "reply_preview": "That sound exactly like what I described. What happened next",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 1783,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_breakup_en_1",
+      "cluster": "breakup",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 2074,
+      "reply_preview": "That grief comes in waves. What was the message that made you cry",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 2074,
+        "failure_reasons": [
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_anxiety_work_ru_2",
+      "cluster": "work",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 4132,
+      "reply_preview": "Ты уже говорила, что начальник каждый день кричит — это постоянное напряжение. Что ты делаешь сейчас, когда он начинает орать",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": true,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 4132,
+        "failure_reasons": [
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_stress_en_1",
+      "cluster": "stress",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3312,
+      "reply_preview": "Мышцы, которые не отдыхают, не слышат 'стоп'. Они знают только один режим. Какой режим был до этого",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3312,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_grief_ru_1",
+      "cluster": "grief",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3130,
+      "reply_preview": "Ты уже прошла через один день — это что-то. Как ты себя чувствуешь сейчас, перед этим",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3130,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_clarity_ru_1",
+      "cluster": "clarity",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 5120,
+      "reply_preview": "Ты описываешь то, что я раньше называла 'страх перед неправильностью' — и он работает с той же кнопки. Что бы ты сказала себе, если бы она не работала",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 5120,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_work_en_1",
+      "cluster": "work",
+      "locale": "en",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch",
+        "prior_topic_mismatch"
+      ],
+      "latency_ms": 3908,
+      "reply_preview": "That fear is heavy. What does your body feel when you hear that tone",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": false,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3908,
+        "failure_reasons": [
+          "keyword_mismatch",
+          "prior_topic_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "memory_anxiety_work_ru_1",
+      "cluster": "anxiety",
+      "locale": "ru",
+      "passed": false,
+      "failure_reasons": [
+        "keyword_mismatch"
+      ],
+      "latency_ms": 3542,
+      "reply_preview": "Показательно, как ты сейчас чувствуешь — тревога и вина вместе. Что было сильнее",
+      "scores": {
+        "passed": false,
+        "length_ok": true,
+        "no_canned_greeting": true,
+        "no_structural_leak": true,
+        "no_script_leak": true,
+        "keyword_match": false,
+        "prior_topic_match": true,
+        "not_hollow": true,
+        "locale_correct": true,
+        "latency_ms": 3542,
+        "failure_reasons": [
+          "keyword_mismatch"
+        ]
+      }
+    }
+  ]
+}
