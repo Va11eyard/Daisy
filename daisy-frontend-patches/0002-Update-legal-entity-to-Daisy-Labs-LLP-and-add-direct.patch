@@ -1,0 +1,223 @@
+From 5bd2e391e3d0eba66e43d25d265bac04694e6132 Mon Sep 17 00:00:00 2001
+From: Cursor Agent <cursoragent@cursor.com>
+Date: Mon, 20 Jul 2026 13:53:55 +0000
+Subject: [PATCH 2/2] Update legal entity to Daisy Labs LLP and add direct
+ pricing URLs for Paddle
+
+- Replace Daisy Mental Health LLP / BIN 250240028245 with Daisy Labs LLP /
+  BIN 260740027366 in EN and RU privacy, terms, and refund pages
+- Add explicit https://talktodaisy.com/{en,ru}/pricing links in legal docs
+- Point nav and footer to /pricing instead of homepage #pricing anchor
+---
+ content/privacy/en.html                 |  3 ++-
+ content/privacy/ru.html                 |  5 +++--
+ content/refund/en.html                  |  2 +-
+ content/refund/ru.html                  |  2 +-
+ content/terms/en.html                   |  8 ++++++++
+ content/terms/ru.html                   | 12 ++++++++++--
+ messages/en.json                        |  1 +
+ messages/kk.json                        |  2 ++
+ messages/ru.json                        |  1 +
+ src/widgets/footer/index.components.tsx |  1 +
+ src/widgets/hero/index.components.tsx   |  2 +-
+ 11 files changed, 31 insertions(+), 8 deletions(-)
+
+diff --git a/content/privacy/en.html b/content/privacy/en.html
+index 351d03a..58381c0 100644
+--- a/content/privacy/en.html
++++ b/content/privacy/en.html
+@@ -461,5 +461,6 @@
+         <strong>17.5.</strong> Any suggestions, requests, or questions relating to this Policy should be directed to:
+       </p>
+ <p>
+-        <strong>hello@talktodaisy.com</strong>
++        <strong>hello@talktodaisy.com</strong><br />
++        Pricing page: <a href="https://talktodaisy.com/en/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/en/pricing</a>
+       </p>
+diff --git a/content/privacy/ru.html b/content/privacy/ru.html
+index 706fa73..025f5b2 100644
+--- a/content/privacy/ru.html
++++ b/content/privacy/ru.html
+@@ -8,7 +8,7 @@
+       <h2 id="s1" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">1. ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</h2>
+ 
+ <p>
+-        <strong>1.1. Оператор (Администрация Сервиса, «Мы»)</strong> - ТОО  «Daisy Mental Health», зарегистрированное в соответствии с законодательством Республики Казахстан, БИН: 250240028245, юридический адрес: г. Костанай, 6-1-81, уполномоченные сотрудники которого организуют и (или) осуществляют обработку персональных данных, определяют цели и содержание обработки.
++        <strong>1.1. Оператор (Администрация Сервиса, «Мы»)</strong> - ТОО «Daisy Labs», зарегистрированное в соответствии с законодательством Республики Казахстан, БИН: 260740027366, юридический адрес: г. Костанай, 6-1-81, уполномоченные сотрудники которого организуют и (или) осуществляют обработку персональных данных, определяют цели и содержание обработки.
+       </p>
+ <p>
+         <strong>1.2. Пользователь (Субъект персональных данных)</strong> - физическое лицо, достигшее 18 (восемнадцати) лет, использующее Сервис через веб-приложение.
+@@ -446,5 +446,6 @@
+         <strong>17.4.</strong> Настоящая Политика составлена на русском языке. При наличии версий на иных языках в случае расхождения приоритет имеет русскоязычная версия.
+       </p>
+ <p>
+-        <strong>17.5.</strong> Все предложения или вопросы по настоящей Политике следует направлять по адресу: <strong>hello@talktodaisy.com</strong>
++        <strong>17.5.</strong> Все предложения или вопросы по настоящей Политике следует направлять по адресу: <strong>hello@talktodaisy.com</strong><br />
++        Страница тарифов: <a href="https://talktodaisy.com/ru/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/ru/pricing</a>
+       </p>
+diff --git a/content/refund/en.html b/content/refund/en.html
+index 2051310..5f970c8 100644
+--- a/content/refund/en.html
++++ b/content/refund/en.html
+@@ -125,7 +125,7 @@
+       <h2 id="s11" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">11. CONTACT</h2>
+ 
+ <p>For any refund-related questions:</p>
+-<p><strong>Daisy Labs LLP</strong> (BIN: 260740027366)<br />Email: <strong>hello@talktodaisy.com</strong><br />Website: <a href="https://talktodaisy.com" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com</a><br />Payment support and refund processing: <a href="https://paddle.net" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.net</a><br />Paddle buyer terms: <a href="https://www.paddle.com/legal/checkout-buyer-terms" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.com/legal/checkout-buyer-terms</a></p>
++<p><strong>Daisy Labs LLP</strong> (BIN: 260740027366)<br />Email: <strong>hello@talktodaisy.com</strong><br />Website: <a href="https://talktodaisy.com" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com</a><br />Pricing: <a href="https://talktodaisy.com/en/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com/en/pricing</a><br />Payment support and refund processing: <a href="https://paddle.net" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.net</a><br />Paddle buyer terms: <a href="https://www.paddle.com/legal/checkout-buyer-terms" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.com/legal/checkout-buyer-terms</a></p>
+ 
+       <h2 id="s12" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">12. RELATIONSHIP WITH TERMS</h2>
+ 
+diff --git a/content/refund/ru.html b/content/refund/ru.html
+index 7b4ff77..ec4481f 100644
+--- a/content/refund/ru.html
++++ b/content/refund/ru.html
+@@ -125,7 +125,7 @@
+       <h2 id="s11" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">11. КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+ 
+ <p>По всем вопросам, связанным с возвратом денежных средств, вы можете обратиться:</p>
+-<p><strong>ТОО &laquo;Daisy Mental Health&raquo;</strong><br />Электронная почта: <strong>hello@talktodaisy.com</strong><br />Веб-сайт: <a href="https://talktodaisy.com" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com</a><br />Поддержка по вопросам оплаты и возврата денежных средств: <a href="https://paddle.net" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.net</a><br />Условия для покупателей Paddle: <a href="https://www.paddle.com/legal/checkout-buyer-terms" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.com/legal/checkout-buyer-terms</a></p>
++<p><strong>ТОО &laquo;Daisy Labs&raquo;</strong> (БИН: 260740027366)<br />Электронная почта: <strong>hello@talktodaisy.com</strong><br />Веб-сайт: <a href="https://talktodaisy.com" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com</a><br />Тарифы: <a href="https://talktodaisy.com/ru/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">talktodaisy.com/ru/pricing</a><br />Поддержка по вопросам оплаты и возврата денежных средств: <a href="https://paddle.net" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.net</a><br />Условия для покупателей Paddle: <a href="https://www.paddle.com/legal/checkout-buyer-terms" class="text-primary underline" target="_blank" rel="noopener noreferrer">paddle.com/legal/checkout-buyer-terms</a></p>
+ 
+       <h2 id="s12" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">12. СООТНОШЕНИЕ С УСЛОВИЯМИ ИСПОЛЬЗОВАНИЯ</h2>
+ 
+diff --git a/content/terms/en.html b/content/terms/en.html
+index 36c8b74..b1caf31 100644
+--- a/content/terms/en.html
++++ b/content/terms/en.html
+@@ -11,6 +11,9 @@
+         <p>
+           Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all orders. Paddle handles customer billing, payment processing, and applicable refunds.
+         </p>
++        <p>
++          Current subscription pricing is published at <a href="https://talktodaisy.com/en/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/en/pricing</a>.
++        </p>
+       </div>
+ 
+       <h2 id="s1" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">1. PARTIES AND SCOPE OF THE AGREEMENT</h2>
+@@ -198,6 +201,10 @@
+         <li><strong>Recurring Subscription</strong> &mdash; automatically recurring monthly or annual payments that continue until cancelled.</li>
+       </ul>
+ 
++<p>
++        <strong>4.2.1.</strong> Detailed pricing for all available subscription plans is published on our pricing page: <a href="https://talktodaisy.com/en/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/en/pricing</a>.
++      </p>
++
+ <p>
+         <strong>4.3. Subscription Renewal</strong>
+       </p>
+@@ -671,6 +678,7 @@
+ 
+ <p>
+         <strong>Daisy Labs LLP</strong><br />
++        Business Identification Number (BIN): 260740027366<br />
+         Registered Address: Apt. 81, Bldg. 1, Microdistrict 6, Kostanay 010000, Republic of Kazakhstan<br />
+         Email: <strong>hello@talktodaisy.com</strong><br />
+         Customer Support: <strong>hello@talktodaisy.com</strong>
+diff --git a/content/terms/ru.html b/content/terms/ru.html
+index d749e65..57e8bfa 100644
+--- a/content/terms/ru.html
++++ b/content/terms/ru.html
+@@ -5,12 +5,15 @@
+         <p>
+           Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
+         </p>
++        <p>
++          Актуальные тарифы и цены опубликованы на странице: <a href="https://talktodaisy.com/ru/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/ru/pricing</a>.
++        </p>
+       </div>
+ 
+       <h2 id="s1" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">1. СТОРОНЫ И ПРЕДМЕТ СОГЛАШЕНИЯ</h2>
+ 
+ <p>
+-        <strong>1.1.</strong> Настоящие Условия использования (далее &mdash; <strong>&laquo;Соглашение&raquo;</strong>, <strong>&laquo;Условия&raquo;</strong>) представляют собой имеющий обязательную юридическую силу договор между вами (далее &mdash; <strong>&laquo;Пользователь&raquo;</strong>) и ТОО &laquo;Daisy Mental Health&raquo;, зарегистрированное в соответствии с законодательством Республики Казахстан, БИН: 250240028245, юридический адрес: г. Костанай, 6-1-81 (далее &mdash; <strong>&laquo;Компания&raquo;</strong>, <strong>&laquo;Daisy&raquo;</strong>, <strong>&laquo;мы&raquo;</strong>).
++        <strong>1.1.</strong> Настоящие Условия использования (далее &mdash; <strong>&laquo;Соглашение&raquo;</strong>, <strong>&laquo;Условия&raquo;</strong>) представляют собой имеющий обязательную юридическую силу договор между вами (далее &mdash; <strong>&laquo;Пользователь&raquo;</strong>) и ТОО &laquo;Daisy Labs&raquo;, зарегистрированное в соответствии с законодательством Республики Казахстан, БИН: 260740027366, юридический адрес: г. Костанай, 6-1-81 (далее &mdash; <strong>&laquo;Компания&raquo;</strong>, <strong>&laquo;Daisy&raquo;</strong>, <strong>&laquo;мы&raquo;</strong>).
+       </p>
+ <p>
+         <strong>1.2.</strong> Предметом настоящего Соглашения является предоставление Пользователю доступа к сервису Daisy &mdash; цифровому wellness-инструменту для эмоциональной поддержки и саморефлексии на основе искусственного интеллекта (далее &mdash; <strong>&laquo;Сервис&raquo;</strong>).
+@@ -155,6 +158,10 @@
+         <li><strong>Рекуррентная подписка</strong> &mdash; регулярные автоматические платежи (ежемесячно / ежегодно) до момента отмены.</li>
+       </ul>
+ 
++<p>
++        <strong>4.2.1.</strong> Подробные цены на все доступные тарифные планы опубликованы на странице: <a href="https://talktodaisy.com/ru/pricing" class="text-primary underline" target="_blank" rel="noopener noreferrer">https://talktodaisy.com/ru/pricing</a>.
++      </p>
++
+ <p>
+         <strong>4.3. Подписки и автопродление</strong>
+       </p>
+@@ -505,7 +512,8 @@
+       <h2 id="s15" class="text-lg font-semibold text-foreground mt-12 mb-4 first:mt-0 flex items-center gap-2 before:content-[\"\"] before:w-1 before:h-6 before:rounded-full before:bg-primary/60 scroll-mt-28">15. КОНТАКТЫ</h2>
+ 
+ <p>
+-        <strong>ТОО &laquo;DAISY MENTAL HEALTH&raquo;</strong><br />
++        <strong>ТОО &laquo;Daisy Labs&raquo;</strong><br />
++        БИН: 260740027366<br />
+         Юридический адрес: 6 микрорайон дом 1 кв 81, Костанай, Казахстан 010000<br />
+         Email: <strong>hello@talktodaisy.com</strong><br />
+         Поддержка: <strong>hello@talktodaisy.com</strong>
+diff --git a/messages/en.json b/messages/en.json
+index 3ba4dbb..77c4dc8 100644
+--- a/messages/en.json
++++ b/messages/en.json
+@@ -579,6 +579,7 @@
+     "privacyPolicy": "Privacy Policy",
+     "termsOfService": "Terms of Service",
+     "refundPolicy": "Refund Policy",
++    "pricing": "Pricing",
+     "hipaaNotice": "HIPAA Notice",
+     "hipaaCompliant": "🔒 HIPAA Compliant",
+     "securePlatform": "🛡️ Secure Platform",
+diff --git a/messages/kk.json b/messages/kk.json
+index 21cbed0..5d258de 100644
+--- a/messages/kk.json
++++ b/messages/kk.json
+@@ -432,6 +432,8 @@
+     "copyright": "© 2025 Daisy. Барлық құқықтар қорғалған.",
+     "privacyPolicy": "Құпиялылық саясаты",
+     "termsOfService": "Қызмет көрсету шарттары",
++    "refundPolicy": "Ақшаны қайтару саясаты",
++    "pricing": "Тарифтер",
+     "hipaaNotice": "HIPAA хабарламасы",
+     "hipaaCompliant": "🔒 HIPAA сәйкес",
+     "securePlatform": "🛡️ Қауіпсіз платформа",
+diff --git a/messages/ru.json b/messages/ru.json
+index e261b3d..81b500f 100644
+--- a/messages/ru.json
++++ b/messages/ru.json
+@@ -576,6 +576,7 @@
+     "privacyPolicy": "Политика конфиденциальности",
+     "termsOfService": "Условия использования",
+     "refundPolicy": "Политика возврата",
++    "pricing": "Тарифы",
+     "hipaaNotice": "Уведомление HIPAA",
+     "hipaaCompliant": "🔒 Соответствие HIPAA",
+     "securePlatform": "🛡️ Безопасная платформа",
+diff --git a/src/widgets/footer/index.components.tsx b/src/widgets/footer/index.components.tsx
+index 36c4ede..2936824 100644
+--- a/src/widgets/footer/index.components.tsx
++++ b/src/widgets/footer/index.components.tsx
+@@ -95,6 +95,7 @@ export function FooterSection({ onNewsletterSubmit }: FooterSectionProps) {
+                 <Link href={`/${locale}/privacy`} className="text-gray-600 hover:text-gray-900 text-xs sm:text-sm transition-colors">{t('privacyPolicy')}</Link>
+                 <Link href={`/${locale}/terms`} className="text-gray-600 hover:text-gray-900 text-xs sm:text-sm transition-colors">{t('termsOfService')}</Link>
+                 <Link href={`/${locale}/refund`} className="text-gray-600 hover:text-gray-900 text-xs sm:text-sm transition-colors">{t('refundPolicy')}</Link>
++                <Link href={`/${locale}/pricing`} className="text-gray-600 hover:text-gray-900 text-xs sm:text-sm transition-colors">{t('pricing')}</Link>
+                 <a href="#" className="text-gray-600 hover:text-gray-900 text-xs sm:text-sm transition-colors">{t('hipaaNotice')}</a>
+               </div>
+             </div>
+diff --git a/src/widgets/hero/index.components.tsx b/src/widgets/hero/index.components.tsx
+index c3e6578..0e7aa34 100644
+--- a/src/widgets/hero/index.components.tsx
++++ b/src/widgets/hero/index.components.tsx
+@@ -23,7 +23,7 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
+   const navigation = [
+     { name: t('howItWorks'), href: '#how-it-works' },
+     { name: t('whyDaisy'), href: '#about' },
+-    { name: t('pricing'), href: '#pricing' },
++    { name: t('pricing'), href: '/pricing' },
+     { name: t('faq'), href: '#faq' },
+   ]
+ 
+-- 
+2.43.0
+
